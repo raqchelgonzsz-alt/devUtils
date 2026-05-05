@@ -1,0 +1,6 @@
+{
+  "name": "DevWorkbench",
+  "description": "High-productivity developer toolkit for formatting GraphQL, JSON, and decoding JWT tokens with zero-latency browser processing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

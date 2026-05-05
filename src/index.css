@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-surface: #f8fafc; /* slate-50 */
+  --color-on-surface: #0f172a; /* slate-900 */
+  --color-surface-dim: #e2e8f0; /* slate-200 */
+  --color-surface-bright: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f8fafc;
+  --color-surface-container: #f1f5f9; /* slate-100 */
+  --color-surface-container-high: #e2e8f0;
+  --color-surface-container-highest: #cbd5e1;
+  
+  --color-primary: #4f46e5; /* indigo-600 */
+  --color-on-primary: #ffffff;
+  --color-primary-container: #e0e7ff; /* indigo-100 */
+  --color-on-primary-container: #3730a3; /* indigo-800 */
+  
+  --color-secondary: #0ea5e9; /* sky-500 or similar */
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e0f2fe;
+  
+  --color-tertiary: #d946ef; /* fuchsia-500 */
+  --color-on-tertiary: #ffffff;
+  
+  --color-outline: #94a3b8; /* slate-400 */
+  --color-outline-variant: #e2e8f0; /* slate-200 */
+
+  --color-error: #ef4444;
+  --color-on-error: #ffffff;
+  --color-error-container: #fee2e2;
+  --color-on-error-container: #991b1b;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-sans antialiased;
+  }
+}
+
+.markdown-body {
+  @apply max-w-none;
+}
