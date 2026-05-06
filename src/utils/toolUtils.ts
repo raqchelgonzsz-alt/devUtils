@@ -34,12 +34,14 @@ export const decodeJWT = (token: string): JWTData => {
     const [headerB64, payloadB64, signature] = parts;
 
     const decode = (b64: string) => {
-      try {
-        const json = atob(b64.replace(/-/g, '+').replace(/_/g, '/'));
-        return JSON.parse(json);
-      } catch (e) {
-        return { error: 'Failed to decode base64' };
-      }
+      const base64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+      const json = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(json);
     };
 
     return {

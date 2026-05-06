@@ -4,6 +4,8 @@ import { Terminal, Copy, Wand2, Trash2, CheckCircle2, History, Maximize2, Minimi
 import { formatJSON } from '../utils/toolUtils';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
+import { SEO } from '../components/SEO';
+import { AdBanner } from '../components/AdBanner';
 
 export const JSONFormatter: React.FC = () => {
   const [input, setInput] = useState('');
@@ -47,10 +49,25 @@ export const JSONFormatter: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col space-y-6 relative">
+      <SEO 
+        title="Formateador JSON Online - Embellecer y Validar JSON | DevUtils"
+        description="El mejor formateador de JSON online. Valida, embellece y minifica tus cadenas JSON al instante. Herramienta gratuita para desarrolladores."
+        keywords="formateador json, json beautifier, validar json, beautify json online, depurar json, dev tools"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Stoolzen JSON Formatter",
+          "url": "https://stoolzen.com/json",
+          "description": "Formatea y valida JSON con resaltado de sintaxis.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any"
+        }}
+      />
+      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-6 gap-4">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold tracking-tight text-on-surface">JSON Formatter</h1>
-          <p className="text-outline">Format, validate, and beautify minified JSON strings.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-on-surface">Formateador JSON</h1>
+          <p className="text-outline">Formatea, valida y embellece tus cadenas JSON de forma segura.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 bg-surface-container-highest border border-outline-variant px-3 py-1.5 rounded-lg">
@@ -81,6 +98,8 @@ export const JSONFormatter: React.FC = () => {
           </button>
         </div>
       </div>
+
+      <AdBanner />
 
       <div className={cn(
         "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20",

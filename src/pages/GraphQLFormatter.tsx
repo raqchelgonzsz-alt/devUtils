@@ -4,6 +4,8 @@ import { FileCode, Copy, Play, Trash2, CheckCircle2, AlertCircle, Maximize2, Min
 import { formatGraphQL } from '../utils/toolUtils';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
+import { SEO } from '../components/SEO';
+import { AdBanner } from '../components/AdBanner';
 
 export const GraphQLFormatter: React.FC = () => {
   const [input, setInput] = useState('');
@@ -44,10 +46,25 @@ export const GraphQLFormatter: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col space-y-6 relative">
+      <SEO 
+        title="Formateador GraphQL Online - Validar y Embellecer Consultas | DevUtils"
+        description="Formatea y valida tus consultas GraphQL online. Mejora la legibilidad de tus schemas y queries con nuestra herramienta gratuita."
+        keywords="formateador graphql, graphql beautifier, validar graphql, queries graphql, esquemas graphql, dev tools"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Stoolzen GraphQL Formatter",
+          "url": "https://stoolzen.com/graphql",
+          "description": "Herramienta para embellecer y validar esquemas y consultas GraphQL.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any"
+        }}
+      />
+      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-6 gap-4">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold tracking-tight text-on-surface">GraphQL Formatter</h1>
-          <p className="text-outline">Clean up and validate your GraphQL queries and schemas.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-on-surface">Formateador GraphQL</h1>
+          <p className="text-outline">Limpia y valida tus consultas y esquemas GraphQL al instante.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 bg-surface-container-highest border border-outline-variant px-3 py-1.5 rounded-lg">
@@ -69,6 +86,8 @@ export const GraphQLFormatter: React.FC = () => {
           </button>
         </div>
       </div>
+
+      <AdBanner />
 
       <div className={cn(
         "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20",

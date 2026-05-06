@@ -10,23 +10,26 @@ import {
   Zap,
   ArrowRight
 } from 'lucide-react';
+import { SEO } from '../components/SEO';
+import { AdBanner } from '../components/AdBanner';
+import { cn } from '../lib/utils';
 
 const tools = [
-  {
-    name: 'GraphQL Formatter',
-    description: 'Validate, format, and neatly indent complex GraphQL queries and mutations.',
-    path: '/graphql',
-    icon: FileCode,
-    category: 'FORMAT UTILITY',
-    color: 'bg-primary'
-  },
   {
     name: 'JSON Formatter',
     description: 'Beautify, minify, and validate JSON payloads with syntax highlighting.',
     path: '/json',
     icon: Terminal,
     category: 'PARSER',
-    color: 'bg-secondary'
+    color: 'bg-yellow-400'
+  },
+  {
+    name: 'GraphQL Formatter',
+    description: 'Validate, format, and neatly indent complex GraphQL queries and mutations.',
+    path: '/graphql',
+    icon: FileCode,
+    category: 'FORMAT UTILITY',
+    color: 'bg-pink-400'
   },
   {
     name: 'JWT Decoder',
@@ -34,7 +37,7 @@ const tools = [
     path: '/jwt',
     icon: Lock,
     category: 'SECURITY',
-    color: 'bg-tertiary'
+    color: 'bg-blue-400'
   }
 ];
 
@@ -62,24 +65,44 @@ const features = [
 export const Home: React.FC = () => {
   return (
     <div className="space-y-12 max-w-5xl mx-auto">
+      <SEO 
+        title="Stoolzen - Mejores Herramientas para Desarrolladores | JSON, GraphQL, JWT"
+        description="La caja de herramientas definitiva para desarrolladores. Formateador de JSON, validador de GraphQL y decodificador de JWT. Rápido, seguro y totalmente offline."
+        keywords="stoolzen, herramientas de dev, formateadores de json, graphql beautifier, validadores de jwt, dev tools online, utilidades para programadores"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Stoolzen",
+          "url": "https://stoolzen.com",
+          "description": "Herramientas esenciales para desarrolladores: Formateador JSON, validador GraphQL y decodificador JWT.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }}
+      />
+      
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white rounded-3xl p-12 lg:p-16 border border-slate-200 shadow-sm">
-        <div className="relative z-10 max-w-2xl space-y-6">
+      <section className="relative overflow-hidden bg-white rounded-3xl p-12 lg:p-16 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-12">
+        <div className="relative z-10 max-w-2xl space-y-6 flex-1 text-center md:text-left">
           <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            The Ultimate Developer Toolkit
+            The Best <span className="text-indigo-600">Dev Tools</span> in One Place
           </h1>
           <p className="text-lg text-slate-500 leading-relaxed font-medium">
-            All your essential tools in one place. Fast, secure, and built for developers to execute tasks with precision.
+            Format JSON, validate GraphQL, and decode JWT instantly. Fast, secure tools optimized for your workflow.
           </p>
-          <div className="pt-4 flex items-center gap-4">
-             <button className="bg-indigo-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-indigo-700 transition-all flex items-center gap-2 shadow-lg shadow-indigo-200">
-               Get Started
-               <ArrowRight className="w-4 h-4" />
-             </button>
-             <button className="bg-white text-slate-700 border border-slate-200 px-8 py-3.5 rounded-xl font-bold hover:bg-slate-50 transition-all">
-               View Docs
-             </button>
-          </div>
+        </div>
+
+        <div className="relative z-10 shrink-0 w-32 h-32 md:w-48 md:h-48">
+          <div className="absolute inset-0 bg-indigo-600/10 rounded-full blur-2xl animate-pulse" />
+          <img 
+            src="/logo.png" 
+            alt="Stoolzen Main Logo" 
+            className="w-full h-full object-contain drop-shadow-2xl animate-float relative z-10" 
+          />
         </div>
         
         {/* Decorative elements */}
@@ -107,7 +130,7 @@ export const Home: React.FC = () => {
                 className="group flex flex-col h-full bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/5 transition-all relative overflow-hidden"
               >
                 <div className="flex items-center justify-between mb-8">
-                  <div className="p-3 bg-slate-50 rounded-xl text-slate-600 group-hover:text-indigo-600 transition-colors">
+                  <div className={cn("p-3 rounded-xl text-white shadow-sm transition-transform group-hover:scale-110", tool.color)}>
                     <tool.icon className="w-6 h-6" />
                   </div>
                   <span className="text-[10px] font-bold tracking-widest text-slate-400 bg-slate-50 px-2.5 py-1 rounded-full uppercase">
@@ -124,6 +147,8 @@ export const Home: React.FC = () => {
           ))}
         </div>
       </section>
+      
+      <AdBanner />
 
       {/* Benefits Summary */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -4,6 +4,8 @@ import { Lock, Info, ShieldCheck, AlertCircle, Copy, CheckCircle2 } from 'lucide
 import { decodeJWT, JWTData } from '../utils/toolUtils';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
+import { SEO } from '../components/SEO';
+import { AdBanner } from '../components/AdBanner';
 
 export const JWTDecoder: React.FC = () => {
   const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
@@ -38,10 +40,25 @@ export const JWTDecoder: React.FC = () => {
 
   return (
     <div className="space-y-8 pb-20">
+      <SEO 
+        title="Decodificador JWT Online - Validar y Analizar Tokens | DevUtils"
+        description="Decodifica tus JSON Web Tokens (JWT) de forma segura. Analiza headers, payloads y verifica firmas online con nuestra herramienta gratuita."
+        keywords="validadores de jwt, jwt decoder, decodificador jwt, analizar jwt, jwt debugger, verificar jwt online"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Stoolzen JWT Decoder",
+          "url": "https://stoolzen.com/jwt",
+          "description": "Herramienta para decodificar e inspeccionar JSON Web Tokens de forma segura.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any"
+        }}
+      />
+
       <div className="flex justify-between items-end">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold tracking-tight text-on-surface">JWT Decoder</h1>
-          <p className="text-outline">Decode, verify and generate JSON Web Tokens.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-on-surface">Decodificador JWT</h1>
+          <p className="text-outline">Decodifica, verifica y analiza tus JSON Web Tokens de forma segura.</p>
         </div>
         <div className={cn(
           "flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm transition-all animate-fade-in",
@@ -53,6 +70,8 @@ export const JWTDecoder: React.FC = () => {
           </span>
         </div>
       </div>
+
+      <AdBanner />
 
       <div className="space-y-6">
         {/* Input Token Area */}

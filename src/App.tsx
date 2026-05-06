@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { JSONFormatter } from './pages/JSONFormatter';
 import { GraphQLFormatter } from './pages/GraphQLFormatter';
 import { JWTDecoder } from './pages/JWTDecoder';
+import { Premium } from './pages/Premium';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/json" element={<JSONFormatter />} />
         <Route path="/graphql" element={<GraphQLFormatter />} />
         <Route path="/jwt" element={<JWTDecoder />} />
+        <Route path="/premium" element={<Premium />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Layout>
