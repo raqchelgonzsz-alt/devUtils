@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Editor from '@monaco-editor/react';
-import { Terminal, Copy, Wand2, Trash2, CheckCircle2, History, Maximize2, Minimize2, Type } from 'lucide-react';
+import { Terminal, Copy, Wand2, Trash2, CheckCircle2, History, Maximize2, Minimize2, Type, FoldVertical, UnfoldVertical } from 'lucide-react';
 import { formatJSON } from '../utils/toolUtils';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { SEO } from '../components/SEO';
-import { AdBanner } from '../components/AdBanner';
 
 export const JSONFormatter: React.FC = () => {
   const [input, setInput] = useState('');
@@ -16,6 +15,19 @@ export const JSONFormatter: React.FC = () => {
   const [spacing, setSpacing] = useState<string>('2');
   const [fontSize, setFontSize] = useState<number>(14);
   const [maximized, setMaximized] = useState<'input' | 'output' | null>(null);
+  const editorRef = useRef<any>(null);
+
+  const handleEditorDidMount = (editor: any) => {
+    editorRef.current = editor;
+  };
+
+  const handleFoldAll = () => {
+    editorRef.current?.trigger('fold', 'editor.foldAll');
+  };
+
+  const handleUnfoldAll = () => {
+    editorRef.current?.trigger('unfold', 'editor.unfoldAll');
+  };
 
   const handleFormat = () => {
     if (!input.trim()) return;
@@ -48,7 +60,7 @@ export const JSONFormatter: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-6 relative">
+    <div className="h-full flex flex-col space-y-4 relative">
       <SEO 
         title="Formateador JSON Online - Embellecer y Validar JSON | DevUtils"
         description="El mejor formateador de JSON online. Valida, embellece y minifica tus cadenas JSON al instante. Herramienta gratuita para desarrolladores."
@@ -64,7 +76,7 @@ export const JSONFormatter: React.FC = () => {
         }}
       />
       
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-6 gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-3 gap-4">
         <div className="space-y-1">
           <h1 className="text-3xl font-bold tracking-tight text-on-surface">Formateador JSON</h1>
           <p className="text-outline">Formatea, valida y embellece tus cadenas JSON de forma segura.</p>
@@ -99,10 +111,8 @@ export const JSONFormatter: React.FC = () => {
         </div>
       </div>
 
-      <AdBanner />
-
       <div className={cn(
-        "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20",
+        "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-20",
         maximized && "hidden"
       )}>
         {/* Input Area */}
@@ -136,6 +146,7 @@ export const JSONFormatter: React.FC = () => {
               theme="vs-light"
               value={input}
               onChange={(value) => setInput(value || '')}
+              onMount={handleEditorDidMount}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
@@ -183,6 +194,7 @@ export const JSONFormatter: React.FC = () => {
               defaultLanguage="json"
               theme="vs-light"
               value={output}
+              onMount={handleEditorDidMount}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
@@ -230,7 +242,33 @@ export const JSONFormatter: React.FC = () => {
                 <span className="font-bold text-slate-900 capitalize tracking-tight">{maximized} Editor</span>
                 <span className="text-xs font-medium text-slate-500 bg-slate-200 px-2 py-0.5 rounded-full">Maximized Mode</span>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 bg-white border border-slate-200 px-2 py-1 rounded-lg">
+                  <Type className="w-3.5 h-3.5 text-slate-400" />
+                  <input 
+                    type="number" 
+                    value={fontSize} 
+                    onChange={(e) => setFontSize(Math.max(10, Math.min(30, parseInt(e.target.value) || 14)))}
+                    className="w-10 bg-transparent text-xs font-bold focus:outline-none"
+                    title="Font Size"
+                  />
+                </div>
+                <div className="h-6 w-px bg-slate-200 mx-1" />
+                <button 
+                  onClick={handleFoldAll}
+                  className="p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                  title="Fold All"
+                >
+                  <FoldVertical className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={handleUnfoldAll}
+                  className="p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                  title="Unfold All"
+                >
+                  <UnfoldVertical className="w-5 h-5" />
+                </button>
+                <div className="h-6 w-px bg-slate-200 mx-1" />
                 {maximized === 'output' && (
                   <button 
                     onClick={handleCopy}
@@ -256,6 +294,7 @@ export const JSONFormatter: React.FC = () => {
                 theme="vs-light"
                 value={maximized === 'input' ? input : output}
                 onChange={(value) => maximized === 'input' && setInput(value || '')}
+                onMount={handleEditorDidMount}
                 options={{
                   minimap: { enabled: true },
                   fontSize: fontSize + 2,

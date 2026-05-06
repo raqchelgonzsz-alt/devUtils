@@ -19,23 +19,53 @@ export const AdBanner: React.FC<AdBannerProps> = ({
   type = 'horizontal',
   slot = 'XXXXXXXXXX' // Placeholder slot ID
 }) => {
+  const adRef = React.useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error('Adsbygoogle error:', e);
+    let timer: any;
+    let observer: IntersectionObserver | null = null;
+    
+    const initAd = () => {
+      try {
+        // Double check dimensions before pushing
+        if (adRef.current && adRef.current.offsetWidth > 0) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      } catch (e) {
+        console.error('Adsbygoogle error:', e);
+      }
+    };
+
+    // Use Intersection Observer to wait until the ad is actually visible
+    // and has dimensions in the layout
+    if (adRef.current) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.boundingClientRect.width > 0) {
+            initAd();
+            if (observer) observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(adRef.current);
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   const getDimensions = () => {
     switch (type) {
       case 'vertical':
-        return 'w-full h-[400px]';
+        return 'w-full min-h-[400px] h-[400px]';
       case 'square':
-        return 'w-full h-[250px]';
+        return 'w-full min-h-[250px] h-[250px]';
       case 'horizontal':
       default:
-        return 'w-full h-[90px]';
+        return 'w-full min-h-[90px] h-[90px]';
     }
   };
 
@@ -47,12 +77,12 @@ export const AdBanner: React.FC<AdBannerProps> = ({
         </span>
       </div>
       
-      <div className={cn("flex items-center justify-center bg-slate-50", getDimensions())}>
+      <div ref={adRef} className={cn("flex items-center justify-center bg-slate-50", getDimensions())}>
         <ins
           className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-          data-ad-slot={slot}
+          style={{ display: 'block', minWidth: '100%', minHeight: '100%' }}
+          data-ad-client="ca-pub-6484516299507438"
+          {...(slot !== 'XXXXXXXXXX' ? { 'data-ad-slot': slot } : {})}
           data-ad-format="auto"
           data-full-width-responsive="true"
         />

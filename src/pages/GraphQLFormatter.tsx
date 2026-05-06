@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Editor from '@monaco-editor/react';
-import { FileCode, Copy, Play, Trash2, CheckCircle2, AlertCircle, Maximize2, Minimize2, Type } from 'lucide-react';
+import { FileCode, Copy, Play, Trash2, CheckCircle2, AlertCircle, Maximize2, Minimize2, Type, FoldVertical, UnfoldVertical } from 'lucide-react';
 import { formatGraphQL } from '../utils/toolUtils';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { SEO } from '../components/SEO';
-import { AdBanner } from '../components/AdBanner';
 
 export const GraphQLFormatter: React.FC = () => {
   const [input, setInput] = useState('');
@@ -15,6 +14,19 @@ export const GraphQLFormatter: React.FC = () => {
   const [statusMessage, setStatusMessage] = useState({ title: '', detail: '' });
   const [fontSize, setFontSize] = useState<number>(14);
   const [maximized, setMaximized] = useState<'input' | 'output' | null>(null);
+  const editorRef = useRef<any>(null);
+
+  const handleEditorDidMount = (editor: any) => {
+    editorRef.current = editor;
+  };
+
+  const handleFoldAll = () => {
+    editorRef.current?.trigger('fold', 'editor.foldAll');
+  };
+
+  const handleUnfoldAll = () => {
+    editorRef.current?.trigger('unfold', 'editor.unfoldAll');
+  };
 
   const handleFormat = () => {
     if (!input.trim()) return;
@@ -45,7 +57,7 @@ export const GraphQLFormatter: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-6 relative">
+    <div className="h-full flex flex-col space-y-4 relative">
       <SEO 
         title="Formateador GraphQL Online - Validar y Embellecer Consultas | DevUtils"
         description="Formatea y valida tus consultas GraphQL online. Mejora la legibilidad de tus schemas y queries con nuestra herramienta gratuita."
@@ -61,7 +73,7 @@ export const GraphQLFormatter: React.FC = () => {
         }}
       />
       
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-6 gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-3 gap-4">
         <div className="space-y-1">
           <h1 className="text-3xl font-bold tracking-tight text-on-surface">Formateador GraphQL</h1>
           <p className="text-outline">Limpia y valida tus consultas y esquemas GraphQL al instante.</p>
@@ -87,10 +99,8 @@ export const GraphQLFormatter: React.FC = () => {
         </div>
       </div>
 
-      <AdBanner />
-
       <div className={cn(
-        "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20",
+        "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-20",
         maximized && "hidden"
       )}>
         <div className="flex flex-col bg-surface-container border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
@@ -123,6 +133,7 @@ export const GraphQLFormatter: React.FC = () => {
               theme="vs-light"
               value={input}
               onChange={(value) => setInput(value || '')}
+              onMount={handleEditorDidMount}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
@@ -166,6 +177,7 @@ export const GraphQLFormatter: React.FC = () => {
               defaultLanguage="graphql"
               theme="vs-light"
               value={output}
+              onMount={handleEditorDidMount}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
@@ -210,7 +222,33 @@ export const GraphQLFormatter: React.FC = () => {
                 <span className="font-bold text-slate-900 capitalize tracking-tight">{maximized} GraphQL Editor</span>
                 <span className="text-xs font-medium text-slate-500 bg-slate-200 px-2 py-0.5 rounded-full">Maximized Mode</span>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 bg-white border border-slate-200 px-2 py-1 rounded-lg">
+                  <Type className="w-3.5 h-3.5 text-slate-400" />
+                  <input 
+                    type="number" 
+                    value={fontSize} 
+                    onChange={(e) => setFontSize(Math.max(10, Math.min(30, parseInt(e.target.value) || 14)))}
+                    className="w-10 bg-transparent text-xs font-bold focus:outline-none"
+                    title="Font Size"
+                  />
+                </div>
+                <div className="h-6 w-px bg-slate-200 mx-1" />
+                <button 
+                  onClick={handleFoldAll}
+                  className="p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                  title="Fold All"
+                >
+                  <FoldVertical className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={handleUnfoldAll}
+                  className="p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                  title="Unfold All"
+                >
+                  <UnfoldVertical className="w-5 h-5" />
+                </button>
+                <div className="h-6 w-px bg-slate-200 mx-1" />
                 {maximized === 'output' && (
                   <button 
                     onClick={handleCopy}
@@ -236,6 +274,7 @@ export const GraphQLFormatter: React.FC = () => {
                 theme="vs-light"
                 value={maximized === 'input' ? input : output}
                 onChange={(value) => maximized === 'input' && setInput(value || '')}
+                onMount={handleEditorDidMount}
                 options={{
                   minimap: { enabled: true },
                   fontSize: fontSize + 2,

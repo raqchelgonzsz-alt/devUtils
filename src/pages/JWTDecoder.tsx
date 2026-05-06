@@ -5,7 +5,6 @@ import { decodeJWT, JWTData } from '../utils/toolUtils';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { SEO } from '../components/SEO';
-import { AdBanner } from '../components/AdBanner';
 
 export const JWTDecoder: React.FC = () => {
   const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
@@ -39,7 +38,7 @@ export const JWTDecoder: React.FC = () => {
   }, [token]);
 
   return (
-    <div className="space-y-8 pb-20">
+    <div className="space-y-4 pb-20">
       <SEO 
         title="Decodificador JWT Online - Validar y Analizar Tokens | DevUtils"
         description="Decodifica tus JSON Web Tokens (JWT) de forma segura. Analiza headers, payloads y verifica firmas online con nuestra herramienta gratuita."
@@ -54,6 +53,8 @@ export const JWTDecoder: React.FC = () => {
           "operatingSystem": "Any"
         }}
       />
+
+
 
       <div className="flex justify-between items-end">
         <div className="space-y-1">
@@ -71,9 +72,7 @@ export const JWTDecoder: React.FC = () => {
         </div>
       </div>
 
-      <AdBanner />
-
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Input Token Area */}
         <div className="space-y-2">
           <label className="text-[10px] font-bold uppercase tracking-widest text-outline">Encoded Token</label>
