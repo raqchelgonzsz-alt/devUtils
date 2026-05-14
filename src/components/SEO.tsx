@@ -1,5 +1,10 @@
 import React from 'react';
 
+interface BreadcrumbItem {
+  name: string;
+  item: string;
+}
+
 interface SEOProps {
   title: string;
   description: string;
@@ -8,6 +13,8 @@ interface SEOProps {
   ogDescription?: string;
   ogType?: string;
   jsonLd?: object;
+  canonical?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export const SEO: React.FC<SEOProps> = ({ 
@@ -17,7 +24,9 @@ export const SEO: React.FC<SEOProps> = ({
   ogTitle, 
   ogDescription, 
   ogType = 'website',
-  jsonLd
+  jsonLd,
+  canonical,
+  breadcrumbs
 }) => {
   React.useEffect(() => {
     document.title = title;
@@ -42,34 +51,63 @@ export const SEO: React.FC<SEOProps> = ({
       metaKeywords.setAttribute('content', keywords);
     }
 
+    // Canonical Tag
+    let canonicalTag = document.querySelector('link[rel="canonical"]');
+    if (!canonicalTag) {
+      canonicalTag = document.createElement('link');
+      canonicalTag.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalTag);
+    }
+    canonicalTag.setAttribute('href', canonical || window.location.href.split('?')[0]);
+
     // OG Tags
-    const updateOG = (property: string, content: string) => {
-      let el = document.querySelector(`meta[property="${property}"]`);
+    const updateMeta = (attr: string, key: string, content: string) => {
+      let el = document.querySelector(`meta[${attr}="${key}"]`);
       if (!el) {
         el = document.createElement('meta');
-        el.setAttribute('property', property);
+        el.setAttribute(attr, key);
         document.head.appendChild(el);
       }
       el.setAttribute('content', content);
     };
 
-    updateOG('og:title', ogTitle || title);
-    updateOG('og:description', ogDescription || description);
-    updateOG('og:type', ogType);
-    updateOG('og:url', window.location.href);
+    updateMeta('property', 'og:title', ogTitle || title);
+    updateMeta('property', 'og:description', ogDescription || description);
+    updateMeta('property', 'og:type', ogType);
+    updateMeta('property', 'og:url', window.location.href);
+    
+    // Twitter Tags
+    updateMeta('name', 'twitter:card', 'summary_large_image');
+    updateMeta('name', 'twitter:title', ogTitle || title);
+    updateMeta('name', 'twitter:description', ogDescription || description);
 
-    // JSON-LD
-    if (jsonLd) {
-      let script = document.querySelector('script[type="application/ld+json"]');
-      if (!script) {
-        script = document.createElement('script');
-        script.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(jsonLd);
+    // JSON-LD Management
+    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+    scripts.forEach(s => s.remove());
+
+    const addJsonLd = (data: object) => {
+      const script = document.createElement('script');
+      script.setAttribute('type', 'application/ld+json');
+      script.textContent = JSON.stringify(data);
+      document.head.appendChild(script);
+    };
+
+    if (jsonLd) addJsonLd(jsonLd);
+
+    if (breadcrumbs) {
+      addJsonLd({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbs.map((item, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": item.name,
+          "item": `https://stoolzen.com${item.item}`
+        }))
+      });
     }
 
-  }, [title, description, keywords, ogTitle, ogDescription, ogType, jsonLd]);
+  }, [title, description, keywords, ogTitle, ogDescription, ogType, jsonLd, canonical, breadcrumbs]);
 
   return null;
 };

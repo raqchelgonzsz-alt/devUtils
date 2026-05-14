@@ -14,10 +14,14 @@ import {
   LayoutGrid,
   FileText,
   Activity,
-  Menu
+  Menu,
+  Sun
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { AdBanner } from '../AdBanner';
+import { Footer } from '../Footer';
+import { CookieConsent } from '../CookieConsent';
+import { useTheme } from '../../context/ThemeContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,6 +29,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const navItems = [
     { name: 'JSON Formatter', icon: Terminal, path: '/json', color: 'bg-yellow-400' },
@@ -38,28 +43,35 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   ];
 
   return (
-    <div className="flex flex-col h-screen bg-slate-50 font-sans overflow-hidden">
+    <div className="flex flex-col h-screen bg-surface font-sans overflow-hidden transition-colors duration-300">
       {/* Header */}
-      <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-8 flex-shrink-0 z-50">
+      <header className="h-16 bg-surface-bright border-b border-outline-variant flex items-center justify-between px-4 md:px-8 flex-shrink-0 z-50 transition-colors">
         <Link to="/" className="flex items-center gap-3 text-indigo-600 group">
           <div className="w-10 h-10 overflow-hidden rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
             <img src="/logo.png" alt="Stoolzen Logo" className="w-full h-full object-cover" />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-900">
-            Stoolzen<span className="text-indigo-500">.com</span>
+          <span className="font-bold text-xl tracking-tight text-on-surface">
+            Stoolzen<span className="text-primary">.com</span>
           </span>
         </Link>
-        <nav className="flex gap-4 md:gap-6 items-center text-sm font-medium text-slate-500">
-          <a href="#" className="hidden sm:block hover:text-indigo-600 transition-colors">Docs</a>
-          <Link to="/premium" className="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider">Premium</Link>
+        <nav className="flex gap-4 md:gap-6 items-center text-sm font-medium text-outline">
+          <button 
+            onClick={toggleTheme}
+            className="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </button>
+          <Link to="/docs" className="hidden sm:block hover:text-primary transition-colors">Docs</Link>
+          <Link to="/premium" className="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider">Premium</Link>
         </nav>
       </header>
 
       <div className="flex-1 flex overflow-hidden relative">
         {/* Sidebar Navigation - Force hidden on mobile, only flex on large screens */}
-        <aside className="hidden lg:flex w-64 bg-white border-r border-slate-200 flex-col flex-shrink-0 z-40 overflow-hidden">
+        <aside className="hidden lg:flex w-64 bg-surface-bright border-r border-outline-variant flex-col flex-shrink-0 z-40 overflow-hidden transition-colors">
           <div className="flex-1 overflow-y-auto p-4 flex flex-col">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">Tools Palette</div>
+            <div className="text-[10px] font-bold text-outline uppercase tracking-widest mb-4 px-2">Tools Palette</div>
             <nav className="space-y-1 mb-6">
             {navItems.map((item) => (
               <Link
@@ -68,8 +80,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 className={cn(
                   "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-all",
                   location.pathname === item.path 
-                    ? "text-slate-900 bg-slate-100" 
-                    : "text-slate-600 hover:bg-slate-50"
+                    ? "text-on-surface bg-surface-container" 
+                    : "text-outline hover:bg-surface-container-low"
                 )}
               >
                 <div className={cn("w-2 h-2 rounded-full", item.color)}></div>
@@ -95,15 +107,19 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Main Workspace */}
         <main className="flex-1 flex flex-col overflow-hidden relative">
-          <div className="flex-1 overflow-y-auto p-6 md:p-8">
+          <div className="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col">
             {children}
-          </div>
-          
-          {/* Bottom Ad Banner - Hidden on mobile to avoid layout issues */}
-          <div className="hidden lg:block px-4 md:px-6 mb-6 mt-auto">
-            <AdBanner />
+            
+            {/* Bottom Ad Banner - moved inside scrollable area so it is not fixed */}
+            <div className="mt-8 mb-4">
+              <AdBanner />
+            </div>
+            
+            <Footer />
           </div>
         </main>
+
+        <CookieConsent />
 
         {/* Mobile Bottom Navigation */}
         <nav className="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200 flex items-center justify-around px-2 z-50 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
@@ -113,7 +129,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               to={item.path}
               className={cn(
                 "flex flex-col items-center justify-center gap-1 min-w-[72px] transition-all",
-                location.pathname === item.path ? "text-indigo-600" : "text-slate-400"
+                location.pathname === item.path ? "text-primary" : "text-outline"
               )}
             >
               <item.icon className="w-5 h-5" />
@@ -127,7 +143,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             to="/"
             className={cn(
               "flex flex-col items-center justify-center gap-1 min-w-[72px] transition-all",
-              location.pathname === "/" ? "text-indigo-600" : "text-slate-400"
+              location.pathname === "/" ? "text-primary" : "text-outline"
             )}
           >
             <Home className="w-5 h-5" />

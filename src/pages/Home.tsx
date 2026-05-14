@@ -86,12 +86,12 @@ export const Home: React.FC = () => {
       />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white rounded-3xl p-12 lg:p-16 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-12">
+      <section className="relative overflow-hidden bg-surface-bright rounded-3xl p-12 lg:p-16 border border-outline-variant shadow-sm flex flex-col md:flex-row items-center gap-12 transition-colors">
         <div className="relative z-10 max-w-2xl space-y-6 flex-1 text-center md:text-left">
-          <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            The Best <span className="text-indigo-600">Dev Tools</span> in One Place
+          <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface leading-tight">
+            The Best <span className="text-primary">Dev Tools</span> in One Place
           </h1>
-          <p className="text-lg text-slate-500 leading-relaxed font-medium">
+          <p className="text-lg text-outline leading-relaxed font-medium">
             Format JSON, validate GraphQL, and decode JWT instantly. Fast, secure tools optimized for your workflow.
           </p>
         </div>
@@ -113,8 +113,8 @@ export const Home: React.FC = () => {
       {/* Dashboard Section */}
       <section className="space-y-8">
         <div className="space-y-1">
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight">Workbench Dashboard</h2>
-          <p className="text-sm text-slate-500 font-medium">Quick access to your most frequently used utilities.</p>
+          <h2 className="text-xl font-bold text-on-surface tracking-tight">Workbench Dashboard</h2>
+          <p className="text-sm text-outline font-medium">Quick access to your most frequently used utilities.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -127,20 +127,20 @@ export const Home: React.FC = () => {
             >
               <Link 
                 to={tool.path}
-                className="group flex flex-col h-full bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/5 transition-all relative overflow-hidden"
+                className="group flex flex-col h-full bg-surface-bright border border-outline-variant rounded-2xl p-6 hover:border-primary hover:shadow-xl hover:shadow-primary/5 transition-all relative overflow-hidden"
               >
                 <div className="flex items-center justify-between mb-8">
                   <div className={cn("p-3 rounded-xl text-white shadow-sm transition-transform group-hover:scale-110", tool.color)}>
                     <tool.icon className="w-6 h-6" />
                   </div>
-                  <span className="text-[10px] font-bold tracking-widest text-slate-400 bg-slate-50 px-2.5 py-1 rounded-full uppercase">
+                  <span className="text-[10px] font-bold tracking-widest text-outline bg-surface-container px-2.5 py-1 rounded-full uppercase">
                     {tool.category}
                   </span>
                 </div>
                 
                 <div className="space-y-2 mt-auto">
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{tool.name}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed font-medium">{tool.description}</p>
+                  <h3 className="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{tool.name}</h3>
+                  <p className="text-sm text-outline leading-relaxed font-medium">{tool.description}</p>
                 </div>
               </Link>
             </motion.div>
@@ -152,31 +152,31 @@ export const Home: React.FC = () => {
 
       {/* Benefits Summary */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+        <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant flex items-center gap-4 shadow-sm transition-colors">
           <div className="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs font-bold text-slate-900 tracking-tight">Safe & Private</div>
-            <div className="text-[11px] text-slate-500 font-medium">Browser-only processing</div>
+            <div className="text-xs font-bold text-on-surface tracking-tight">Safe & Private</div>
+            <div className="text-[11px] text-outline font-medium">Browser-only processing</div>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
-          <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center shrink-0">
+        <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant flex items-center gap-4 shadow-sm transition-colors">
+          <div className="w-10 h-10 bg-primary-container text-primary rounded-full flex items-center justify-center shrink-0">
             <Zap className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs font-bold text-slate-900 tracking-tight">Zero Latency</div>
-            <div className="text-[11px] text-slate-500 font-medium">Instant WASM formatting</div>
+            <div className="text-xs font-bold text-on-surface tracking-tight">Zero Latency</div>
+            <div className="text-[11px] text-outline font-medium">Instant WASM formatting</div>
           </div>
         </div>
-          <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+          <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant flex items-center gap-4 shadow-sm transition-colors">
           <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">
             <Bolt className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs font-bold text-slate-900 tracking-tight">1.2M Developers</div>
-            <div className="text-[11px] text-slate-500 font-medium">Trusted global community</div>
+            <div className="text-xs font-bold text-on-surface tracking-tight">1.2M Developers</div>
+            <div className="text-[11px] text-outline font-medium">Trusted global community</div>
           </div>
         </div>
       </div>

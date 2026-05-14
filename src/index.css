@@ -36,6 +36,28 @@
   --color-on-error-container: #991b1b;
 }
 
+.dark {
+  --color-surface: #0f172a; /* slate-900 */
+  --color-on-surface: #f8fafc; /* slate-50 */
+  --color-surface-dim: #1e293b; /* slate-800 */
+  --color-surface-bright: #1e293b;
+  --color-surface-container-lowest: #020617;
+  --color-surface-container-low: #0f172a;
+  --color-surface-container: #1e293b;
+  --color-surface-container-high: #334155;
+  --color-surface-container-highest: #475569;
+
+  --color-primary: #818cf8; /* indigo-400 */
+  --color-primary-container: #312e81; /* indigo-900 */
+  --color-on-primary-container: #e0e7ff;
+
+  --color-outline: #94a3b8; /* slate-400 (was slate-600, too dark) */
+  --color-outline-variant: #334155; /* slate-700 for better border visibility */
+  
+  --color-error-container: #7f1d1d;
+  --color-on-error-container: #fca5a5;
+}
+
 @layer base {
   body {
     @apply bg-surface text-on-surface font-sans antialiased;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
-import { Lock, Info, ShieldCheck, AlertCircle, Copy, CheckCircle2 } from 'lucide-react';
+import { Lock, Info, ShieldCheck, AlertCircle, Copy, CheckCircle2, FileCode, Activity } from 'lucide-react';
 import { decodeJWT, JWTData } from '../utils/toolUtils';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { SEO } from '../components/SEO';
+import { useTheme } from '../context/ThemeContext';
 
 export const JWTDecoder: React.FC = () => {
   const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
@@ -12,6 +13,7 @@ export const JWTDecoder: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showStatus, setShowStatus] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ title: '', detail: '' });
+  const { theme } = useTheme();
 
   const handleCopy = (text: string, label: string) => {
     if (!text) return;
@@ -106,8 +108,7 @@ export const JWTDecoder: React.FC = () => {
             <div className="flex-1 bg-surface-container-lowest relative">
                <Editor
                 height="100%"
-                defaultLanguage="json"
-                theme="vs-light"
+                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
                 value={decoded ? JSON.stringify(decoded.header, null, 2) : ''}
                 options={{
                   minimap: { enabled: false },
@@ -140,8 +141,7 @@ export const JWTDecoder: React.FC = () => {
             <div className="flex-1 bg-surface-container-lowest relative">
                <Editor
                 height="100%"
-                defaultLanguage="json"
-                theme="vs-light"
+                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
                 value={decoded ? JSON.stringify(decoded.payload, null, 2) : ''}
                 options={{
                   minimap: { enabled: false },
@@ -202,18 +202,72 @@ export const JWTDecoder: React.FC = () => {
         )}
       </div>
 
-      {/* Info Card */}
-      <section className="bg-surface-container-low p-8 rounded-3xl border border-outline-variant flex items-start gap-6">
-        <div className="w-12 h-12 bg-primary-container text-primary rounded-2xl flex items-center justify-center shrink-0">
-          <Info className="w-6 h-6" />
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-bold">About JSON Web Tokens</h3>
-          <p className="text-sm text-outline leading-relaxed max-w-4xl">
-            JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.
+      {/* SEO Content Section */}
+      <article className="mt-12 space-y-10 bg-surface-bright p-8 lg:p-12 rounded-3xl border border-outline-variant shadow-sm text-on-surface">
+        <section className="space-y-4">
+          <div className="flex items-center gap-4 border-b border-outline-variant pb-4">
+            <div className="w-12 h-12 bg-primary-container text-primary rounded-2xl flex items-center justify-center shrink-0">
+              <Info className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-extrabold tracking-tight">Todo lo que necesitas saber sobre los JWT</h2>
+          </div>
+          <p className="text-outline leading-relaxed text-lg">
+            Un <strong>JSON Web Token (JWT)</strong> es un estándar abierto (RFC 7519) que define un formato compacto y autónomo para transmitir información de forma segura entre distintas partes como un objeto JSON. Esta información puede ser verificada y validada porque está firmada digitalmente utilizando un secreto (con el algoritmo HMAC) o un par de claves pública/privada usando RSA o ECDSA.
           </p>
-        </div>
-      </section>
+        </section>
+
+        <section className="space-y-4">
+          <h3 className="text-xl font-bold border-l-4 border-primary pl-4">¿Cómo funciona y cómo decodificar un JWT?</h3>
+          <p className="text-outline leading-relaxed">
+            Un JWT se compone de tres partes separadas por puntos (<code>.</code>): <strong>Header</strong>, <strong>Payload</strong>, y <strong>Signature</strong>. Al ser cadenas codificadas en Base64Url, pueden ser decodificadas fácilmente sin necesidad de la clave secreta. Sin embargo, para <em>verificar</em> que la información no ha sido alterada, es indispensable la firma.
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-outline ml-4">
+            <li><strong>Header (Encabezado):</strong> Contiene el tipo de token (JWT) y el algoritmo de firma utilizado (como HMAC SHA256 o RSA).</li>
+            <li><strong>Payload (Carga útil):</strong> Contiene las afirmaciones o "claims", que son declaraciones sobre una entidad (típicamente, el usuario) y metadatos adicionales.</li>
+            <li><strong>Signature (Firma):</strong> Se crea tomando el header codificado, el payload codificado, un secreto, y aplicando el algoritmo especificado en el header. Esto garantiza la integridad del token.</li>
+          </ul>
+        </section>
+
+        <section className="space-y-4 bg-surface-container-low p-6 rounded-2xl border border-outline-variant">
+          <h3 className="text-xl font-bold flex items-center gap-2">
+            <FileCode className="w-5 h-5 text-secondary" /> 
+            Ejemplo real de un JWT
+          </h3>
+          <p className="text-outline leading-relaxed">
+            Imagina que un usuario inicia sesión en tu aplicación. El servidor genera un JWT y se lo envía al cliente. El token lucirá algo así:
+          </p>
+          <div className="font-mono text-sm break-all bg-surface p-4 rounded-lg border border-outline-variant">
+            <span className="text-error">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.
+            <span className="text-primary">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ</span>.
+            <span className="text-secondary">SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span>
+          </div>
+          <p className="text-outline text-sm mt-4">
+            Al decodificar la parte roja (Header), vemos que el algoritmo es HS256. La parte azul (Payload) nos revela que el token pertenece al usuario "John Doe". La parte verde es la firma criptográfica.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h3 className="text-xl font-bold border-l-4 border-secondary pl-4">Casos de Uso más Comunes</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div className="bg-surface-bright border border-outline-variant p-5 rounded-xl">
+              <h4 className="font-bold flex items-center gap-2 mb-2 text-primary">
+                <Lock className="w-4 h-4" /> Autorización (Autenticación sin estado)
+              </h4>
+              <p className="text-sm text-outline">
+                Es el uso más común. Una vez que el usuario inicia sesión, cada petición posterior incluye el JWT. El servidor verifica la firma y confía en los datos del token sin necesidad de consultar una base de datos de sesiones, haciéndolo ideal para APIs REST y Single Page Applications (SPAs).
+              </p>
+            </div>
+            <div className="bg-surface-bright border border-outline-variant p-5 rounded-xl">
+              <h4 className="font-bold flex items-center gap-2 mb-2 text-secondary">
+                <Activity className="w-4 h-4" /> Intercambio seguro de información
+              </h4>
+              <p className="text-sm text-outline">
+                Los JWTs son excelentes para transmitir datos de forma segura entre sistemas. Gracias a la firma, el receptor puede estar seguro de que la información provino de la fuente esperada y no fue modificada en tránsito.
+              </p>
+            </div>
+          </div>
+        </section>
+      </article>
 
       {/* Success Toast */}
       <AnimatePresence>
