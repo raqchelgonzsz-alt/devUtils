@@ -301,15 +301,55 @@ export const JSONFormatter: React.FC = () => {
           { name: 'JSON Tools', item: '/json' },
           { name: seo.h1, item: pathname }
         ]}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "name": seo.h1,
-          "url": `https://stoolzen.com${pathname}`,
-          "description": seo.description,
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Any"
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": seo.h1,
+            "url": `https://stoolzen.com${pathname}`,
+            "description": seo.description,
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Cómo puedo convertir JSON a una sola línea?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Utiliza el botón 'Minify' en el panel de salida. Esto eliminará todos los espacios en blanco y saltos de línea innecesarios."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿El validador detecta errores de sintaxis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, nuestro motor de validación resalta la línea exacta donde se encuentra el error para que puedas corregirlo al instante."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Puedo descargar el resultado?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutamente. Haz clic en el icono de descarga (flecha hacia abajo) para guardar tu JSON formateado como un archivo .json."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Es gratis este servicio?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Stoolzen es una herramienta 100% gratuita para desarrolladores. También ofrecemos una versión Premium sin anuncios para usuarios avanzados."
+                }
+              }
+            ]
+          }
+        ]}
       />
       
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-3 gap-4">
@@ -532,7 +572,7 @@ export const JSONFormatter: React.FC = () => {
                 {output ? (
                   <JsonView 
                     value={JSON.parse(output)} 
-                    style={theme === 'dark' ? darkTheme : lightTheme} 
+                    style={{ ...(theme === 'dark' ? darkTheme : lightTheme), fontSize: fontSize }} 
                     displayDataTypes={false}
                     displayObjectSize={false}
                     enableClipboard={true}
@@ -757,7 +797,7 @@ export const JSONFormatter: React.FC = () => {
                   {output ? (
                     <JsonView 
                       value={JSON.parse(output)} 
-                      style={theme === 'dark' ? darkTheme : lightTheme} 
+                      style={{ ...(theme === 'dark' ? darkTheme : lightTheme), fontSize: fontSize + 2 }} 
                       displayDataTypes={false}
                       displayObjectSize={false}
                       enableClipboard={({ value }) => navigator.clipboard.writeText(typeof value === 'string' ? value : JSON.stringify(value, null, 2))}

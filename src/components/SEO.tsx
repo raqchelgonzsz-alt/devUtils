@@ -12,7 +12,7 @@ interface SEOProps {
   ogTitle?: string;
   ogDescription?: string;
   ogType?: string;
-  jsonLd?: object;
+  jsonLd?: any;
   canonical?: string;
   breadcrumbs?: BreadcrumbItem[];
 }
@@ -92,7 +92,13 @@ export const SEO: React.FC<SEOProps> = ({
       document.head.appendChild(script);
     };
 
-    if (jsonLd) addJsonLd(jsonLd);
+    if (jsonLd) {
+      if (Array.isArray(jsonLd)) {
+        jsonLd.forEach(addJsonLd);
+      } else {
+        addJsonLd(jsonLd);
+      }
+    }
 
     if (breadcrumbs) {
       addJsonLd({
