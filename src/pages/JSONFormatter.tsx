@@ -9,78 +9,114 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { SEO } from '../components/SEO';
 import { useTheme } from '../context/ThemeContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { RelatedContent } from '../components/RelatedContent';
 
 const JSON_SEO_MAP: Record<string, { title: string; description: string; keywords: string; h1: string; subtitle: string }> = {
-  '/json': {
-    title: 'Formateador JSON Online - Embellecer y Validar JSON | DevUtils',
+  '/tools/json/formatter': {
+    title: 'Formateador JSON Online - Embellecer y Validar JSON | Stoolzen',
     description: 'El mejor formateador de JSON online. Valida, embellece y minifica tus cadenas JSON al instante. Herramienta gratuita para desarrolladores.',
     keywords: 'formateador json, json beautifier, validar json, beautify json online, depurar json, dev tools',
     h1: 'Formateador JSON',
     subtitle: 'Formatea, valida y embellece tus cadenas JSON de forma segura.',
   },
-  '/json-validator': {
-    title: 'Validador JSON Online Gratis - Verifica tu JSON al Instante | DevUtils',
+  '/tools/json/validator': {
+    title: 'Validador JSON Online Gratis - Verifica tu JSON al Instante | Stoolzen',
     description: 'Valida tu JSON online de forma gratuita. Detecta errores de sintaxis y verifica la estructura de tus datos JSON al instante.',
     keywords: 'validador json, json validator online, verificar json, json syntax checker, json error checker',
     h1: 'Validador JSON Online',
     subtitle: 'Comprueba si tu JSON es válido y detecta errores de sintaxis al instante.',
   },
-  '/json-editor': {
-    title: 'Editor JSON Online con Resaltado de Sintaxis | DevUtils',
+  '/tools/json/editor': {
+    title: 'Editor JSON Online con Resaltado de Sintaxis | Stoolzen',
     description: 'Editor JSON online con resaltado de sintaxis, autocompletado y validación en tiempo real. La herramienta definitiva para editar JSON.',
     keywords: 'editor json online, json editor, editar json, json syntax highlight, json online editor',
     h1: 'Editor JSON Online',
     subtitle: 'Edita tu JSON con resaltado de sintaxis y validación en tiempo real.',
   },
-  '/json-pretty-print': {
-    title: 'JSON Pretty Print Online - Indentar y Embellecer JSON | DevUtils',
+  '/tools/json/pretty-print': {
+    title: 'JSON Pretty Print Online - Indentar y Embellecer JSON | Stoolzen',
     description: 'Aplica pretty print a tu JSON online. Indenta y embellece cualquier cadena JSON comprimida para hacerla legible al instante.',
     keywords: 'json pretty print, json indent online, embellecer json, json beautify, json format online, pretty print json',
     h1: 'JSON Pretty Print',
     subtitle: 'Indenta y embellece cualquier cadena JSON comprimida al instante.',
   },
-  '/json-viewer': {
-    title: 'Visor JSON Online - Explorar JSON en Vista de Árbol | DevUtils',
+  '/tools/json/viewer': {
+    title: 'Visor JSON Online - Explorar JSON en Vista de Árbol | Stoolzen',
     description: 'Visualiza y explora tu JSON online con vista de árbol interactiva. Navega por estructuras JSON complejas fácilmente.',
     keywords: 'visor json, json viewer online, explorar json, json tree view, visualizar json, json browser',
     h1: 'Visor JSON Online',
     subtitle: 'Explora y navega por tus datos JSON con una vista de árbol interactiva.',
   },
-  '/json-parser': {
-    title: 'JSON Parser Online - Parsear y Analizar JSON | DevUtils',
+  '/tools/json/parser': {
+    title: 'JSON Parser Online - Parsear y Analizar JSON | Stoolzen',
     description: 'Parsea y analiza tu JSON online. Convierte cadenas JSON en estructuras de datos legibles y válidas al instante.',
     keywords: 'json parser online, parsear json, analizar json, json decode, json parse online, json analyzer',
     h1: 'JSON Parser Online',
     subtitle: 'Parsea y analiza tus cadenas JSON para detectar su estructura al instante.',
   },
-  '/json-minifier': {
-    title: 'JSON Minifier Online - Comprimir y Minificar JSON | DevUtils',
+  '/tools/json/minify': {
+    title: 'JSON Minifier Online - Comprimir y Minificar JSON | Stoolzen',
     description: 'Minifica y comprime tu JSON online al instante. Reduce el tamaño de tus payloads JSON para optimizar el rendimiento de tu API.',
     keywords: 'json minifier, minificar json, comprimir json, json compress online, json minify, reducir json',
     h1: 'JSON Minifier Online',
     subtitle: 'Comprime y minifica tu JSON para reducir su tamaño al máximo.',
   },
-  '/json-reader': {
-    title: 'JSON Reader Online - Leer y Visualizar JSON | DevUtils',
+  '/tools/json/reader': {
+    title: 'JSON Reader Online - Leer y Visualizar JSON | Stoolzen',
     description: 'Lee y visualiza ficheros o cadenas JSON online con facilidad. Herramienta gratuita para leer JSON de forma clara y estructurada.',
     keywords: 'json reader, leer json online, json file reader, visualizar json, abrir json online',
     h1: 'JSON Reader Online',
     subtitle: 'Lee y visualiza tus datos JSON de forma clara y estructurada.',
   },
-  '/json-stringify': {
-    title: 'JSON Stringify Online - Convertir Objetos a Cadenas JSON | DevUtils',
+  '/tools/json/stringify': {
+    title: 'JSON Stringify Online - Convertir Objetos a Cadenas JSON | Stoolzen',
     description: 'Convierte objetos y estructuras de datos a cadenas JSON serializadas online. Equivalente a JSON.stringify con formato personalizable.',
     keywords: 'json stringify online, json serialize, convertir a json string, json serialization, json to string',
     h1: 'JSON Stringify Online',
     subtitle: 'Serializa y convierte estructuras de datos a cadenas JSON al instante.',
   },
-  '/json-sorter': {
-    title: 'JSON Sorter Online - Ordenar Claves JSON Alfabéticamente | DevUtils',
+  '/tools/json/sorter': {
+    title: 'JSON Sorter Online - Ordenar Claves JSON Alfabéticamente | Stoolzen',
     description: 'Ordena las claves de tu JSON online de forma alfabética o personalizada. Normaliza la estructura de tus datos JSON al instante.',
     keywords: 'json sorter, ordenar json, json sort keys, json alphabetical order, ordenar claves json',
     h1: 'JSON Sorter Online',
     subtitle: 'Ordena las claves de tu JSON de forma alfabética e instantánea.',
+  },
+  '/tools/json/compare': {
+    title: 'JSON Compare Online - Comparar Diferencias entre JSONs | Stoolzen',
+    description: 'Compara dos JSONs online y encuentra sus diferencias al instante. Herramienta gratuita para identificar cambios entre payloads JSON.',
+    keywords: 'json compare, comparar json, json diff online, json differences, comparar dos json',
+    h1: 'JSON Compare Online',
+    subtitle: 'Compara dos JSONs y detecta sus diferencias al instante.',
+  },
+  '/tools/json/escape': {
+    title: 'JSON Escape Online - Escapar Caracteres en JSON | Stoolzen',
+    description: 'Escapa caracteres especiales en cadenas JSON online. Convierte caracteres reservados para uso seguro en strings JSON.',
+    keywords: 'json escape, escapar json, json string escape, json encode, escape json online',
+    h1: 'JSON Escape Online',
+    subtitle: 'Escapa caracteres especiales en tus strings JSON al instante.',
+  },
+  '/tools/json/unescape': {
+    title: 'JSON Unescape Online - Desescapar Cadenas JSON | Stoolzen',
+    description: 'Desescapa cadenas JSON online con un clic. Convierte secuencias de escape JSON en su representación original legible.',
+    keywords: 'json unescape, desescapar json, json decode string, json unescape online, json string decode',
+    h1: 'JSON Unescape Online',
+    subtitle: 'Desescapa y decodifica cadenas JSON al instante.',
+  },
+  '/tools/json/path-explorer': {
+    title: 'JSONPath Explorer Online - Explorar Rutas en JSON | Stoolzen',
+    description: 'Explora y prueba expresiones JSONPath en tus datos online. El JSONPath Explorer más potente y visual para desarrolladores.',
+    keywords: 'jsonpath explorer, jsonpath online, json path tester, explorar json path, json query online',
+    h1: 'JSONPath Explorer Online',
+    subtitle: 'Explora y prueba expresiones JSONPath en tus datos de forma visual.',
+  },
+  '/tools/json/diff': {
+    title: 'JSON Diff Online - Diferencias entre Documentos JSON | Stoolzen',
+    description: 'Compara y resalta las diferencias entre dos documentos JSON online. Visualiza los cambios con un diff visual claro e intuitivo.',
+    keywords: 'json diff, diferencias json, json diff online, comparar json, json delta, json changes',
+    h1: 'JSON Diff Online',
+    subtitle: 'Visualiza las diferencias entre dos documentos JSON con un diff interactivo.',
   },
 };
 
@@ -101,7 +137,7 @@ export const JSONFormatter: React.FC = () => {
   const [showHistory, setShowHistory] = useState(false);
   const { theme } = useTheme();
   const { pathname } = useLocation();
-  const seo = JSON_SEO_MAP[pathname] ?? JSON_SEO_MAP['/json'];
+  const seo = JSON_SEO_MAP[pathname] ?? JSON_SEO_MAP['/tools/json/formatter'];
   const editorRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -360,7 +396,7 @@ export const JSONFormatter: React.FC = () => {
       </div>
 
       <div className={cn(
-        "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-20",
+        "flex-1 min-h-[650px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-8",
         maximized && "hidden"
       )}>
         {/* Input Area */}
@@ -388,7 +424,6 @@ export const JSONFormatter: React.FC = () => {
                 title="Load Sample Data"
               >
                 <Database className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Demo</span>
               </button>
               <button 
                 onClick={() => fileInputRef.current?.click()}
@@ -396,7 +431,6 @@ export const JSONFormatter: React.FC = () => {
                 title="Upload JSON File"
               >
                 <Upload className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Upload</span>
               </button>
               <button 
                 onClick={() => setShowHistory(true)}
@@ -404,7 +438,6 @@ export const JSONFormatter: React.FC = () => {
                 title="View History"
               >
                 <History className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">History</span>
               </button>
               <button 
                 onClick={handleShare}
@@ -412,7 +445,6 @@ export const JSONFormatter: React.FC = () => {
                 title="Share JSON"
               >
                 <Share2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Share</span>
               </button>
               <button 
                 onClick={() => setInput('')}
@@ -420,7 +452,6 @@ export const JSONFormatter: React.FC = () => {
                 title="Clear Input"
               >
                 <Trash2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Clear</span>
               </button>
               <button 
                 onClick={() => toggleMaximize('input')}
@@ -501,14 +532,13 @@ export const JSONFormatter: React.FC = () => {
                   title="Minify JSON"
                 >
                   <Minimize className="w-3.5 h-3.5" />
-                  Minify
                 </button>
                 <button 
                   onClick={handleFormat}
                   className={btnPrimary}
+                  title="Prettify JSON"
                 >
                   <Wand2 className="w-3.5 h-3.5" />
-                  Prettify
                 </button>
               </div>
             </div>
@@ -519,7 +549,6 @@ export const JSONFormatter: React.FC = () => {
                 title="Print Output"
               >
                 <Printer className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Print</span>
               </button>
               <button 
                 onClick={handleDownload}
@@ -527,14 +556,13 @@ export const JSONFormatter: React.FC = () => {
                 title="Download JSON"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Download</span>
               </button>
               <button 
                 onClick={handleCopy}
                 className={btnSecondary}
+                title="Copy to Clipboard"
               >
                 <Copy className="w-3.5 h-3.5" />
-                Copy
               </button>
               <button 
                 onClick={() => toggleMaximize('output')}
@@ -603,65 +631,184 @@ export const JSONFormatter: React.FC = () => {
         </div>
       </div>
 
-      {/* Educational & SEO Content Section */}
-      <div className={cn("mt-16 pt-12 border-t border-outline-variant pb-20 space-y-12", maximized && "hidden")}>
+      {/* Rich SEO Content Section - dynamic per route */}
+      <div className={cn("mt-10 pt-8 border-t border-outline-variant pb-20 space-y-14", maximized && "hidden")}>
+
+        {/* Intro + Why use it */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
               <FileCode className="w-6 h-6 text-indigo-500" />
-              ¿Qué es un Formateador JSON?
+              ¿Qué es {seo.h1}?
             </h2>
-            <p className="text-outline leading-relaxed">
-              Un <strong>formateador JSON</strong> (o JSON Beautifier) es una herramienta esencial para desarrolladores que convierte archivos JSON comprimidos o mal estructurados en un formato jerárquico fácil de leer. El formato JSON (JavaScript Object Notation) es el estándar de facto para el intercambio de datos en la web moderna.
-            </p>
-            <p className="text-outline leading-relaxed">
-              Nuestra herramienta no solo "embellece" el código, sino que también actúa como un <strong>validador JSON</strong> en tiempo real, detectando errores de sintaxis, comas faltantes o llaves mal cerradas que podrían romper tu aplicación.
-            </p>
+            {pathname === '/tools/json/formatter' && (
+              <>
+                <p className="text-outline leading-relaxed">
+                  Un <strong>formateador JSON</strong> (o JSON Beautifier) es una herramienta esencial para desarrolladores que convierte archivos JSON comprimidos o mal estructurados en un formato jerárquico e indentado, fácil de leer y depurar. El estándar JSON (JavaScript Object Notation) es el formato de intercambio de datos más utilizado en APIs REST, configuraciones de aplicaciones y bases de datos NoSQL.
+                </p>
+                <p className="text-outline leading-relaxed">
+                  Nuestra herramienta no solo "embellece" el código, sino que también actúa como un <strong>validador JSON en tiempo real</strong>, detectando errores de sintaxis — comas faltantes, llaves mal cerradas, comillas incorrectas — que podrían romper tu aplicación en producción.
+                </p>
+                <p className="text-outline leading-relaxed">
+                  Es especialmente útil cuando recibes respuestas de APIs en una sola línea (minificadas) y necesitas inspeccionarlas rápidamente, o cuando depuras webhooks, configuras archivos <code className="bg-surface-container px-1 rounded text-xs font-mono">package.json</code>, o construyes integraciones con servicios de terceros.
+                </p>
+              </>
+            )}
+            {pathname === '/tools/json/validator' && (
+              <>
+                <p className="text-outline leading-relaxed">
+                  Un <strong>validador JSON</strong> analiza tu cadena JSON y determina si es sintácticamente correcta según el estándar <a href="https://www.rfc-editor.org/rfc/rfc8259" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:underline">RFC 8259</a>. A diferencia de simplemente parsear el JSON en un lenguaje de programación, un validador online te señala exactamente la línea y columna donde está el error.
+                </p>
+                <p className="text-outline leading-relaxed">
+                  Los errores más comunes que detecta incluyen: comas finales en objetos o arrays (trailing commas), comillas simples en lugar de dobles, claves sin comillas, y valores <code className="bg-surface-container px-1 rounded text-xs font-mono">undefined</code> que no son válidos en JSON.
+                </p>
+              </>
+            )}
+            {pathname === '/tools/json/minify' && (
+              <>
+                <p className="text-outline leading-relaxed">
+                  Un <strong>minificador JSON</strong> elimina todos los espacios en blanco, saltos de línea e indentaciones innecesarios de un documento JSON, reduciendo su tamaño al mínimo posible. Esto es crítico para optimizar el rendimiento de tus APIs, ya que el tamaño de los payloads afecta directamente la velocidad de transferencia.
+                </p>
+                <p className="text-outline leading-relaxed">
+                  Un archivo JSON bien formateado para desarrollo puede ocupar el doble o el triple de espacio que su versión minificada. En entornos de producción con miles de peticiones por minuto, esta diferencia de tamaño tiene un impacto real en el consumo de ancho de banda y latencia.
+                </p>
+              </>
+            )}
+            {pathname === '/tools/json/viewer' && (
+              <>
+                <p className="text-outline leading-relaxed">
+                  Un <strong>visor JSON</strong> en formato de árbol (tree view) transforma una cadena JSON plana en una estructura visual jerárquica e interactiva, donde puedes expandir y contraer nodos para navegar por estructuras complejas con cientos o miles de propiedades anidadas.
+                </p>
+                <p className="text-outline leading-relaxed">
+                  Es indispensable cuando trabajas con respuestas de APIs de producción que devuelven objetos muy anidados, como respuestas de GraphQL, payloads de Stripe, o documentos de MongoDB con referencias embebidas.
+                </p>
+              </>
+            )}
+            {![ '/tools/json/formatter','/tools/json/validator','/tools/json/minify','/tools/json/viewer'].includes(pathname) && (
+              <>
+                <p className="text-outline leading-relaxed">
+                  <strong>{seo.h1}</strong> es una herramienta online gratuita diseñada para desarrolladores y equipos de ingeniería que trabajan con el formato JSON a diario. Todo el procesamiento ocurre directamente en tu navegador, garantizando la privacidad total de tus datos.
+                </p>
+                <p className="text-outline leading-relaxed">
+                  Compatible con cualquier JSON válido, desde simples objetos de configuración hasta estructuras complejas con arrays anidados, referencias circulares y caracteres Unicode. Sin límite de tamaño, sin registro, sin coste.
+                </p>
+              </>
+            )}
           </div>
-          
+
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
               <CheckCircle2 className="w-6 h-6 text-green-500" />
-              ¿Por qué usar Stoolzen para tus datos?
+              ¿Por qué usar Stoolzen?
             </h2>
             <ul className="space-y-3 text-outline">
               <li className="flex gap-3">
-                <span className="font-bold text-indigo-500">1.</span>
-                <span><strong>Privacidad Total:</strong> Todo el procesamiento ocurre en tu navegador. Tus datos nunca se envían a nuestros servidores.</span>
+                <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
+                <span><strong>100% privado:</strong> Tu JSON nunca sale de tu navegador. Todo el procesamiento es local, sin llamadas a ningún servidor externo.</span>
               </li>
               <li className="flex gap-3">
-                <span className="font-bold text-indigo-500">2.</span>
-                <span><strong>Modo Árbol Interactivo:</strong> Visualiza estructuras complejas y copia sub-nodos con un solo clic.</span>
+                <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
+                <span><strong>Sin registro:</strong> Usa cualquier herramienta sin crear una cuenta ni proporcionar tu email. Completamente anónimo.</span>
               </li>
               <li className="flex gap-3">
-                <span className="font-bold text-indigo-500">3.</span>
-                <span><strong>Velocidad Extrema:</strong> Formateo instantáneo incluso con archivos de varios megabytes.</span>
+                <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
+                <span><strong>Vista de árbol interactiva:</strong> Navega por estructuras JSON complejas, expande/colapsa nodos y copia sub-árboles con un clic.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
+                <span><strong>Editor Monaco:</strong> El mismo motor que usa VS Code — con resaltado de sintaxis, validación en tiempo real y autocompletado.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
+                <span><strong>Comparte en un clic:</strong> Genera un enlace único con tu JSON codificado para compartirlo con tu equipo.</span>
               </li>
             </ul>
           </div>
         </div>
 
+        {/* Example Input / Output */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-bold text-on-surface">Ejemplo: Input → Output</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-outline uppercase tracking-widest">Input (JSON sin formatear)</span>
+              <pre className="bg-slate-900 text-green-400 rounded-xl p-4 text-xs font-mono overflow-auto leading-relaxed">
+{`{"user":{"id":1,"name":"Alice","roles":["admin","user"],"active":true},"settings":{"theme":"dark","notifications":true}}`}
+              </pre>
+            </div>
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-outline uppercase tracking-widest">Output (formateado con 2 espacios)</span>
+              <pre className="bg-slate-900 text-indigo-300 rounded-xl p-4 text-xs font-mono overflow-auto leading-relaxed">
+{`{
+  "user": {
+    "id": 1,
+    "name": "Alice",
+    "roles": [
+      "admin",
+      "user"
+    ],
+    "active": true
+  },
+  "settings": {
+    "theme": "dark",
+    "notifications": true
+  }
+}`}
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ */}
         <div className="bg-surface-container-low rounded-2xl p-8 border border-outline-variant">
           <h2 className="text-xl font-bold text-on-surface mb-6">Preguntas Frecuentes (FAQ)</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿Cómo puedo convertir JSON a una sola línea?</h3>
-              <p className="text-sm text-outline">Utiliza el botón <strong>"Minify"</strong> en el panel de salida. Esto eliminará todos los espacios en blanco y saltos de línea innecesarios.</p>
+              <h3 className="font-bold text-on-surface">¿Es seguro pegar mi JSON aquí?</h3>
+              <p className="text-sm text-outline">Sí, 100%. Todo el procesamiento ocurre en tu navegador (client-side). Tus datos JSON nunca se envían a ningún servidor nuestro ni de terceros. Puedes verificarlo abriendo las DevTools de tu navegador y viendo que no hay ninguna petición de red.</p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿El validador detecta errores de sintaxis?</h3>
-              <p className="text-sm text-outline">Sí, nuestro motor de validación resalta la línea exacta donde se encuentra el error para que puedas corregirlo al instante.</p>
+              <h3 className="font-bold text-on-surface">¿Puedo usarlo sin conexión a internet?</h3>
+              <p className="text-sm text-outline">Una vez que la página se ha cargado, las operaciones de formateo, validación y minificación funcionan completamente sin internet, ya que la lógica reside en tu navegador.</p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-on-surface">¿Detecta errores de sintaxis específicos?</h3>
+              <p className="text-sm text-outline">Sí. El editor Monaco (el mismo motor de VS Code) resalta en rojo la línea exacta donde está el error y muestra un mensaje descriptivo. Detecta: comas finales, comillas simples, valores undefined, y más.</p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-on-surface">¿Cómo puedo convertir JSON a una sola línea?</h3>
+              <p className="text-sm text-outline">Usa el botón <strong>"Minify"</strong> en el panel de salida. Esto elimina todos los espacios en blanco y saltos de línea, produciendo un JSON comprimido ideal para producción o para usar en variables de entorno.</p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-on-surface">¿Hay un límite de tamaño para el JSON?</h3>
+              <p className="text-sm text-outline">No hay límite explícito impuesto por nuestra herramienta. El límite práctico depende de la memoria RAM disponible en tu navegador. Hemos probado con archivos de hasta 10 MB sin problemas de rendimiento.</p>
             </div>
             <div className="space-y-2">
               <h3 className="font-bold text-on-surface">¿Puedo descargar el resultado?</h3>
-              <p className="text-sm text-outline">Absolutamente. Haz clic en el icono de descarga (flecha hacia abajo) para guardar tu JSON formateado como un archivo .json.</p>
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿Es gratis este servicio?</h3>
-              <p className="text-sm text-outline">Stoolzen es una herramienta 100% gratuita para desarrolladores. También ofrecemos una versión Premium sin anuncios para usuarios avanzados.</p>
+              <p className="text-sm text-outline">Sí. Haz clic en el botón <strong>"Download"</strong> (icono de descarga) para guardar el JSON formateado como un archivo <code className="bg-surface-container px-1 rounded text-xs font-mono">.json</code> en tu ordenador.</p>
             </div>
           </div>
         </div>
+
+        <RelatedContent 
+          category="json"
+          currentPath={pathname}
+          relatedTools={[
+            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Verifica la sintaxis de tus objetos JSON' },
+            { name: 'JSON Diff', path: '/tools/json/diff', desc: 'Compara dos JSONs y encuentra diferencias' },
+            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Escapa caracteres para strings' },
+            { name: 'JSONPath Explorer', path: '/tools/json/path-explorer', desc: 'Filtra datos con expresiones JSONPath' },
+            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Comprime tu JSON para producción' },
+          ]}
+          categories={[
+            { name: 'JSON Tools Hub', path: '/tools/json' },
+            { name: 'API & Auth Tools', path: '/tools/api' }
+          ]}
+          guides={[
+            { name: 'Cómo validar JSON correctamente', path: '/docs/json-validation-guide' },
+            { name: 'Guía de JSONPath para principiantes', path: '/docs/jsonpath-tutorial' }
+          ]}
+        />
       </div>
 
       {/* Maximized View Overlay */}

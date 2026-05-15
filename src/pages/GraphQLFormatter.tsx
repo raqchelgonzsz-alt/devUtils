@@ -6,65 +6,71 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { SEO } from '../components/SEO';
 import { useTheme } from '../context/ThemeContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
-const GRAPHQL_SEO_MAP: Record<string, { title: string; description: string; keywords: string; h1: string; subtitle: string }> = {
-  '/graphql': {
-    title: 'Formateador GraphQL Online - Validar y Embellecer Consultas | DevUtils',
+const GRAPHQL_SEO_MAP: Record<string, { 
+  title: string; 
+  description: string; 
+  keywords: string; 
+  h1: string; 
+  subtitle: string;
+  intro: string;
+  example?: { input: string; output: string };
+  faqs: { q: string; a: string }[];
+}> = {
+  '/tools/graphql/formatter': {
+    title: 'Formateador GraphQL Online - Validar y Embellecer Consultas | Stoolzen',
     description: 'Formatea y valida tus consultas GraphQL online. Mejora la legibilidad de tus schemas y queries con nuestra herramienta gratuita.',
     keywords: 'formateador graphql, graphql beautifier, validar graphql, queries graphql, esquemas graphql, dev tools',
-    h1: 'Formateador GraphQL',
+    h1: 'Formateador GraphQL Online',
     subtitle: 'Limpia y valida tus consultas y esquemas GraphQL al instante.',
+    intro: 'Un formateador GraphQL es esencial para mantener el orden en proyectos de gran escala. Esta herramienta no solo indenta tu código, sino que verifica que la estructura de campos, argumentos y fragmentos cumpla con la especificación oficial.',
+    example: {
+      input: '{user(id:1){id name email posts{title}}}',
+      output: 'query {\n  user(id: 1) {\n    id\n    name\n    email\n    posts {\n      title\n    }\n  }\n}'
+    },
+    faqs: [
+      { q: "¿Por qué usar un formateador GraphQL?", a: "Para asegurar que las consultas sean legibles en revisiones de código y commits de Git, facilitando la detección de errores lógicos." },
+      { q: "¿Valida sintaxis en tiempo real?", a: "Sí, el editor marcará con rojo cualquier error estructural mientras escribes." }
+    ]
   },
-  '/graphql-validator': {
-    title: 'Validador GraphQL Online Gratis - Verifica Queries y Schemas | DevUtils',
+  '/tools/graphql/validator': {
+    title: 'Validador GraphQL Online Gratis - Verifica Queries y Schemas | Stoolzen',
     description: 'Valida tus queries y schemas GraphQL online de forma gratuita. Detecta errores de sintaxis en tus consultas GraphQL al instante.',
     keywords: 'validador graphql, graphql validator online, verificar graphql, graphql syntax checker, graphql lint',
     h1: 'Validador GraphQL Online',
     subtitle: 'Comprueba si tus queries y schemas GraphQL son válidos al instante.',
+    intro: 'El validador de GraphQL de Stoolzen analiza profundamente la estructura de tus consultas para encontrar errores que a menudo pasan desapercibidos en editores de texto simples.',
+    faqs: [
+      { q: "¿Soporta la sintaxis SDL?", a: "Sí, puedes validar tanto consultas de cliente como definiciones de esquema (Schema Definition Language)." }
+    ]
   },
-  '/graphql-editor': {
-    title: 'Editor GraphQL Online con Resaltado de Sintaxis | DevUtils',
-    description: 'Editor GraphQL online con resaltado de sintaxis y validación en tiempo real. La herramienta definitiva para editar queries y schemas GraphQL.',
-    keywords: 'editor graphql online, graphql editor, editar graphql, graphql syntax highlight, graphql ide online',
-    h1: 'Editor GraphQL Online',
-    subtitle: 'Edita tus queries GraphQL con resaltado de sintaxis y validación en tiempo real.',
-  },
-  '/graphql-beautifier': {
-    title: 'GraphQL Beautifier Online - Embellecer y Formatear Queries | DevUtils',
-    description: 'Embellece y formatea tus queries GraphQL online con un solo clic. Convierte GraphQL comprimido en código legible y bien indentado.',
-    keywords: 'graphql beautifier, embellecer graphql, graphql formatter online, graphql pretty print, formatear graphql',
-    h1: 'GraphQL Beautifier Online',
-    subtitle: 'Embellece y formatea tus queries GraphQL para hacerlos más legibles.',
-  },
-  '/graphql-minifier': {
-    title: 'GraphQL Minifier Online - Comprimir y Minificar Queries | DevUtils',
+  '/tools/graphql/minifier': {
+    title: 'GraphQL Minifier Online - Comprimir y Minificar Queries | Stoolzen',
     description: 'Minifica y comprime tus queries GraphQL online al instante. Reduce el tamaño de tus consultas para optimizar el rendimiento de tus APIs.',
     keywords: 'graphql minifier, minificar graphql, comprimir graphql, graphql compress online, graphql minify',
     h1: 'GraphQL Minifier Online',
     subtitle: 'Comprime y minifica tus queries GraphQL para reducir su tamaño.',
-  },
-  '/graphql-viewer': {
-    title: 'Visor GraphQL Online - Explorar y Visualizar Queries | DevUtils',
-    description: 'Visualiza y explora tus queries y schemas GraphQL online. Herramienta gratuita para navegar por estructuras GraphQL complejas.',
-    keywords: 'visor graphql, graphql viewer online, explorar graphql, visualizar graphql, graphql schema browser',
-    h1: 'Visor GraphQL Online',
-    subtitle: 'Explora y visualiza tus queries y schemas GraphQL de forma clara.',
-  },
-  '/graphql-checker': {
-    title: 'GraphQL Checker Online - Comprobar Errores en Queries | DevUtils',
-    description: 'Comprueba y analiza tus queries GraphQL online. Detecta errores y problemas de sintaxis en tus consultas y schemas GraphQL.',
-    keywords: 'graphql checker, comprobar graphql, graphql error checker, graphql analyzer, graphql linter online',
-    h1: 'GraphQL Checker Online',
-    subtitle: 'Comprueba y analiza tus queries GraphQL para detectar errores al instante.',
-  },
-  '/graphql-parser': {
-    title: 'GraphQL Parser Online - Parsear y Analizar Queries | DevUtils',
-    description: 'Parsea y analiza tus queries GraphQL online. Convierte tus consultas GraphQL en estructuras de datos legibles al instante.',
-    keywords: 'graphql parser, parsear graphql, analizar graphql, graphql parse online, graphql ast viewer',
-    h1: 'GraphQL Parser Online',
-    subtitle: 'Parsea y analiza la estructura de tus queries y schemas GraphQL.',
-  },
+    intro: 'La minificación de GraphQL elimina espacios en blanco y comentarios innecesarios, lo cual es crítico para reducir el payload de las peticiones POST en aplicaciones de alto rendimiento.',
+    example: {
+      input: 'query GetUser {\n  user {\n    id\n    name\n  }\n}',
+      output: 'query GetUser{user{id name}}'
+    },
+    faqs: [
+      { q: "¿Afecta la minificación al funcionamiento de la API?", a: "No, GraphQL ignora los espacios en blanco insignificantes, por lo que el servidor procesará la query exactamente igual." }
+    ]
+  }
+};
+
+// Fallback SEO for other GraphQL routes
+const FALLBACK_GRAPHQL_SEO = {
+  title: 'Herramientas GraphQL Online - Stoolzen',
+  description: 'Suite completa de herramientas para trabajar con GraphQL.',
+  keywords: 'graphql, devtools, formatter, validator',
+  h1: 'Herramientas GraphQL',
+  subtitle: 'Gestiona tus queries y schemas de forma eficiente.',
+  intro: 'Explora nuestra colección de utilidades diseñadas para simplificar el desarrollo con GraphQL.',
+  faqs: []
 };
 
 export const GraphQLFormatter: React.FC = () => {
@@ -82,7 +88,7 @@ export const GraphQLFormatter: React.FC = () => {
   const [showHistory, setShowHistory] = useState(false);
   const { theme } = useTheme();
   const { pathname } = useLocation();
-  const seo = GRAPHQL_SEO_MAP[pathname] ?? GRAPHQL_SEO_MAP['/graphql'];
+  const seo = GRAPHQL_SEO_MAP[pathname] ?? FALLBACK_GRAPHQL_SEO;
   const editorRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -272,18 +278,10 @@ export const GraphQLFormatter: React.FC = () => {
         keywords={seo.keywords}
         breadcrumbs={[
           { name: 'Home', item: '/' },
-          { name: 'GraphQL Tools', item: '/graphql' },
+          { name: 'Tools', item: '/tools' },
+          { name: 'GraphQL', item: '/tools/graphql' },
           { name: seo.h1, item: pathname }
         ]}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "name": seo.h1,
-          "url": `https://stoolzen.com${pathname}`,
-          "description": seo.description,
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Any"
-        }}
       />
       
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-outline-variant pb-3 gap-4">
@@ -294,7 +292,7 @@ export const GraphQLFormatter: React.FC = () => {
       </div>
 
       <div className={cn(
-        "flex-1 min-h-[500px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-20",
+        "flex-1 min-h-[650px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-8",
         maximized && "hidden"
       )}>
         <div className="flex flex-col bg-surface-container border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
@@ -321,7 +319,6 @@ export const GraphQLFormatter: React.FC = () => {
                 title="Load Sample Data"
               >
                 <Database className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Demo</span>
               </button>
               <button 
                 onClick={() => fileInputRef.current?.click()}
@@ -329,7 +326,6 @@ export const GraphQLFormatter: React.FC = () => {
                 title="Upload GraphQL File"
               >
                 <Upload className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Upload</span>
               </button>
               <button 
                 onClick={() => setShowHistory(true)}
@@ -337,7 +333,6 @@ export const GraphQLFormatter: React.FC = () => {
                 title="View History"
               >
                 <History className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">History</span>
               </button>
               <button 
                 onClick={handleShare}
@@ -345,7 +340,6 @@ export const GraphQLFormatter: React.FC = () => {
                 title="Share GraphQL"
               >
                 <Share2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Share</span>
               </button>
               <button 
                 onClick={() => setInput('')}
@@ -353,7 +347,6 @@ export const GraphQLFormatter: React.FC = () => {
                 title="Clear Input"
               >
                 <Trash2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Clear</span>
               </button>
               <button 
                 onClick={() => toggleMaximize('input')}
@@ -399,14 +392,13 @@ export const GraphQLFormatter: React.FC = () => {
                   title="Minify GraphQL"
                 >
                   <Minimize className="w-3.5 h-3.5" />
-                  Minify
                 </button>
                 <button 
                   onClick={handleFormat}
                   className={btnPrimary}
+                  title="Prettify GraphQL"
                 >
                   <Wand2 className="w-3.5 h-3.5" />
-                  Prettify
                 </button>
               </div>
             </div>
@@ -417,7 +409,6 @@ export const GraphQLFormatter: React.FC = () => {
                 title="Print Output"
               >
                 <Printer className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Print</span>
               </button>
               <button 
                 onClick={handleDownload}
@@ -425,14 +416,13 @@ export const GraphQLFormatter: React.FC = () => {
                 title="Download GraphQL"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Download</span>
               </button>
               <button 
                 onClick={handleCopy}
                 className={btnSecondary}
+                title="Copy to Clipboard"
               >
                 <Copy className="w-3.5 h-3.5" />
-                Copy
               </button>
               <button 
                 onClick={() => toggleMaximize('output')}
@@ -480,64 +470,101 @@ export const GraphQLFormatter: React.FC = () => {
       </div>
 
       {/* Educational & SEO Content Section */}
-      <div className={cn("mt-16 pt-12 border-t border-outline-variant pb-20 space-y-12", maximized && "hidden")}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
-              <FileCode className="w-6 h-6 text-pink-500" />
-              ¿Qué es un Formateador GraphQL?
-            </h2>
-            <p className="text-outline leading-relaxed">
-              Un <strong>formateador GraphQL</strong> es una herramienta especializada que organiza y embellece consultas (queries) y esquemas de GraphQL. A diferencia del JSON tradicional, GraphQL tiene su propia sintaxis basada en tipos y campos que puede volverse difícil de manejar sin la indentación correcta.
-            </p>
-            <p className="text-outline leading-relaxed">
-              Nuestra herramienta actúa como un <strong>entorno de desarrollo ligero</strong> que valida tu sintaxis mientras escribes, asegurando que tus operaciones GraphQL cumplan con los estándares antes de enviarlas a tu servidor de API.
-            </p>
-          </div>
-          
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
-              <CheckCircle2 className="w-6 h-6 text-indigo-500" />
-              Funciones Avanzadas de Stoolzen
-            </h2>
-            <ul className="space-y-3 text-outline">
-              <li className="flex gap-3">
-                <span className="font-bold text-pink-500">1.</span>
-                <span><strong>Prettify Inteligente:</strong> Formatea tus queries respetando la estructura de fragmentos y argumentos.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="font-bold text-pink-500">2.</span>
-                <span><strong>Minificación de Queries:</strong> Reduce el tamaño de tus peticiones HTTP comprimiendo tu GraphQL a una sola línea.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="font-bold text-pink-500">3.</span>
-                <span><strong>Compatibilidad Total:</strong> Soporta Queries, Mutations, Subscriptions y definiciones de Schema (SDL).</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div className={cn("mt-10 pt-8 border-t border-outline-variant pb-20 space-y-14", maximized && "hidden")}>
+        {/* Intro Section */}
+        <section className="max-w-4xl space-y-6">
+          <h2 className="text-3xl font-bold text-on-surface">Sobre {seo.h1}</h2>
+          <p className="text-outline text-lg leading-relaxed">
+            {seo.intro}
+          </p>
+        </section>
 
-        <div className="bg-surface-container-low rounded-2xl p-8 border border-outline-variant">
-          <h2 className="text-xl font-bold text-on-surface mb-6">Preguntas Frecuentes sobre GraphQL</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿Puedo validar esquemas SDL completos?</h3>
-              <p className="text-sm text-outline">Sí, el editor soporta tanto consultas de cliente como definiciones de esquema del lado del servidor (SDL).</p>
+        {/* Input/Output Example */}
+        {seo.example && (
+          <section className="space-y-8">
+            <h2 className="text-2xl font-bold text-on-surface">Ejemplo de Uso</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <p className="text-sm font-bold text-outline uppercase tracking-wider">Entrada (Crudo)</p>
+                <div className="bg-surface-container rounded-xl p-4 border border-outline-variant font-mono text-sm text-on-surface overflow-x-auto">
+                  {seo.example.input}
+                </div>
+              </div>
+              <div className="space-y-3">
+                <p className="text-sm font-bold text-outline uppercase tracking-wider">Salida (Procesado)</p>
+                <div className="bg-indigo-50/30 rounded-xl p-4 border border-indigo-100 font-mono text-sm text-indigo-900 overflow-x-auto whitespace-pre">
+                  {seo.example.output}
+                </div>
+              </div>
             </div>
-            <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿Cómo comparto una consulta con mi equipo?</h3>
-              <p className="text-sm text-outline">Usa el botón <strong>"Share"</strong> para generar una URL que contenga tu código codificado. Solo tienes que copiar y enviar el enlace.</p>
+          </section>
+        )}
+
+        {/* Features Grid */}
+        <section className="space-y-10">
+          <h2 className="text-2xl font-bold text-on-surface text-center">Por qué usar Stoolzen para GraphQL</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-indigo-500/50 transition-colors group">
+              <div className="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Wand2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Prettify Inteligente</h3>
+              <p className="text-outline leading-relaxed">Organiza tus queries respetando la estructura de fragmentos y argumentos automáticamente.</p>
             </div>
-            <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿Stoolzen guarda mis consultas?</h3>
-              <p className="text-sm text-outline">No guardamos nada en el servidor. Tus datos se mantienen en el historial local de tu navegador para tu comodidad y privacidad.</p>
+            <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-indigo-500/50 transition-colors group">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Minimize className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Minificación Real</h3>
+              <p className="text-outline leading-relaxed">Comprime tus consultas para producción eliminando espacios y comentarios innecesarios.</p>
             </div>
-            <div className="space-y-2">
-              <h3 className="font-bold text-on-surface">¿Es compatible con Relay y Apollo?</h3>
-              <p className="text-sm text-outline">Absolutamente. Nuestra validación sigue la especificación oficial de GraphQL compatible con todos los clientes populares.</p>
+            <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-indigo-500/50 transition-colors group">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Validación SDL</h3>
+              <p className="text-outline leading-relaxed">Soporte total para la especificación oficial de GraphQL, incluyendo Schema Definition Language.</p>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* FAQs Section */}
+        {seo.faqs.length > 0 && (
+          <section className="bg-surface-container-low rounded-[2rem] p-10 md:p-16 border border-outline-variant">
+            <h2 className="text-3xl font-bold text-on-surface mb-12 text-center">Preguntas Frecuentes</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+              {seo.faqs.map((faq, idx) => (
+                <div key={idx} className="space-y-4">
+                  <h3 className="text-xl font-bold text-on-surface flex gap-3">
+                    <span className="text-indigo-500">Q.</span>
+                    {faq.q}
+                  </h3>
+                  <p className="text-outline leading-relaxed pl-8 border-l-2 border-indigo-100">
+                    {faq.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Related Tools Grid */}
+        <section className="space-y-8">
+          <h2 className="text-2xl font-bold text-on-surface text-center">Otras Herramientas GraphQL</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'GraphQL Validator', path: '/tools/graphql/validator', desc: 'Valida sintaxis al instante' },
+              { name: 'GraphQL Minifier', path: '/tools/graphql/minifier', desc: 'Comprime para producción' },
+              { name: 'GraphQL Editor', path: '/tools/graphql/editor', desc: 'Editor profesional online' },
+              { name: 'GraphQL Beautifier', path: '/tools/graphql/beautifier', desc: 'Embellece tus queries' }
+            ].filter(t => t.path !== pathname).map(tool => (
+              <a key={tool.path} href={tool.path} className="p-6 rounded-2xl bg-surface-container border border-outline-variant hover:border-indigo-500 transition-all group">
+                <p className="font-bold text-on-surface group-hover:text-indigo-600 transition-colors">{tool.name}</p>
+                <p className="text-xs text-outline mt-1">{tool.desc}</p>
+              </a>
+            ))}
+          </div>
+        </section>
       </div>
 
       {/* Maximized View Overlay */}
@@ -560,23 +587,18 @@ export const GraphQLFormatter: React.FC = () => {
                   <>
                     <button onClick={loadDemoData} className={cn(btnSecondary, "text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100")} title="Load Sample Data">
                       <Database className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Demo</span>
                     </button>
                     <button onClick={() => fileInputRef.current?.click()} className={btnSecondary} title="Upload GraphQL File">
                       <Upload className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Upload</span>
                     </button>
                     <button onClick={() => { setMaximized(null); setShowHistory(true); }} className={btnSecondary} title="View History">
                       <History className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">History</span>
                     </button>
                     <button onClick={handleShare} className={btnSecondary} title="Share GraphQL">
                       <Share2 className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Share</span>
                     </button>
                     <button onClick={() => setInput('')} className={btnDanger} title="Clear Input">
                       <Trash2 className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Clear</span>
                     </button>
                   </>
                 )}
@@ -585,23 +607,18 @@ export const GraphQLFormatter: React.FC = () => {
                   <>
                     <button onClick={handleMinify} className={btnSecondary} title="Minify GraphQL">
                       <Minimize className="w-3.5 h-3.5" />
-                      Minify
                     </button>
-                    <button onClick={handleFormat} className={btnPrimary}>
+                    <button onClick={handleFormat} className={btnPrimary} title="Prettify GraphQL">
                       <Wand2 className="w-3.5 h-3.5" />
-                      Prettify
                     </button>
                     <button onClick={handlePrint} className={btnSecondary} title="Print Output">
                       <Printer className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Print</span>
                     </button>
                     <button onClick={handleDownload} className={btnSecondary} title="Download GraphQL">
                       <Download className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Download</span>
                     </button>
-                    <button onClick={handleCopy} className={btnSecondary}>
+                    <button onClick={handleCopy} className={btnSecondary} title="Copy to Clipboard">
                       <Copy className="w-3.5 h-3.5" />
-                      Copy
                     </button>
                   </>
                 )}
