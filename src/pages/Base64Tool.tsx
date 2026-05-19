@@ -218,6 +218,17 @@ export const Base64Tool: React.FC = () => {
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
+          <div className="prose prose-slate max-w-none text-outline space-y-4">
+            <p>
+              <strong>Base64</strong> es un esquema de codificación binario a texto que representa datos binarios en un formato de cadena ASCII. Se utiliza comúnmente para transmitir datos que de otro modo podrían ser interpretados incorrectamente por sistemas que solo manejan texto, como correos electrónicos o URLs.
+            </p>
+            <h3 className="text-xl font-bold text-on-surface pt-4">¿Cuándo usar Base64?</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Incrustar Imágenes:</strong> Convertir pequeños iconos o imágenes en strings para usarlos directamente en CSS o HTML (Data URIs).</li>
+              <li><strong>Transferencia de Archivos:</strong> Enviar archivos adjuntos en formatos de texto como JSON o XML.</li>
+              <li><strong>Autenticación Básica:</strong> Codificar credenciales (usuario:contraseña) para el encabezado <code>Authorization</code> de HTTP.</li>
+            </ul>
+          </div>
         </section>
 
         {/* FAQs */}

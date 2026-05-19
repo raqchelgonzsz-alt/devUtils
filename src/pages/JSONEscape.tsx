@@ -198,6 +198,46 @@ export const JSONEscape: React.FC = () => {
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
+          <div className="prose prose-slate max-w-none text-outline space-y-4">
+            <p>
+              El <strong>escapado de caracteres JSON</strong> es el proceso de convertir caracteres reservados (como comillas dobles, barras diagonales o caracteres de control) en secuencias seguras que puedan ser transmitidas dentro de un string JSON sin romper la estructura del objeto. 
+              Esto es vital cuando necesitas enviar código HTML, rutas de archivos de Windows o bloques de texto con saltos de línea a través de una API.
+            </p>
+            <h3 className="text-xl font-bold text-on-surface pt-4">¿Por qué es necesario escapar el JSON?</h3>
+            <p>
+              En JSON, ciertos caracteres tienen significados especiales. Por ejemplo, una comilla doble (<code>"</code>) indica el inicio o fin de un campo. Si tu texto contiene una comilla, el parser de JSON fallará a menos que la escapes como <code>\"</code>.
+            </p>
+          </div>
+        </section>
+
+        {/* Examples Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-on-surface">Ejemplo de Escapado vs Unescaped</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-outline font-bold">Texto Plano (Unescaped)</span>
+              <pre className="bg-surface-container p-4 rounded-xl text-xs font-mono border border-outline-variant overflow-x-auto text-on-surface">
+{`Hello "Stoolzen"
+Line 1
+Line 2`}
+              </pre>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-outline font-bold">JSON Escaped</span>
+              <pre className="bg-surface-container p-4 rounded-xl text-xs font-mono border border-outline-variant overflow-x-auto text-indigo-600">
+{`Hello \\"Stoolzen\\"\\nLine 1\\nLine 2`}
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+           <h3 className="text-xl font-bold text-on-surface">Casos de Uso Comunes</h3>
+           <ul className="list-disc pl-5 text-outline space-y-2">
+              <li><strong>Integración con Bases de Datos:</strong> Preparar strings para ser guardados en campos tipo JSON o TEXT.</li>
+              <li><strong>Desarrollo de APIs:</strong> Enviar fragmentos de código o HTML dentro de una respuesta JSON.</li>
+              <li><strong>Configuraciones:</strong> Escapar rutas de sistema en archivos <code>.json</code> (ej: <code>C:\\Users\\Path</code>).</li>
+           </ul>
         </section>
 
         {/* FAQs */}

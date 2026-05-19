@@ -121,8 +121,24 @@ const CATEGORY_CONTENT: Record<string, { description: React.ReactNode; useCases:
         <p className="mt-4">
           Sin embargo, trabajar con JSON crudo puede ser un desafío. Las respuestas de las APIs a menudo vienen minificadas para ahorrar ancho de banda, lo que las hace casi imposibles de leer. Un simple error de sintaxis, como una coma de más o una llave mal cerrada, puede detener por completo el desarrollo.
         </p>
-        <p className="mt-4">
-          Nuestra suite de <strong>herramientas JSON online</strong> está diseñada para solventar estos problemas. Desde formateadores que devuelven la estructura jerárquica a tus datos, hasta validadores que señalan errores exactos, y exploradores de JSONPath para consultas complejas. Todo procesado localmente en tu navegador para garantizar la máxima privacidad.
+        
+        <div className="mt-8 p-6 bg-surface-container rounded-2xl border border-outline-variant">
+           <h3 className="text-xl font-bold text-on-surface mb-4">Diferencias entre Formatear, Validar y Comparar</h3>
+           <div className="space-y-4 text-sm">
+              <p>
+                <strong>Formatear (Beautify):</strong> Toma una cadena de texto JSON desordenada o compacta y le aplica sangría (indentación) y saltos de línea para que sea legible por humanos. No cambia los datos, solo su presentación.
+              </p>
+              <p>
+                <strong>Validar:</strong> Analiza la estructura del JSON contra las reglas del estándar RFC 8259. Detecta errores comunes como comas finales, falta de comillas en las claves o llaves desbalanceadas.
+              </p>
+              <p>
+                <strong>Comparar (Diff):</strong> Identifica cambios semánticos entre dos objetos JSON. Es vital para detectar diferencias en payloads de APIs entre entornos de staging y producción.
+              </p>
+           </div>
+        </div>
+
+        <p className="mt-8">
+          Nuestra suite de <strong>herramientas JSON online</strong> está diseñada para solventar estos problemas. Todo procesado localmente en tu navegador para garantizar la máxima privacidad.
         </p>
       </>
     ),
@@ -145,8 +161,22 @@ const CATEGORY_CONTENT: Record<string, { description: React.ReactNode; useCases:
         <p>
           <strong>GraphQL</strong> revolucionó la forma en que consumimos datos al permitir que los clientes soliciten exactamente lo que necesitan. Aunque es potente, la sintaxis de las consultas y la estructura de los esquemas pueden volverse complejas rápidamente.
         </p>
-        <p className="mt-4">
-          Nuestras <strong>herramientas GraphQL online</strong> te ayudan a mantener tus queries limpias, válidas y eficientes. Ya sea que necesites formatear una consulta larga para mejorar la legibilidad del código o validar la sintaxis antes de enviarla a tu servidor Apollo o Relay.
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+           <div className="p-5 bg-pink-50/50 border border-pink-100 rounded-2xl">
+              <h4 className="font-bold text-pink-700 mb-2">Formateo Inteligente</h4>
+              <p className="text-xs text-pink-800/80 leading-relaxed">
+                 Aplica reglas de estilo de Prettier a tus queries para mantener una estructura de campos y argumentos consistente.
+              </p>
+           </div>
+           <div className="p-5 bg-surface-container border border-outline-variant rounded-2xl">
+              <h4 className="font-bold text-on-surface mb-2">Validación de Esquema</h4>
+              <p className="text-xs text-outline leading-relaxed">
+                 Comprueba la validez de tus documentos GraphQL antes de integrarlos en tu código cliente.
+              </p>
+           </div>
+        </div>
+        <p className="mt-8">
+          Nuestras <strong>herramientas GraphQL online</strong> te ayudan a mantener tus queries limpias, válidas y eficientes. Todo sin instalaciones y con procesamiento local.
         </p>
       </>
     ),
@@ -247,9 +277,33 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
     .filter(cat => cat.tools.length > 0);
 
   const currentCategory = category ? CATEGORIES.find(c => c.id === category) : null;
-  const seoTitle = currentCategory
-    ? `Herramientas ${currentCategory.label} Online Gratis | Stoolzen`
-    : 'Todas las Herramientas para Desarrolladores | Stoolzen';
+  
+  // SEO Optimization based on user suggestions
+  const getPageTitle = () => {
+    if (!category) return 'Developer Tools for JSON, API, Regex and Data Transformation | Stoolzen';
+    switch (category) {
+      case 'json': return 'Free Online JSON Tools - Formatter, Validator & Editor | Stoolzen';
+      case 'graphql': return 'Developer Tools for GraphQL - Formatter & Validator | Stoolzen';
+      case 'api': return 'Free Online API Tools - JWT Decoder & OAuth Debugger | Stoolzen';
+      case 'text': return 'Data Transformation Tools - Base64, URL & Text Encoding | Stoolzen';
+      case 'css': return 'Online CSS Tools - Formatter, Minifier & Layout Generators | Stoolzen';
+      default: return `Herramientas ${currentCategory?.label} Online | Stoolzen`;
+    }
+  };
+
+  const getH1 = () => {
+    if (!category) return 'Developer Tools for JSON, API, Regex and Data Transformation';
+    switch (category) {
+      case 'json': return 'Free Online JSON Tools for Data Formatting';
+      case 'graphql': return 'Developer Tools for GraphQL and API Schema';
+      case 'api': return 'Free Online API Tools and Auth Debugging';
+      case 'text': return 'Online Data Transformation and Encoding Tools';
+      case 'css': return 'Free Online CSS Tools and Design Utilities';
+      default: return `Herramientas de ${currentCategory?.label}`;
+    }
+  };
+
+  const seoTitle = getPageTitle();
   const seoDesc = currentCategory
     ? `Explora todas las herramientas ${currentCategory.label} online gratuitas de Stoolzen. Formateadores, validadores, editores y más.`
     : 'El hub definitivo de herramientas para desarrolladores. JSON, GraphQL, JWT, CSS, Texto y más. Gratuito y sin registro.';
@@ -268,39 +322,47 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
       />
 
       {/* Hero */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-sm text-outline">
-          <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-          <ChevronRight className="w-3 h-3" />
-          <Link to="/tools" className="hover:text-primary transition-colors">Tools</Link>
-          {currentCategory && (
-            <>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-on-surface font-medium">{currentCategory.label}</span>
-            </>
-          )}
+      <div className="relative py-4">
+        <div className="space-y-4 relative z-10">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-outline">
+            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+            <ChevronRight className="w-3 h-3" />
+            <Link to="/tools" className="hover:text-primary transition-colors">Tools</Link>
+            {currentCategory && (
+              <>
+                <ChevronRight className="w-3 h-3" />
+                <span className="text-primary">{currentCategory.label}</span>
+              </>
+            )}
+          </div>
+          <div className="flex flex-col gap-3">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-on-surface leading-tight">
+              {getH1()}
+            </h1>
+            <div className="h-1.5 w-20 bg-primary rounded-full" />
+          </div>
+          <p className="text-lg text-outline max-w-3xl leading-relaxed font-medium">
+            {seoDesc}
+          </p>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-on-surface">
-          {currentCategory ? `Herramientas ${currentCategory.label}` : 'Todas las Herramientas'}
-        </h1>
-        <p className="text-outline max-w-2xl">
-          {seoDesc}
-        </p>
+        
+        {/* Decorative background element */}
+        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       </div>
 
       {/* Search bar */}
-      <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+      <div className="relative max-w-md group">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-outline group-focus-within:text-primary transition-colors" />
         <input
           type="search"
           placeholder="Buscar herramienta..."
           value={search}
           onChange={e => setSearch(e.target.value)}
           className={cn(
-            "w-full pl-9 pr-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all",
+            "w-full pl-11 pr-4 py-3 rounded-2xl border text-sm font-medium focus:outline-none transition-all shadow-sm",
             theme === 'dark'
-              ? 'bg-surface-container border-outline-variant text-on-surface placeholder:text-outline'
-              : 'bg-white border-slate-200 text-slate-800 placeholder:text-slate-400'
+              ? 'bg-surface-container border-outline-variant text-on-surface placeholder:text-outline focus:border-primary/50 focus:ring-4 focus:ring-primary/10'
+              : 'bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100/50'
           )}
         />
       </div>
@@ -342,29 +404,47 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
                 {cat.tools.length} herramientas
               </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {cat.tools.map(tool => (
                 <Link
                   key={tool.path}
                   to={tool.path}
                   className={cn(
-                    "group relative flex flex-col gap-2 p-4 rounded-xl border transition-all hover:shadow-md hover:-translate-y-0.5",
+                    "group relative flex flex-col gap-3 p-5 rounded-2xl border transition-all duration-300",
+                    "hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1",
                     theme === 'dark'
-                      ? 'bg-surface-container border-outline-variant hover:border-indigo-500'
-                      : 'bg-white border-slate-200 hover:border-indigo-300'
+                      ? 'bg-surface-container border-outline-variant hover:border-indigo-500/50 hover:bg-surface-container-high'
+                      : 'bg-white border-slate-200 hover:border-indigo-200 hover:bg-indigo-50/5'
                   )}
                 >
+                  {/* Subtle hover glow */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden">
+                    <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-indigo-500/5 blur-[80px]" />
+                  </div>
+
                   {tool.badge && (
-                    <span className="absolute top-3 right-3 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-indigo-100 text-indigo-600 uppercase tracking-wider">
+                    <span className="absolute top-4 right-4 text-[9px] font-black px-2 py-0.5 rounded-full bg-indigo-600 text-white uppercase tracking-[0.1em] shadow-sm z-10">
                       {tool.badge}
                     </span>
                   )}
-                  <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center border", cat.bgColor)}>
-                    <tool.icon className={cn("w-4 h-4", cat.color)} />
+                  
+                  <div className={cn(
+                    "w-10 h-10 rounded-xl flex items-center justify-center border transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3", 
+                    cat.bgColor
+                  )}>
+                    <tool.icon className={cn("w-5 h-5", cat.color)} />
                   </div>
-                  <div>
-                    <p className="text-sm font-bold text-on-surface group-hover:text-indigo-600 transition-colors">{tool.name}</p>
-                    <p className="text-xs text-outline mt-0.5 leading-relaxed">{tool.description}</p>
+                  
+                  <div className="relative z-10">
+                    <p className="text-sm font-bold text-on-surface group-hover:text-indigo-600 transition-colors tracking-tight">{tool.name}</p>
+                    <p className="text-[11px] text-outline mt-1.5 leading-relaxed font-medium group-hover:text-on-surface/70 transition-colors">
+                      {tool.description}
+                    </p>
+                  </div>
+
+                  {/* Arrow indicator */}
+                  <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                    <ChevronRight className="w-3.5 h-3.5 text-indigo-400" />
                   </div>
                 </Link>
               ))}
@@ -389,11 +469,11 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
             <h2 className="text-2xl font-bold text-on-surface text-center">Casos de Uso Comunes</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {CATEGORY_CONTENT[category].useCases.map((useCase, idx) => (
-                <div key={idx} className="p-6 rounded-2xl bg-surface-container border border-outline-variant flex gap-4">
+                <div key={idx} className="p-6 rounded-2xl bg-surface-container border border-outline-variant flex gap-4 transition-transform hover:-translate-y-1">
                   <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0 font-bold text-sm">
                     {idx + 1}
                   </div>
-                  <p className="text-on-surface font-medium leading-relaxed">{useCase}</p>
+                  <p className="text-on-surface font-medium leading-relaxed text-sm">{useCase}</p>
                 </div>
               ))}
             </div>
@@ -404,11 +484,11 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
             <h2 className="text-2xl font-bold text-on-surface text-center">Preguntas Frecuentes sobre {currentCategory?.label}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
               {CATEGORY_CONTENT[category].faqs.map((faq, idx) => (
-                <div key={idx} className="space-y-3">
-                  <h3 className="text-lg font-bold text-on-surface flex gap-2">
-                    <span className="text-indigo-500">Q:</span> {faq.q}
+                <div key={idx} className="space-y-3 group">
+                  <h3 className="text-lg font-bold text-on-surface flex gap-2 group-hover:text-primary transition-colors">
+                    <span className="text-primary/40 font-black">Q.</span> {faq.q}
                   </h3>
-                  <p className="text-outline leading-relaxed pl-7 border-l-2 border-indigo-100 italic">
+                  <p className="text-outline leading-relaxed pl-7 border-l-2 border-outline-variant group-hover:border-primary/30 transition-colors">
                     {faq.a}
                   </p>
                 </div>

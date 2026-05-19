@@ -51,14 +51,17 @@ export const SEO: React.FC<SEOProps> = ({
       metaKeywords.setAttribute('content', keywords);
     }
 
-    // Canonical Tag
+    // Canonical Tag - Force normalized URL with domain
     let canonicalTag = document.querySelector('link[rel="canonical"]');
     if (!canonicalTag) {
       canonicalTag = document.createElement('link');
       canonicalTag.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalTag);
     }
-    canonicalTag.setAttribute('href', canonical || window.location.href.split('?')[0]);
+    const finalCanonical = canonical 
+      ? `https://stoolzen.com${canonical.startsWith('/') ? canonical : '/' + canonical}`
+      : `https://stoolzen.com${window.location.pathname}`;
+    canonicalTag.setAttribute('href', finalCanonical.replace(/\/$/, '')); // Remove trailing slash
 
     // OG Tags
     const updateMeta = (attr: string, key: string, content: string) => {

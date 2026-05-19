@@ -152,6 +152,49 @@ export const JSONDiff: React.FC = () => {
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
+          <div className="prose prose-slate max-w-none text-outline space-y-4">
+            <p>
+              En el desarrollo de software moderno, los archivos JSON son el estándar de facto para el intercambio de datos. Sin embargo, cuando trabajamos con respuestas de API complejas o archivos de configuración de miles de líneas, identificar cambios manuales es propenso a errores humanos. 
+              Nuestro <strong>comparador de JSON online</strong> utiliza un algoritmo de diferenciación avanzado para resaltar no solo líneas cambiadas, sino también cambios semánticos dentro de los objetos.
+            </p>
+            <h3 className="text-xl font-bold text-on-surface pt-4">Casos de uso reales</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Depuración de APIs:</strong> Compara la respuesta de tu servidor local vs producción para encontrar inconsistencias en el esquema.</li>
+              <li><strong>Control de Versiones:</strong> Analiza cambios en archivos <code>package.json</code> o archivos de configuración de infraestructura (Terraform, CloudFormation) antes de hacer un commit.</li>
+              <li><strong>Validación de Regresiones:</strong> Asegúrate de que una actualización en tu base de datos no ha alterado campos críticos en el payload de salida.</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Examples Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-on-surface">Ejemplos de Comparación JSON</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-outline">Entrada Original</span>
+              <pre className="bg-surface-container p-4 rounded-xl text-xs font-mono border border-outline-variant overflow-x-auto text-on-surface">
+{`{
+  "id": 1,
+  "status": "active",
+  "tags": ["dev", "test"]
+}`}
+              </pre>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-outline">Entrada Modificada</span>
+              <pre className="bg-surface-container p-4 rounded-xl text-xs font-mono border border-outline-variant overflow-x-auto text-on-surface">
+{`{
+  "id": 1,
+  "status": "pending",
+  "tags": ["dev", "prod"],
+  "version": "1.0.1"
+}`}
+              </pre>
+            </div>
+          </div>
+          <p className="text-sm text-outline italic">
+            * El editor resaltará "status" en rojo/verde, "tags" mostrará el cambio de "test" por "prod", y se marcará la nueva línea "version" como una adición.
+          </p>
         </section>
 
         {/* FAQs */}

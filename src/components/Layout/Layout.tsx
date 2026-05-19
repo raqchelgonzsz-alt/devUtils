@@ -121,29 +121,37 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col h-screen bg-surface font-sans overflow-hidden transition-colors duration-300">
       {/* Header */}
-      <header className="h-16 bg-surface-bright border-b border-outline-variant flex items-center justify-between px-4 md:px-8 flex-shrink-0 z-50 transition-colors">
-        <Link to="/" className="flex items-center gap-3 text-indigo-600 group">
-          <div className="w-10 h-10 overflow-hidden rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+      <header className="h-20 bg-surface-bright/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-6 md:px-10 flex-shrink-0 z-50 transition-all">
+        <Link to="/" className="flex items-center gap-3.5 group">
+          <div className="w-11 h-11 overflow-hidden rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm border border-outline-variant bg-white">
             <img src="/logo.png" alt="Stoolzen Logo" className="w-full h-full object-cover" />
           </div>
-          <span className="font-bold text-xl tracking-tight text-on-surface">
+          <span className="font-black text-2xl tracking-tighter text-on-surface">
             Stoolzen<span className="text-primary">.com</span>
           </span>
         </Link>
-        <nav className="flex gap-4 md:gap-6 items-center text-sm font-medium text-outline">
+        <nav className="flex gap-6 md:gap-8 items-center text-sm font-bold text-outline">
           <button 
             onClick={toggleTheme}
-            className="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface"
+            className="p-2.5 hover:bg-surface-container rounded-xl transition-all text-on-surface hover:rotate-12"
             aria-label="Toggle theme"
           >
             {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
           </button>
-          <Link to="/tools" className="hidden sm:flex items-center gap-1.5 hover:text-primary transition-colors font-semibold">
+          <Link to="/tools" className={cn(
+            "hidden sm:flex items-center gap-2 transition-all hover:text-primary",
+            location.pathname.startsWith('/tools') ? "text-primary scale-105" : ""
+          )}>
             <LayoutGrid className="w-4 h-4" />
             Tools
           </Link>
-          <Link to="/docs" className="hidden sm:block hover:text-primary transition-colors">Docs</Link>
-          <Link to="/premium" className="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider">Premium</Link>
+          <Link to="/docs" className={cn(
+            "hidden sm:block transition-all hover:text-primary",
+            location.pathname.startsWith('/docs') ? "text-primary" : ""
+          )}>Docs</Link>
+          <Link to="/premium" className="px-4 py-1.5 bg-primary text-white rounded-full text-[10px] font-black uppercase tracking-[0.15em] shadow-lg shadow-primary/20 hover:scale-105 transition-all">
+            Premium
+          </Link>
         </nav>
       </header>
 

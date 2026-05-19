@@ -18,7 +18,7 @@ const tools = [
   {
     name: 'JSON Formatter',
     description: 'Beautify, minify, and validate JSON payloads with syntax highlighting.',
-    path: '/json',
+    path: '/tools/json/formatter',
     icon: Terminal,
     category: 'PARSER',
     color: 'bg-yellow-400'
@@ -26,7 +26,7 @@ const tools = [
   {
     name: 'GraphQL Formatter',
     description: 'Validate, format, and neatly indent complex GraphQL queries and mutations.',
-    path: '/graphql',
+    path: '/tools/graphql/formatter',
     icon: FileCode,
     category: 'FORMAT UTILITY',
     color: 'bg-pink-400'
@@ -34,7 +34,7 @@ const tools = [
   {
     name: 'JWT Decoder',
     description: 'Decode JSON Web Tokens to inspect headers, payloads, and verify signatures safely.',
-    path: '/jwt',
+    path: '/tools/api/jwt-decoder',
     icon: Lock,
     category: 'SECURITY',
     color: 'bg-blue-400'
@@ -86,22 +86,30 @@ export const Home: React.FC = () => {
       />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-surface-bright rounded-3xl p-12 lg:p-16 border border-outline-variant shadow-sm flex flex-col md:flex-row items-center gap-12 transition-colors">
-        <div className="relative z-10 max-w-2xl space-y-6 flex-1 text-center md:text-left">
-          <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface leading-tight">
-            The Best <span className="text-primary">Dev Tools</span> in One Place
+      <section className="relative overflow-hidden bg-surface-bright rounded-[2rem] p-12 lg:p-20 border border-outline-variant shadow-[0_8px_40px_rgb(0,0,0,0.02)] flex flex-col md:flex-row items-center gap-16 transition-all duration-500 hover:shadow-[0_20px_80px_rgb(0,0,0,0.04)]">
+        <div className="relative z-10 max-w-2xl space-y-8 flex-1 text-center md:text-left">
+          <h1 className="text-5xl lg:text-7xl font-black tracking-tight text-on-surface leading-[1.1]">
+            Developer Tools for <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-400">JSON, API, Regex</span>
           </h1>
-          <p className="text-lg text-outline leading-relaxed font-medium">
+          <p className="text-xl text-outline leading-relaxed font-medium max-w-xl">
             Format JSON, validate GraphQL, and decode JWT instantly. Fast, secure tools optimized for your workflow.
           </p>
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <Link to="/tools" className="px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20">
+              Explorer Tools
+            </Link>
+            <Link to="/docs" className="px-8 py-4 bg-surface-container border border-outline-variant text-on-surface font-bold rounded-2xl hover:bg-surface-container-high transition-all">
+              Documentation
+            </Link>
+          </div>
         </div>
 
-        <div className="relative z-10 shrink-0 w-32 h-32 md:w-48 md:h-48">
-          <div className="absolute inset-0 bg-indigo-600/10 rounded-full blur-2xl animate-pulse" />
+        <div className="relative z-10 shrink-0 w-40 h-40 md:w-64 md:h-64 group">
+          <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse group-hover:bg-primary/30 transition-colors" />
           <img 
             src="/logo.png" 
             alt="Stoolzen Main Logo" 
-            className="w-full h-full object-contain drop-shadow-2xl animate-float relative z-10" 
+            className="w-full h-full object-contain drop-shadow-2xl animate-float relative z-10 transition-transform duration-700 group-hover:scale-110" 
           />
         </div>
         

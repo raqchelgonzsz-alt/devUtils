@@ -805,8 +805,8 @@ export const JSONFormatter: React.FC = () => {
             { name: 'API & Auth Tools', path: '/tools/api' }
           ]}
           guides={[
-            { name: 'Cómo validar JSON correctamente', path: '/docs/json-validation-guide' },
-            { name: 'Guía de JSONPath para principiantes', path: '/docs/jsonpath-tutorial' }
+            { name: 'Guía de Formateo JSON', path: '/docs/json-formatting-guide' },
+            { name: 'Seguridad en Tokens JWT', path: '/docs/jwt-security-essentials' }
           ]}
         />
       </div>

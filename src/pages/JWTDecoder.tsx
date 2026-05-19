@@ -40,7 +40,16 @@ const API_SEO_MAP: Record<string, {
   }
 };
 
-const FALLBACK_API_SEO = {
+const FALLBACK_API_SEO: {
+  title: string;
+  description: string;
+  keywords: string;
+  h1: string;
+  subtitle: string;
+  intro: string;
+  example?: { input: string; output: { header: string; payload: string } };
+  faqs: { q: string; a: string }[];
+} = {
   title: 'Herramientas de API y Autenticación Online | Stoolzen',
   description: 'Herramientas para desarrolladores backend y frontend: JWT, OAuth, REST y más.',
   keywords: 'api tools, auth tools, jwt, oauth, rest debug',
@@ -250,9 +259,25 @@ export const JWTDecoder: React.FC = () => {
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
-          <p className="text-outline leading-relaxed">
-            Un <strong>JSON Web Token (JWT)</strong> es un estándar abierto (RFC 7519) que define un formato compacto para transmitir información de forma segura. Nuestra herramienta te permite descomponer este token en sus tres partes fundamentales: el encabezado (Header), la carga útil (Payload) y la firma (Signature).
-          </p>
+          <div className="prose prose-slate max-w-none text-outline space-y-4">
+            <p>
+              Un <strong>JSON Web Token (JWT)</strong> es un estándar abierto (RFC 7519) que define un formato compacto para transmitir información de forma segura. Nuestra herramienta te permite descomponer este token en sus tres partes fundamentales:
+            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Header (Encabezado):</strong> Contiene el tipo de token (JWT) y el algoritmo de firma utilizado (como HS256 o RS256).</li>
+              <li><strong>Payload (Carga útil):</strong> Contiene las declaraciones (claims), que son datos sobre una entidad (generalmente el usuario) y metadatos adicionales.</li>
+              <li><strong>Signature (Firma):</strong> Se utiliza para verificar que el remitente del JWT es quien dice ser y para asegurar que el mensaje no fue alterado.</li>
+            </ul>
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mt-8">
+               <h4 className="text-amber-800 font-bold flex items-center gap-2 mb-2">
+                  <ShieldCheck className="w-5 h-5" />
+                  Aviso de Seguridad
+               </h4>
+               <p className="text-amber-900 text-sm leading-relaxed italic">
+                  Recuerda que los JWT están codificados en Base64, NO encriptados. Cualquier persona con el token puede leer su contenido. Nunca incluyas contraseñas, claves privadas o información altamente sensible dentro del payload de un JWT.
+               </p>
+            </div>
+          </div>
         </section>
 
         {/* Input/Output Example */}

@@ -1,1 +1,21 @@
+/json /tools/json/formatter 301
+/graphql /tools/graphql/formatter 301
+/jwt /tools/api/jwt-decoder 301
+/json-validator /tools/json/validator 301
+/json-editor /tools/json/editor 301
+/json-pretty-print /tools/json/pretty-print 301
+/json-viewer /tools/json/viewer 301
+/json-parser /tools/json/parser 301
+/json-minifier /tools/json/minify 301
+/json-reader /tools/json/reader 301
+/json-stringify /tools/json/stringify 301
+/json-sorter /tools/json/sorter 301
+/graphql-validator /tools/graphql/validator 301
+/graphql-editor /tools/graphql/editor 301
+/graphql-beautifier /tools/graphql/beautifier 301
+/graphql-minifier /tools/graphql/minifier 301
+/graphql-viewer /tools/graphql/viewer 301
+/graphql-checker /tools/graphql/checker 301
+/graphql-parser /tools/graphql/parser 301
+
 /* /index.html 200

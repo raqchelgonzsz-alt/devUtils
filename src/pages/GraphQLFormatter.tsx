@@ -63,7 +63,16 @@ const GRAPHQL_SEO_MAP: Record<string, {
 };
 
 // Fallback SEO for other GraphQL routes
-const FALLBACK_GRAPHQL_SEO = {
+const FALLBACK_GRAPHQL_SEO: {
+  title: string;
+  description: string;
+  keywords: string;
+  h1: string;
+  subtitle: string;
+  intro: string;
+  example?: { input: string; output: string };
+  faqs: { q: string; a: string }[];
+} = {
   title: 'Herramientas GraphQL Online - Stoolzen',
   description: 'Suite completa de herramientas para trabajar con GraphQL.',
   keywords: 'graphql, devtools, formatter, validator',
@@ -477,6 +486,20 @@ export const GraphQLFormatter: React.FC = () => {
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
+          <div className="prose prose-slate max-w-none text-outline space-y-4">
+            <p>
+              <strong>GraphQL</strong> es un lenguaje de consulta para APIs y un tiempo de ejecución para cumplir con esas consultas utilizando tus datos existentes. A diferencia de REST, GraphQL permite a los clientes solicitar exactamente los datos que necesitan, nada más y nada menos.
+            </p>
+            <h3 className="text-xl font-bold text-on-surface pt-4">¿Por qué formatear tus consultas GraphQL?</h3>
+            <p>
+              Las consultas GraphQL pueden volverse extremadamente complejas y profundas a medida que tu aplicación crece. Un <strong>formateador de GraphQL</strong> ayuda a los desarrolladores a:
+            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Mejorar la legibilidad:</strong> Indentación clara de campos, argumentos y directivas.</li>
+              <li><strong>Detectar errores:</strong> Validación instantánea contra la sintaxis estándar de GraphQL.</li>
+              <li><strong>Estandarización:</strong> Mantener un estilo de código consistente en todo el equipo de desarrollo.</li>
+            </ul>
+          </div>
         </section>
 
         {/* Input/Output Example */}

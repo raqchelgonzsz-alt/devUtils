@@ -186,6 +186,63 @@ export const JSONPathExplorer: React.FC = () => {
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
+          <div className="prose prose-slate max-w-none text-outline space-y-4">
+            <p>
+              <strong>JSONPath</strong> es un lenguaje de consulta para JSON, similar a lo que XPath es para XML. Te permite navegar a través de un documento JSON y extraer nodos, elementos o valores específicos utilizando una sintaxis compacta y potente.
+            </p>
+            <h3 className="text-xl font-bold text-on-surface pt-4">Operadores principales de JSONPath</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-outline-variant">
+                    <th className="py-2 pr-4 font-bold text-on-surface">Operador</th>
+                    <th className="py-2 font-bold text-on-surface">Descripción</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-outline-variant/30">
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">$</td><td className="py-2">El objeto o elemento raíz.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">@</td><td className="py-2">El objeto o elemento actual.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">. ó []</td><td className="py-2">Operador de hijo (dot-notation o bracket-notation).</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">..</td><td className="py-2">Escaneo profundo. Busca en todos los niveles.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">*</td><td className="py-2">Comodín. Todos los objetos/elementos.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Examples Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-on-surface">Ejemplos Prácticos de Consultas</h2>
+          <div className="space-y-4">
+            <div className="bg-surface-container rounded-2xl border border-outline-variant p-6 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                   <span className="text-[10px] font-bold uppercase text-outline">JSON de Ejemplo</span>
+                   <pre className="bg-white p-3 rounded-lg text-[10px] font-mono border border-slate-100">
+{`{
+  "store": {
+    "book": [
+      { "category": "reference", "price": 8.95 },
+      { "category": "fiction", "price": 12.99 }
+    ]
+  }
+}`}
+                   </pre>
+                </div>
+                <div className="space-y-4">
+                   <div className="space-y-1">
+                      <p className="text-xs font-bold text-on-surface">Consultar todos los precios:</p>
+                      <code className="text-xs bg-indigo-50 text-indigo-700 p-1 rounded">$.store.book[*].price</code>
+                   </div>
+                   <div className="space-y-1">
+                      <p className="text-xs font-bold text-on-surface">Consultar libros de ficción:</p>
+                      <code className="text-xs bg-indigo-50 text-indigo-700 p-1 rounded">$..book[?(@.category=="fiction")]</code>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* FAQs */}
