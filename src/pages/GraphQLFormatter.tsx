@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
-import { FileCode, Copy, Wand2, Trash2, CheckCircle2, AlertCircle, Maximize2, Minimize2, Type, FoldVertical, UnfoldVertical, Upload, Download, Minimize, Database, Printer, History, Share2, X } from 'lucide-react';
+import { FileCode, Copy, Wand2, Trash2, CheckCircle2, AlertCircle, Maximize2, Minimize2, Type, FoldVertical, UnfoldVertical, Upload, Download, Minimize, Database, Printer, History, Share2, X, BookOpen, HelpCircle, ChevronDown, ChevronUp, Lightbulb, ArrowRight } from 'lucide-react';
 import { formatGraphQL, minifyGraphQL } from '../utils/toolUtils';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
@@ -8,78 +8,48 @@ import { SEO } from '../components/SEO';
 import { useTheme } from '../context/ThemeContext';
 import { useLocation, Link } from 'react-router-dom';
 
-const GRAPHQL_SEO_MAP: Record<string, { 
-  title: string; 
-  description: string; 
-  keywords: string; 
-  h1: string; 
-  subtitle: string;
-  intro: string;
-  example?: { input: string; output: string };
-  faqs: { q: string; a: string }[];
-}> = {
-  '/tools/graphql/formatter': {
-    title: 'Formateador GraphQL Online - Validar y Embellecer Consultas | Stoolzen',
-    description: 'Formatea y valida tus consultas GraphQL online. Mejora la legibilidad de tus schemas y queries con nuestra herramienta gratuita.',
-    keywords: 'formateador graphql, graphql beautifier, validar graphql, queries graphql, esquemas graphql, dev tools',
-    h1: 'Formateador GraphQL Online',
-    subtitle: 'Limpia y valida tus consultas y esquemas GraphQL al instante.',
-    intro: 'Un formateador GraphQL es esencial para mantener el orden en proyectos de gran escala. Esta herramienta no solo indenta tu código, sino que verifica que la estructura de campos, argumentos y fragmentos cumpla con la especificación oficial.',
-    example: {
-      input: '{user(id:1){id name email posts{title}}}',
-      output: 'query {\n  user(id: 1) {\n    id\n    name\n    email\n    posts {\n      title\n    }\n  }\n}'
-    },
-    faqs: [
-      { q: "¿Por qué usar un formateador GraphQL?", a: "Para asegurar que las consultas sean legibles en revisiones de código y commits de Git, facilitando la detección de errores lógicos." },
-      { q: "¿Valida sintaxis en tiempo real?", a: "Sí, el editor marcará con rojo cualquier error estructural mientras escribes." }
-    ]
-  },
-  '/tools/graphql/validator': {
-    title: 'Validador GraphQL Online Gratis - Verifica Queries y Schemas | Stoolzen',
-    description: 'Valida tus queries y schemas GraphQL online de forma gratuita. Detecta errores de sintaxis en tus consultas GraphQL al instante.',
-    keywords: 'validador graphql, graphql validator online, verificar graphql, graphql syntax checker, graphql lint',
-    h1: 'Validador GraphQL Online',
-    subtitle: 'Comprueba si tus queries y schemas GraphQL son válidos al instante.',
-    intro: 'El validador de GraphQL de Stoolzen analiza profundamente la estructura de tus consultas para encontrar errores que a menudo pasan desapercibidos en editores de texto simples.',
-    faqs: [
-      { q: "¿Soporta la sintaxis SDL?", a: "Sí, puedes validar tanto consultas de cliente como definiciones de esquema (Schema Definition Language)." }
-    ]
-  },
-  '/tools/graphql/minifier': {
-    title: 'GraphQL Minifier Online - Comprimir y Minificar Queries | Stoolzen',
-    description: 'Minifica y comprime tus queries GraphQL online al instante. Reduce el tamaño de tus consultas para optimizar el rendimiento de tus APIs.',
-    keywords: 'graphql minifier, minificar graphql, comprimir graphql, graphql compress online, graphql minify',
-    h1: 'GraphQL Minifier Online',
-    subtitle: 'Comprime y minifica tus queries GraphQL para reducir su tamaño.',
-    intro: 'La minificación de GraphQL elimina espacios en blanco y comentarios innecesarios, lo cual es crítico para reducir el payload de las peticiones POST en aplicaciones de alto rendimiento.',
-    example: {
-      input: 'query GetUser {\n  user {\n    id\n    name\n  }\n}',
-      output: 'query GetUser{user{id name}}'
-    },
-    faqs: [
-      { q: "¿Afecta la minificación al funcionamiento de la API?", a: "No, GraphQL ignora los espacios en blanco insignificantes, por lo que el servidor procesará la query exactamente igual." }
-    ]
-  }
-};
+import { GRAPHQL_SEO_MAP } from '../utils/graphqlSeoData';
 
-// Fallback SEO for other GraphQL routes
-const FALLBACK_GRAPHQL_SEO: {
-  title: string;
-  description: string;
-  keywords: string;
-  h1: string;
-  subtitle: string;
-  intro: string;
-  example?: { input: string; output: string };
-  faqs: { q: string; a: string }[];
-} = {
-  title: 'Herramientas GraphQL Online - Stoolzen',
-  description: 'Suite completa de herramientas para trabajar con GraphQL.',
-  keywords: 'graphql, devtools, formatter, validator',
-  h1: 'Herramientas GraphQL',
-  subtitle: 'Gestiona tus queries y schemas de forma eficiente.',
-  intro: 'Explora nuestra colección de utilidades diseñadas para simplificar el desarrollo con GraphQL.',
-  faqs: []
+const EditorSkeleton: React.FC = () => {
+  return (
+    <div className="w-full h-full min-h-[350px] bg-white dark:bg-[#1e1e1e] flex flex-col p-4 space-y-3 animate-pulse">
+      <div className="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-zinc-800">
+        <div className="w-3 h-3 rounded-full bg-slate-200 dark:bg-zinc-700" />
+        <div className="w-3 h-3 rounded-full bg-slate-200 dark:bg-zinc-700" />
+        <div className="w-3 h-3 rounded-full bg-slate-200 dark:bg-zinc-700" />
+        <div className="w-20 h-3 bg-slate-200 dark:bg-zinc-700 rounded ml-4" />
+      </div>
+      <div className="flex-1 space-y-4 font-mono text-[10px] text-slate-300 dark:text-zinc-600">
+        <div className="flex items-center space-x-2">
+          <span className="w-4 select-none">1</span>
+          <div className="w-12 h-3 bg-indigo-100 dark:bg-indigo-950 rounded" />
+          <div className="w-2 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+        </div>
+        <div className="flex items-center space-x-2 pl-4">
+          <span className="w-4 select-none">2</span>
+          <div className="w-16 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+          <div className="w-2 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+          <div className="w-24 h-3 bg-emerald-100 dark:bg-emerald-950 rounded" />
+        </div>
+        <div className="flex items-center space-x-2 pl-4">
+          <span className="w-4 select-none">3</span>
+          <div className="w-20 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+          <div className="w-2 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+          <div className="w-12 h-3 bg-amber-100 dark:bg-amber-950 rounded" />
+        </div>
+        <div className="flex items-center space-x-2 pl-4">
+          <span className="w-4 select-none">4</span>
+          <div className="w-8 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+          <div className="w-2 h-3 bg-slate-100 dark:bg-zinc-800 rounded" />
+          <div className="w-32 h-3 bg-indigo-100 dark:bg-indigo-950 rounded" />
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="w-4 select-none">5</span>
+          <div className="w-4 h-3 bg-indigo-100 dark:bg-indigo-950 rounded" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export const GraphQLFormatter: React.FC = () => {
@@ -95,9 +65,10 @@ export const GraphQLFormatter: React.FC = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [showHistory, setShowHistory] = useState(false);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const { theme } = useTheme();
   const { pathname } = useLocation();
-  const seo = GRAPHQL_SEO_MAP[pathname] ?? FALLBACK_GRAPHQL_SEO;
+  const seo = GRAPHQL_SEO_MAP[pathname] ?? GRAPHQL_SEO_MAP['/tools/graphql/formatter'];
   const editorRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -366,7 +337,7 @@ export const GraphQLFormatter: React.FC = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 bg-white relative">
+          <div className="flex-1 bg-white relative min-h-[450px]">
             <Editor
               height="100%"
               defaultLanguage="graphql"
@@ -374,6 +345,7 @@ export const GraphQLFormatter: React.FC = () => {
               value={input}
               onChange={(value) => setInput(value || '')}
               onMount={handleEditorDidMount}
+              loading={<EditorSkeleton />}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
@@ -442,13 +414,14 @@ export const GraphQLFormatter: React.FC = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 bg-white relative">
+          <div className="flex-1 bg-white relative min-h-[450px]">
             <Editor
               height="100%"
               defaultLanguage="graphql"
               theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
               value={output}
               onMount={handleEditorDidMount}
+              loading={<EditorSkeleton />}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
@@ -690,6 +663,7 @@ export const GraphQLFormatter: React.FC = () => {
                 value={maximized === 'input' ? input : output}
                 onChange={(value) => maximized === 'input' && setInput(value || '')}
                 onMount={handleEditorDidMount}
+                loading={<EditorSkeleton />}
                 options={{
                   minimap: { enabled: true },
                   fontSize: fontSize + 2,
@@ -749,6 +723,228 @@ export const GraphQLFormatter: React.FC = () => {
               )}
             </div>
           </div>
+        </div>
+      )}
+      {/* Programmatic Technical SEO Section */}
+      {!maximized && (
+        <div className="mt-12 space-y-12 border-t border-slate-200/80 dark:border-zinc-800/80 pt-10 pb-16 font-sans">
+          
+          {/* Schema Markup Injection */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": seo.h1,
+              "operatingSystem": "All",
+              "applicationCategory": "DeveloperApplication",
+              "offers": {
+                "@type": "Offer",
+                "price": "0.00",
+                "priceCurrency": "USD"
+              },
+              "description": seo.description
+            })}
+          </script>
+
+          {seo.faqs.length > 0 && (
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": seo.faqs.map(faq => ({
+                  "@type": "Question",
+                  "name": faq.q,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                  }
+                }))
+              })}
+            </script>
+          )}
+
+          {/* Section 1: Detailed Technical Overview */}
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Guía Técnica de Integridad en GraphQL</h2>
+                <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Análisis en profundidad</p>
+              </div>
+            </div>
+            <p className="text-slate-600 dark:text-zinc-300 leading-relaxed text-sm md:text-base mb-6">
+              {seo.intro}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 border-t border-slate-100 dark:border-zinc-800 pt-8">
+              <div className="flex gap-4">
+                <div className="p-2 h-10 w-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+                  ✓
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base">Privacidad por diseño</h3>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                    Las operaciones de formateo, validación y minificación se ejecutan 100% localmente en tu cliente web. Ninguna consulta abandona tu dispositivo.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="p-2 h-10 w-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
+                  ⚡
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base">Velocidad instantánea</h3>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                    Optimizado con el motor Monaco Editor y algoritmos AST para parsear consultas de miles de líneas en milisegundos con cero lag visual.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 2: Interactive Comparative Example */}
+          {seo.example && (
+            <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
+                  <Lightbulb className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Ejemplo Práctico Ilustrativo</h2>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Demostración técnica interactiva</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-slate-600 dark:text-zinc-400 mb-2 uppercase tracking-wide">
+                    {seo.example.inputLabel || 'Original'}
+                  </span>
+                  <div className="bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 relative font-mono text-xs text-slate-700 dark:text-zinc-300 min-h-[140px] flex items-center justify-start overflow-auto whitespace-pre-wrap">
+                    {seo.example.input}
+                    <button 
+                      onClick={() => {
+                        setInput(seo.example!.input);
+                        setStatusMessage({ title: 'Ejemplo cargado', detail: 'El código del ejemplo ha sido cargado al editor.' });
+                        setShowStatus(true);
+                        setTimeout(() => setShowStatus(false), 3000);
+                      }}
+                      className="absolute top-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1 px-2.5 rounded-md text-[10px] uppercase shadow-sm transition-all"
+                    >
+                      Probar en editor
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-slate-600 dark:text-zinc-400 mb-2 uppercase tracking-wide">
+                    {seo.example.outputLabel || 'Resultado Esperado'}
+                  </span>
+                  <div className="bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 relative font-mono text-xs text-slate-700 dark:text-zinc-300 min-h-[140px] overflow-auto whitespace-pre">
+                    {seo.example.output}
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText(seo.example!.output);
+                        setStatusMessage({ title: 'Copiado al portapapeles', detail: 'El resultado del ejemplo ha sido copiado.' });
+                        setShowStatus(true);
+                        setTimeout(() => setShowStatus(false), 3000);
+                      }}
+                      className="absolute top-2 right-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold py-1 px-2.5 rounded-md text-[10px] uppercase shadow-sm transition-all"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Section 3: Dynamic Accordion FAQ in Spanish */}
+          {seo.faqs.length > 0 && (
+            <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
+                  <HelpCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Preguntas Frecuentes (FAQ)</h2>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Respuestas de expertos</p>
+                </div>
+              </div>
+
+              <div className="space-y-4 mt-6">
+                {seo.faqs.map((faq, index) => {
+                  const isOpen = activeFaq === index;
+                  return (
+                    <div 
+                      key={index} 
+                      className="border border-slate-200/60 dark:border-zinc-800 rounded-2xl overflow-hidden transition-all duration-200 bg-slate-50/30 dark:bg-zinc-900/50 hover:bg-slate-50 dark:hover:bg-zinc-800/40"
+                    >
+                      <button
+                        onClick={() => setActiveFaq(isOpen ? null : index)}
+                        className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base focus:outline-none"
+                      >
+                        <span>{faq.q}</span>
+                        {isOpen ? (
+                          <ChevronUp className="w-5 h-5 text-indigo-500" />
+                        ) : (
+                          <ChevronDown className="w-5 h-5 text-slate-400" />
+                        )}
+                      </button>
+                      <div 
+                        className={cn(
+                          "transition-all duration-300 overflow-hidden",
+                          isOpen ? "max-h-[500px] border-t border-slate-100 dark:border-zinc-800/80 p-5 bg-white dark:bg-zinc-950/50" : "max-h-0"
+                        )}
+                      >
+                        <p className="text-slate-600 dark:text-zinc-300 text-xs md:text-sm leading-relaxed font-normal">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Section 4: Programmatic Internal Links Panel */}
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-zinc-100 mb-6">Explora otras herramientas GraphQL</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { title: 'Formateador', desc: 'Indentar y embellecer consultas', path: '/tools/graphql/formatter' },
+                { title: 'Validador', desc: 'Comprobar errores sintácticos', path: '/tools/graphql/validator' },
+                { title: 'Editor', desc: 'Zona de pruebas interactiva', path: '/tools/graphql/editor' },
+                { title: 'Beautifier', desc: 'Embellecedor de código', path: '/tools/graphql/beautifier' },
+                { title: 'Minifier', desc: 'Comprimir consultas GraphQL', path: '/tools/graphql/minifier' },
+                { title: 'Viewer', desc: 'Visualizar jerarquía', path: '/tools/graphql/viewer' },
+                { title: 'Checker', desc: 'Linter y corrector sintáctico', path: '/tools/graphql/checker' },
+                { title: 'Parser', desc: 'Analizar árbol de sintaxis AST', path: '/tools/graphql/parser' }
+              ]
+                .filter(item => item.path !== pathname)
+                .map((item, idx) => (
+                  <Link
+                    key={idx}
+                    to={item.path}
+                    className="flex flex-col justify-between p-4 rounded-2xl border border-slate-100 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-950/20 hover:bg-indigo-50/30 dark:hover:bg-indigo-950/10 hover:border-indigo-200/80 dark:hover:border-indigo-800/80 transition-all group"
+                  >
+                    <div>
+                      <span className="text-xs font-bold text-slate-950 dark:text-zinc-50 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        {item.title}
+                      </span>
+                      <p className="text-[10px] text-slate-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 mt-4 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                      Iniciar <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
+                ))}
+            </div>
+          </div>
+
         </div>
       )}
     </div>
