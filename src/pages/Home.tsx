@@ -66,15 +66,15 @@ export const Home: React.FC = () => {
   return (
     <div className="space-y-12 max-w-5xl mx-auto">
       <SEO 
-        title="Stoolzen - Mejores Herramientas para Desarrolladores | JSON, GraphQL, JWT"
-        description="La caja de herramientas definitiva para desarrolladores. Formateador de JSON, validador de GraphQL y decodificador de JWT. Rápido, seguro y totalmente offline."
-        keywords="stoolzen, herramientas de dev, formateadores de json, graphql beautifier, validadores de jwt, dev tools online, utilidades para programadores"
+        title="Stoolzen - Best Developer Tools | JSON, GraphQL, JWT"
+        description="The ultimate toolbox for developers. JSON Formatter, GraphQL Validator, and JWT Decoder. Fast, secure, and entirely offline."
+        keywords="stoolzen, dev tools, json formatters, graphql beautifier, jwt validators, dev tools online, programmer utilities"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebApplication",
           "name": "Stoolzen",
           "url": "https://stoolzen.com",
-          "description": "Herramientas esenciales para desarrolladores: Formateador JSON, validador GraphQL y decodificador JWT.",
+          "description": "Essential developer tools: JSON Formatter, GraphQL Validator, and JWT Decoder.",
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Any",
           "offers": {

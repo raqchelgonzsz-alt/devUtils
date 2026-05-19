@@ -8,37 +8,37 @@ import { useLocation } from 'react-router-dom';
 
 const BASE64_SEO_MAP: Record<string, { title: string; description: string; keywords: string; h1: string; subtitle: string; intro: string; faqs: { q: string; a: string }[] }> = {
   '/tools/text/base64-encoder': {
-    title: 'Codificador Base64 Online - Convertir Texto a Base64 | Stoolzen',
-    description: 'Codifica cualquier texto o dato binario a formato Base64 online de forma gratuita. Herramienta rápida, segura y privada para desarrolladores.',
-    keywords: 'codificador base64, texto a base64, base64 encode online, convertir a base64, dev tools',
-    h1: 'Codificador Base64',
-    subtitle: 'Convierte tus cadenas de texto a formato Base64 al instante.',
-    intro: 'La codificación Base64 es un proceso de conversión de datos binarios en una cadena de texto ASCII. Es ampliamente utilizado para embeber imágenes en archivos CSS, transmitir datos en JSON o enviar adjuntos en correos electrónicos.',
+    title: 'Base64 Encoder Online - Convert Text to Base64 | Stoolzen',
+    description: 'Encode any text or binary data to Base64 format online for free. Fast, secure, and private tool for developers.',
+    keywords: 'base64 encoder, text to base64, base64 encode online, convert to base64, dev tools',
+    h1: 'Base64 Encoder',
+    subtitle: 'Convert your text strings to Base64 format instantly.',
+    intro: 'Base64 encoding is a process of converting binary data into an ASCII string format. It is widely used to embed images in CSS files, transmit data in JSON, or send email attachments.',
     faqs: [
-      { q: "¿Para qué sirve el Base64?", a: "Se usa principalmente para transmitir datos que de otro modo podrían ser interpretados incorrectamente por sistemas que solo manejan texto plano, como protocolos de email antiguos o XML." },
-      { q: "¿Es seguro codificar contraseñas en Base64?", a: "No. Base64 NO es encriptación. Cualquier persona puede decodificarlo fácilmente. Úsalo solo para transporte de datos, nunca para ocultar información sensible." }
+      { q: "What is Base64 used for?", a: "It is primarily used to transmit data that might otherwise be incorrectly interpreted by systems that only handle plain text, like older email protocols or XML." },
+      { q: "Is it safe to encode passwords in Base64?", a: "No. Base64 is NOT encryption. Anyone can easily decode it. Use it only for data transport, never to hide sensitive information." }
     ]
   },
   '/tools/text/base64-decoder': {
-    title: 'Decodificador Base64 Online - Convertir Base64 a Texto | Stoolzen',
-    description: 'Decodifica cadenas Base64 a texto plano online al instante. Herramienta gratuita y segura para recuperar datos originales de Base64.',
-    keywords: 'decodificador base64, base64 a texto, base64 decode online, convertir base64 a texto, dev tools',
-    h1: 'Decodificador Base64',
-    subtitle: 'Decodifica cualquier cadena Base64 a su formato de texto original.',
-    intro: 'Si tienes un fragmento de datos en Base64, esta herramienta te permite recuperar el contenido original. Es ideal para inspeccionar payloads de APIs o extraer datos de archivos de configuración.',
+    title: 'Base64 Decoder Online - Convert Base64 to Text | Stoolzen',
+    description: 'Decode Base64 strings to plain text online instantly. Free and secure tool to recover original data from Base64.',
+    keywords: 'base64 decoder, base64 to text, base64 decode online, convert base64 to text, dev tools',
+    h1: 'Base64 Decoder',
+    subtitle: 'Decode any Base64 string back to its original text format.',
+    intro: 'If you have a snippet of Base64 data, this tool allows you to recover the original content. It is ideal for inspecting API payloads or extracting data from configuration files.',
     faqs: [
-      { q: "¿Cómo sé si una cadena es Base64?", a: "Las cadenas Base64 suelen terminar en uno o dos caracteres de relleno '=', y solo contienen caracteres A-Z, a-z, 0-9, + y /." }
+      { q: "How do I know if a string is Base64?", a: "Base64 strings often end with one or two padding '=' characters, and only contain characters A-Z, a-z, 0-9, +, and /." }
     ]
   }
 };
 
 const FALLBACK_SEO = {
-  title: 'Codificador/Decodificador Base64 Online | Stoolzen',
-  description: 'Herramienta para convertir texto a Base64 y viceversa.',
+  title: 'Base64 Encoder/Decoder Online | Stoolzen',
+  description: 'Tool to convert text to Base64 and vice versa.',
   keywords: 'base64, encode, decode, text tools',
   h1: 'Base64 Encoder/Decoder',
-  subtitle: 'Codifica y decodifica texto en formato Base64 de forma rápida.',
-  intro: 'Una utilidad sencilla para trabajar con codificación Base64 en tu flujo de trabajo diario.',
+  subtitle: 'Quickly encode and decode text in Base64 format.',
+  intro: 'A simple utility for working with Base64 encoding in your daily workflow.',
   faqs: []
 };
 
@@ -57,16 +57,16 @@ export const Base64Tool: React.FC = () => {
     try {
       if (mode === 'encode') {
         setOutput(btoa(input));
-        setStatusMessage({ title: 'Codificado con éxito', detail: 'Texto convertido a Base64.' });
+        setStatusMessage({ title: 'Successfully Encoded', detail: 'Text converted to Base64.' });
       } else {
         setOutput(atob(input));
-        setStatusMessage({ title: 'Decodificado con éxito', detail: 'Base64 convertido a texto original.' });
+        setStatusMessage({ title: 'Successfully Decoded', detail: 'Base64 converted back to text.' });
       }
       setError(null);
       setShowStatus(true);
       setTimeout(() => setShowStatus(false), 3000);
     } catch (err) {
-      setError(mode === 'encode' ? 'Error al codificar: Asegúrate de que el texto no contenga caracteres especiales no soportados por btoa.' : 'Error al decodificar: La cadena no parece ser un Base64 válido.');
+      setError(mode === 'encode' ? 'Error encoding: Ensure text does not contain special characters unsupported by btoa.' : 'Error decoding: The string does not appear to be valid Base64.');
       setOutput('');
     }
   };
@@ -74,7 +74,7 @@ export const Base64Tool: React.FC = () => {
   const handleCopy = () => {
     if (!output) return;
     navigator.clipboard.writeText(output);
-    setStatusMessage({ title: 'Copiado al portapapeles', detail: 'El resultado está listo para usar.' });
+    setStatusMessage({ title: 'Copied to clipboard', detail: 'The result is ready to use.' });
     setShowStatus(true);
     setTimeout(() => setShowStatus(false), 3000);
   };
@@ -126,7 +126,7 @@ export const Base64Tool: React.FC = () => {
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Tools', item: '/tools' },
-          { name: 'Texto', item: '/tools/text' },
+          { name: 'Text', item: '/tools/text' },
           { name: seo.h1, item: pathname }
         ]}
       />
@@ -144,17 +144,17 @@ export const Base64Tool: React.FC = () => {
           <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Type className="w-4 h-4 text-slate-400" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Entrada</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Input</span>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={handleClear} className="p-1.5 text-slate-400 hover:text-red-500 transition-colors" title="Limpiar Entrada">
+              <button onClick={handleClear} className="p-1.5 text-slate-400 hover:text-red-500 transition-colors" title="Clear Input">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
           </div>
           <textarea
             className="flex-1 w-full bg-transparent p-4 font-mono text-sm resize-none focus:outline-none min-h-[300px]"
-            placeholder={pathname.includes('encoder') ? "Escribe o pega el texto a codificar..." : "Pega la cadena Base64 a decodificar..."}
+            placeholder={pathname.includes('encoder') ? "Type or paste text to encode..." : "Paste Base64 string to decode..."}
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
@@ -165,16 +165,16 @@ export const Base64Tool: React.FC = () => {
           <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Hash className="w-4 h-4 text-slate-400" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Resultado</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Output</span>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={handleSwap} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors" title="Intercambiar Entrada/Salida">
+              <button onClick={handleSwap} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors" title="Swap Input/Output">
                 <ArrowLeftRight className="w-4 h-4" />
               </button>
-              <button onClick={handleDownload} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors" title="Descargar Resultado">
+              <button onClick={handleDownload} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors" title="Download Result">
                 <Download className="w-4 h-4" />
               </button>
-              <button onClick={handleCopy} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors" title="Copiar Resultado">
+              <button onClick={handleCopy} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors" title="Copy Result">
                 <Copy className="w-4 h-4" />
               </button>
             </div>
@@ -184,7 +184,7 @@ export const Base64Tool: React.FC = () => {
               className="w-full h-full bg-transparent p-4 font-mono text-sm resize-none focus:outline-none min-h-[300px]"
               readOnly
               value={output}
-              placeholder="El resultado aparecerá aquí..."
+              placeholder="Result will appear here..."
             />
             {error && (
               <div className="absolute inset-0 bg-red-50/50 backdrop-blur-[1px] flex items-center justify-center p-6 text-center">
@@ -204,7 +204,7 @@ export const Base64Tool: React.FC = () => {
             onClick={() => handleProcess(pathname.includes('encoder') ? 'encode' : 'decode')}
             className={cn(btnClass, "bg-indigo-600 text-white")}
           >
-            {pathname.includes('encoder') ? 'Codificar Ahora' : 'Decodificar Ahora'}
+            {pathname.includes('encoder') ? 'Encode Now' : 'Decode Now'}
           </button>
       </div>
 
@@ -213,20 +213,20 @@ export const Base64Tool: React.FC = () => {
         <section className="max-w-4xl space-y-6">
           <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
             <FileCode className="w-6 h-6 text-indigo-500" />
-            ¿Qué es {seo.h1}?
+            What is {seo.h1}?
           </h2>
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
           <div className="prose prose-slate max-w-none text-outline space-y-4">
             <p>
-              <strong>Base64</strong> es un esquema de codificación binario a texto que representa datos binarios en un formato de cadena ASCII. Se utiliza comúnmente para transmitir datos que de otro modo podrían ser interpretados incorrectamente por sistemas que solo manejan texto, como correos electrónicos o URLs.
+              <strong>Base64</strong> is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It is commonly used to transmit data that might otherwise be incorrectly interpreted by systems that only handle text, like emails or URLs.
             </p>
-            <h3 className="text-xl font-bold text-on-surface pt-4">¿Cuándo usar Base64?</h3>
+            <h3 className="text-xl font-bold text-on-surface pt-4">When to use Base64?</h3>
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Incrustar Imágenes:</strong> Convertir pequeños iconos o imágenes en strings para usarlos directamente en CSS o HTML (Data URIs).</li>
-              <li><strong>Transferencia de Archivos:</strong> Enviar archivos adjuntos en formatos de texto como JSON o XML.</li>
-              <li><strong>Autenticación Básica:</strong> Codificar credenciales (usuario:contraseña) para el encabezado <code>Authorization</code> de HTTP.</li>
+              <li><strong>Embed Images:</strong> Convert small icons or images to strings to use them directly in CSS or HTML (Data URIs).</li>
+              <li><strong>File Transfer:</strong> Send attachments in text formats like JSON or XML.</li>
+              <li><strong>Basic Authentication:</strong> Encode credentials (username:password) for the HTTP <code>Authorization</code> header.</li>
             </ul>
           </div>
         </section>
@@ -234,7 +234,7 @@ export const Base64Tool: React.FC = () => {
         {/* FAQs */}
         {seo.faqs.length > 0 && (
           <section className="bg-surface-container-low rounded-3xl p-8 md:p-12 border border-outline-variant">
-            <h2 className="text-2xl font-bold text-on-surface mb-8">Preguntas Frecuentes</h2>
+            <h2 className="text-2xl font-bold text-on-surface mb-8">Frequently Asked Questions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {seo.faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-3">

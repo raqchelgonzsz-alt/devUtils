@@ -1,147 +1,182 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
-import { FileText, BookOpen, Terminal, Code } from 'lucide-react';
+import { FileText, Shield, Terminal, Code, Search, Database, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const DOCS_ARTICLES = [
+const KNOWLEDGE_HUBS = [
   {
-    id: 'json-formatting-guide',
-    title: 'A Developer\'s Guide to JSON Formatting',
-    description: 'Learn the best practices for formatting, validating, and structuring JSON data in your modern web applications.',
-    icon: Terminal,
-    date: 'May 06, 2026',
-    readTime: '4 min read',
-    category: 'Guides'
+    category: 'Data Formats',
+    icon: Database,
+    hubs: [
+      {
+        id: 'json',
+        title: 'JSON Format & Validation',
+        description: 'Master JSON formatting, validation, schema design, and resolve common parsing errors.',
+        keywords: ['JSON', 'Parsing', 'Schema', 'SyntaxError']
+      }
+    ]
   },
   {
-    id: 'graphql-best-practices',
-    title: 'GraphQL API Design Best Practices',
-    description: 'Discover how to design scalable and maintainable GraphQL schemas, including error handling and performance optimizations.',
+    category: 'Security & Auth',
+    icon: Shield,
+    hubs: [
+      {
+        id: 'jwt',
+        title: 'JWT Authentication',
+        description: 'Understand JSON Web Tokens structure, signing algorithms, and security best practices.',
+        keywords: ['JWT', 'RS256', 'Payload', 'Security']
+      }
+    ]
+  },
+  {
+    category: 'Encoding & Strings',
     icon: Code,
-    date: 'May 07, 2026',
-    readTime: '6 min read',
-    category: 'API Design'
+    hubs: [
+      {
+        id: 'base64',
+        title: 'Base64 Encoding',
+        description: 'Learn how Base64 works, when to use it, and differences from encryption.',
+        keywords: ['Base64', 'Encoding', 'Padding']
+      },
+      {
+        id: 'regex',
+        title: 'Regular Expressions',
+        description: 'Stop copy-pasting Regex. Learn patterns, lookaheads, and performance optimization.',
+        keywords: ['Regex', 'Patterns', 'Validation']
+      }
+    ]
   },
   {
-    id: 'jwt-security-essentials',
-    title: 'JWT Security Essentials',
-    description: 'Understand the core concepts of JSON Web Tokens (JWT) and how to securely implement authentication in your apps.',
-    icon: BookOpen,
-    date: 'May 08, 2026',
-    readTime: '5 min read',
-    category: 'Security'
-  },
-  {
-    id: 'cors-errors-explained',
-    title: 'Understanding and Fixing CORS Errors',
-    description: 'A comprehensive guide to understanding Cross-Origin Resource Sharing (CORS) and how to resolve common errors in modern web apps.',
-    icon: BookOpen,
-    date: 'May 09, 2026',
-    readTime: '7 min read',
-    category: 'Web Dev'
-  },
-  {
-    id: 'base64-encoding-guide',
-    title: 'When to Use Base64 Encoding: A Practical Guide',
-    description: 'Learn what Base64 encoding actually is, why it exists, and the best use cases for encoding data in web applications.',
-    icon: Code,
-    date: 'May 10, 2026',
-    readTime: '5 min read',
-    category: 'Fundamentals'
-  },
-  {
-    id: 'regex-for-developers',
-    title: 'Mastering Regex: Common Patterns for Devs',
-    description: 'Stop copy-pasting Regex. Learn how to write and understand common regular expressions used for validation and parsing.',
-    icon: Terminal,
-    date: 'May 11, 2026',
-    readTime: '8 min read',
-    category: 'Snippets'
+    category: 'Web Development',
+    icon: Globe,
+    hubs: [
+      {
+        id: 'api-debugging',
+        title: 'API Debugging & CORS',
+        description: 'Resolve CORS errors, understand HTTP headers, and debug REST APIs effectively.',
+        keywords: ['CORS', 'HTTP', 'REST', 'Debugging']
+      }
+    ]
   }
 ];
 
 export const Docs: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Blog",
-    "headline": "Stoolzen Documentation & Developer Blog",
-    "description": "Tutorials, guides, and best practices for developers using JSON, GraphQL, JWT, and other tools.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Stoolzen",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://stoolzen.com/logo.png"
-      }
+    "@type": "WebSite",
+    "name": "Stoolzen Developer Knowledge Hub",
+    "url": "https://stoolzen.com/docs",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://stoolzen.com/docs?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
   };
 
+  const filteredHubs = KNOWLEDGE_HUBS.map(group => ({
+    ...group,
+    hubs: group.hubs.filter(hub => 
+      hub.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      hub.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      hub.keywords.some(k => k.toLowerCase().includes(searchQuery.toLowerCase()))
+    )
+  })).filter(group => group.hubs.length > 0);
+
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto pb-12">
       <SEO 
-        title="Documentation & Blog | Stoolzen Developer Tools"
-        description="Explore in-depth tutorials, guides, and best practices on JSON, GraphQL, JWT security, and general web development."
-        keywords="developer documentation, programming blog, json guide, graphql best practices, jwt tutorial, stoolzen docs"
+        title="Developer Knowledge Hub | Stoolzen Docs"
+        description="Master developer tools, data formats, and web security. In-depth technical guides on JSON, JWT, Regex, Base64, and API debugging."
+        keywords="developer documentation, json guide, jwt authentication, base64 encoding, regex tutorial, api debugging, stoolzen docs"
         jsonLd={jsonLd}
       />
       
-      <div className="mb-10 text-center md:text-left">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-4 flex items-center justify-center md:justify-start gap-3">
-          <FileText className="w-8 h-8 text-primary" />
-          Documentation & Guides
+      {/* Hero Section */}
+      <div className="mb-12 text-center bg-surface-bright border border-outline-variant rounded-2xl p-8 md:p-12 shadow-sm">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-container text-primary mb-6">
+          <FileText className="w-8 h-8" />
+        </div>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-on-surface tracking-tight mb-6">
+          Developer Knowledge Hub
         </h1>
-        <p className="text-outline text-lg max-w-2xl">
-          Deep dives, tutorials, and practical advice to help you build better software and master our developer tools.
+        <p className="text-outline text-xl max-w-3xl mx-auto mb-8">
+          Technical deep-dives, best practices, and interactive examples. Stop guessing and start mastering the core technologies you use every day.
         </p>
+        
+        {/* Search Bar */}
+        <div className="relative max-w-2xl mx-auto">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <Search className="h-6 w-6 text-outline" />
+          </div>
+          <input
+            type="text"
+            className="block w-full pl-12 pr-4 py-4 bg-surface border-2 border-outline-variant rounded-xl text-on-surface placeholder-outline focus:ring-0 focus:border-primary transition-colors text-lg"
+            placeholder="Search for JSON formatting, JWT security, Regex..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div className="grid gap-6">
-        {DOCS_ARTICLES.map((article) => (
-          <article 
-            key={article.id} 
-            className="bg-surface-bright border border-outline-variant rounded-xl p-6 hover:shadow-md transition-all group flex flex-col md:flex-row gap-6 items-start"
-          >
-            <div className="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-              <article.icon className="w-6 h-6 text-primary" />
-            </div>
-            
-            <div className="flex-1">
-              <div className="flex items-center gap-3 text-xs font-semibold text-outline mb-2 uppercase tracking-wider">
-                <span className="text-primary">{article.category}</span>
-                <span>&bull;</span>
-                <span>{article.date}</span>
-                <span>&bull;</span>
-                <span>{article.readTime}</span>
+      {/* Hubs Grid */}
+      <div className="space-y-12">
+        {filteredHubs.length > 0 ? (
+          filteredHubs.map((group, index) => (
+            <div key={index} className="space-y-6">
+              <div className="flex items-center gap-3 pb-2 border-b border-outline-variant">
+                <group.icon className="w-6 h-6 text-primary" />
+                <h2 className="text-2xl font-bold text-on-surface">{group.category}</h2>
               </div>
               
-              <h2 className="text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">
-                <Link to={`/docs/${article.id}`}>
-                  {article.title}
-                </Link>
-              </h2>
-              
-              <p className="text-outline mb-4 line-clamp-2">
-                {article.description}
-              </p>
-              
-              <Link 
-                to={`/docs/${article.id}`}
-                className="inline-flex items-center text-sm font-bold text-primary hover:text-primary-dark transition-colors"
-              >
-                Read full article &rarr;
-              </Link>
+              <div className="grid md:grid-cols-2 gap-6">
+                {group.hubs.map((hub) => (
+                  <Link 
+                    key={hub.id} 
+                    to={`/docs/${hub.id}`}
+                    className="block group bg-surface-bright border border-outline-variant rounded-xl p-6 hover:shadow-lg hover:border-primary/50 transition-all"
+                  >
+                    <h3 className="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors flex items-center justify-between">
+                      {hub.title}
+                      <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0">&rarr;</span>
+                    </h3>
+                    <p className="text-outline mb-4 line-clamp-2">
+                      {hub.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {hub.keywords.map(keyword => (
+                        <span key={keyword} className="px-2 py-1 bg-surface text-outline text-xs font-medium rounded-md border border-outline-variant">
+                          {keyword}
+                        </span>
+                      ))}
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </article>
-        ))}
+          ))
+        ) : (
+          <div className="text-center py-12">
+            <Terminal className="w-12 h-12 text-outline-variant mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-on-surface mb-2">No guides found</h3>
+            <p className="text-outline">Try adjusting your search terms.</p>
+          </div>
+        )}
       </div>
       
-      <div className="mt-12 p-8 bg-surface-container rounded-2xl text-center border border-outline-variant">
-        <h3 className="text-2xl font-bold text-on-surface mb-3">More Content Coming Soon</h3>
-        <p className="text-outline mb-6">We're constantly working on new guides and tools to improve your development workflow.</p>
-        <Link to="/" className="inline-block px-6 py-3 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary-dark transition-colors shadow-sm">
-          Return to Tools
+      {/* CTA Section */}
+      <div className="mt-16 p-8 bg-primary-container/30 rounded-2xl text-center border border-primary/20">
+        <h3 className="text-2xl font-bold text-on-surface mb-3">Looking for a specific tool?</h3>
+        <p className="text-outline mb-6 max-w-2xl mx-auto">
+          Our knowledge base is directly integrated with our developer tools. Learn the theory here, then test it live.
+        </p>
+        <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary-dark transition-colors shadow-sm">
+          <Terminal className="w-5 h-5" />
+          Open Tools Workspace
         </Link>
       </div>
     </div>
   );
 };
+

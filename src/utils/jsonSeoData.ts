@@ -16,274 +16,274 @@ export interface JSONSeoConfig {
 
 export const JSON_SEO_MAP: Record<string, JSONSeoConfig> = {
   '/tools/json/formatter': {
-    title: 'Formateador JSON Online - Embellecer y Validar JSON | Stoolzen',
-    description: 'El mejor formateador de JSON online. Valida, embellece y minifica tus cadenas JSON al instante. Herramienta gratuita para desarrolladores.',
-    keywords: 'formateador json, json beautifier, validar json, beautify json online, depurar json, dev tools',
-    h1: 'Formateador JSON',
-    subtitle: 'Formatea, valida y embellece tus cadenas JSON de forma segura.',
-    intro: 'Un formateador JSON (o JSON Beautifier) es una herramienta indispensable para desarrolladores que convierte estructuras JSON compactas o mal indentadas en código limpio, jerárquico y altamente legible. Esto facilita enormemente la depuración de respuestas de APIs, archivos de configuración de sistemas y webhooks.',
+    title: 'JSON Formatter Online - Beautify and Validate JSON | Stoolzen',
+    description: 'The best online JSON formatter. Validate, beautify, and minify your JSON strings instantly. Free tool for developers.',
+    keywords: 'json formatter, json beautifier, validate json, beautify json online, debug json, dev tools',
+    h1: 'JSON Formatter',
+    subtitle: 'Format, validate, and beautify your JSON strings safely.',
+    intro: 'A JSON Formatter (or JSON Beautifier) is an indispensable tool for developers that converts compact or poorly indented JSON structures into clean, hierarchical, and highly readable code. This makes debugging API responses, system configuration files, and webhooks infinitely easier.',
     example: {
       input: '{"user":{"id":1,"name":"Alice","roles":["admin"],"active":true}}',
       output: '{\n  "user": {\n    "id": 1,\n    "name": "Alice",\n    "roles": [\n      "admin"\n    ],\n    "active": true\n  }\n}',
-      inputLabel: 'JSON Compacto',
-      outputLabel: 'JSON Formateado'
+      inputLabel: 'Compact JSON',
+      outputLabel: 'Formatted JSON'
     },
     faqs: [
-      { q: '¿Qué hace exactamente este formateador?', a: 'Parsea y re-estructura tu objeto JSON aplicando sangrado (indentación) consistente para hacerlo fácilmente legible por humanos.' },
-      { q: '¿Es seguro procesar datos sensibles aquí?', a: 'Sí. Todo el procesamiento se realiza localmente en tu navegador. Ningún dato se transmite a nuestros servidores.' },
-      { q: '¿Por qué mi JSON se muestra como inválido?', a: 'Suele deberse a comas de más, falta de comillas dobles en las llaves o valores incorrectos como "undefined".' }
+      { q: 'What exactly does this formatter do?', a: 'It parses and restructures your JSON object, applying consistent indentation to make it easily readable by humans.' },
+      { q: 'Is it safe to process sensitive data here?', a: 'Yes. All processing is done locally in your browser. No data is transmitted to our servers.' },
+      { q: 'Why is my JSON showing up as invalid?', a: 'This is usually due to trailing commas, missing double quotes on keys, or invalid values like "undefined".' }
     ]
   },
   '/tools/json/validator': {
-    title: 'Validador JSON Online Gratis - Verifica tu JSON al Instante | Stoolzen',
-    description: 'Valida tu JSON online de forma gratuita. Detecta errores de sintaxis y verifica la estructura de tus datos JSON al instante.',
-    keywords: 'validador json, json validator online, verificar json, json syntax checker, json error checker',
-    h1: 'Validador JSON Online',
-    subtitle: 'Comprueba si tu JSON es válido y detecta errores de sintaxis al instante.',
-    intro: 'El Validador de JSON comprueba si tu cadena de texto cumple estrictamente la especificación RFC 8259 del formato JSON. Analiza la sintaxis en tiempo real señalándote la línea y columna exacta del primer error sintáctico.',
+    title: 'Free Online JSON Validator - Check JSON Instantly | Stoolzen',
+    description: 'Validate your JSON online for free. Detect syntax errors and verify the structure of your JSON data instantly.',
+    keywords: 'json validator, json validator online, check json, json syntax checker, json error checker',
+    h1: 'Online JSON Validator',
+    subtitle: 'Check if your JSON is valid and detect syntax errors instantly.',
+    intro: 'The JSON Validator checks whether your text string strictly complies with the RFC 8259 JSON format specification. It analyzes syntax in real-time, pointing out the exact line and column of the first syntax error.',
     example: {
       input: '{"key": "value",}',
       output: 'Error: Trailing comma at line 1 column 17',
-      inputLabel: 'JSON con error sintáctico',
-      outputLabel: 'Análisis de error'
+      inputLabel: 'JSON with syntax error',
+      outputLabel: 'Error Analysis'
     },
     faqs: [
-      { q: '¿Qué es una coma final o trailing comma?', a: 'Es una coma colocada al final del último elemento en un objeto o array. No está permitida según la especificación estricta de JSON.' },
-      { q: '¿El validador muestra la ubicación del error?', a: 'Sí, el editor Monaco integrado resalta en rojo la zona con error y te describe la causa precisa al pasar el cursor por encima.' }
+      { q: 'What is a trailing comma?', a: 'It is a comma placed at the end of the last element in an object or array. It is not allowed according to the strict JSON specification.' },
+      { q: 'Does the validator show the error location?', a: 'Yes, the integrated Monaco Editor highlights the error zone in red and describes the exact cause when you hover over it.' }
     ]
   },
   '/tools/json/editor': {
-    title: 'Editor JSON Online con Resaltado de Sintaxis | Stoolzen',
-    description: 'Editor JSON online con resaltado de sintaxis, autocompletado y validación en tiempo real. La herramienta definitiva para editar JSON.',
-    keywords: 'editor json online, json editor, editar json, json syntax highlight, json online editor',
-    h1: 'Editor JSON Online',
-    subtitle: 'Edita tu JSON con resaltado de sintaxis y validación en tiempo real.',
-    intro: 'El Editor de JSON de Stoolzen ofrece un entorno interactivo enriquecido para modificar objetos estructurados de forma rápida y segura. Cuenta con las funcionalidades típicas de un IDE moderno directamente en tu web.',
+    title: 'Online JSON Editor with Syntax Highlighting | Stoolzen',
+    description: 'Online JSON editor with syntax highlighting, auto-completion, and real-time validation. The ultimate tool for editing JSON.',
+    keywords: 'online json editor, json editor, edit json, json syntax highlight, json online editor',
+    h1: 'Online JSON Editor',
+    subtitle: 'Edit your JSON with syntax highlighting and real-time validation.',
+    intro: 'The Stoolzen JSON Editor offers a rich interactive environment to quickly and safely modify structured objects. It features typical modern IDE functionalities right in your browser.',
     example: {
       input: '{\n  "version": "1.0.0",\n  "dependencies": {}\n}',
       output: '{\n  "version": "1.0.0",\n  "dependencies": {\n    "react": "^19.0.0"\n  }\n}',
-      inputLabel: 'JSON Original',
-      outputLabel: 'JSON Modificado'
+      inputLabel: 'Original JSON',
+      outputLabel: 'Modified JSON'
     },
     faqs: [
-      { q: '¿Cuenta con autocompletado de llaves?', a: 'Sí, el editor añade y cierra automáticamente llaves, corchetes y comillas a medida que escribes.' },
-      { q: '¿Puedo copiar el contenido completo fácilmente?', a: 'Sí, dispones de un botón rápido "Copy" para copiar al portapapeles con un solo clic.' }
+      { q: 'Does it have bracket auto-completion?', a: 'Yes, the editor automatically adds and closes brackets, braces, and quotes as you type.' },
+      { q: 'Can I copy the entire content easily?', a: 'Yes, there is a quick "Copy" button to copy everything to your clipboard with a single click.' }
     ]
   },
   '/tools/json/pretty-print': {
-    title: 'JSON Pretty Print Online - Indentar y Embellecer JSON | Stoolzen',
-    description: 'Aplica pretty print a tu JSON online. Indenta y embellece cualquier cadena JSON comprimida para hacerla legible al instante.',
-    keywords: 'json pretty print, json indent online, embellecer json, json beautify, json format online, pretty print json',
+    title: 'JSON Pretty Print Online - Indent and Beautify JSON | Stoolzen',
+    description: 'Apply pretty print to your JSON online. Indent and beautify any compressed JSON string to make it instantly readable.',
+    keywords: 'json pretty print, json indent online, beautify json, json beautify, json format online, pretty print json',
     h1: 'JSON Pretty Print',
-    subtitle: 'Indenta y embellece cualquier cadena JSON comprimida al instante.',
-    intro: 'Pretty Print añade espaciado y saltos de línea estratégicos a tu documento JSON para dotarlo de una presentación atractiva. Puedes personalizar la indentación a 2 espacios, 4 espacios o tabulaciones según tus estándares de diseño de código.',
+    subtitle: 'Indent and beautify any compressed JSON string instantly.',
+    intro: 'Pretty Print adds strategic spacing and line breaks to your JSON document to give it an attractive presentation. You can customize the indentation to 2 spaces, 4 spaces, or tabs according to your code design standards.',
     example: {
       input: '{"project":"Stoolzen","awesome":true}',
       output: '{\n    "project": "Stoolzen",\n    "awesome": true\n}',
-      inputLabel: 'String sin formato',
-      outputLabel: 'Pretty-Print (4 espacios)'
+      inputLabel: 'Unformatted string',
+      outputLabel: 'Pretty-Print (4 spaces)'
     },
     faqs: [
-      { q: '¿Qué opciones de espaciado existen?', a: 'Soportamos 2 espacios, 4 espacios y tabuladores clásicos en el selector de formato.' },
-      { q: '¿Afecta la legibilidad del archivo en producción?', a: 'No, los espacios en blanco no alteran la estructura semántica de los datos serializados.' }
+      { q: 'What spacing options are available?', a: 'We support 2 spaces, 4 spaces, and classic tabs in the format selector.' },
+      { q: 'Does it affect file readability in production?', a: 'No, whitespace does not alter the semantic structure of serialized data.' }
     ]
   },
   '/tools/json/viewer': {
-    title: 'Visor JSON Online - Explorar JSON en Vista de Árbol | Stoolzen',
-    description: 'Visualiza y explora tu JSON online con vista de árbol interactiva. Navega por estructuras JSON complejas fácilmente.',
-    keywords: 'visor json, json viewer online, explorar json, json tree view, visualizar json, json browser',
-    h1: 'Visor JSON Online',
-    subtitle: 'Explora y navega por tus datos JSON con una vista de árbol interactiva.',
-    intro: 'Navega por documentos masivos expandiendo y colapsando nodos interactivos mediante la vista en árbol (tree view). Ideal para explorar payloads de APIs anidadas complejas sin perderse en el código plano.',
+    title: 'Online JSON Viewer - Explore JSON in Tree View | Stoolzen',
+    description: 'View and explore your JSON online with an interactive tree view. Navigate through complex JSON structures easily.',
+    keywords: 'json viewer, json viewer online, explore json, json tree view, visualize json, json browser',
+    h1: 'Online JSON Viewer',
+    subtitle: 'Explore and navigate your JSON data with an interactive tree view.',
+    intro: 'Navigate massive documents by expanding and collapsing interactive nodes using the tree view. Ideal for exploring deeply nested API payloads without getting lost in flat code.',
     example: {
       input: '{"users":[{"name":"Bob","age":28},{"name":"Alice","age":30}]}',
       output: '▶ Object { users: Array[2] }\n  ▼ users: Array[2]\n    ▶ 0: Object { name: "Bob", age: 28 }\n    ▶ 1: Object { name: "Alice", age: 30 }',
-      inputLabel: 'Código plano',
-      outputLabel: 'Visualización interactiva'
+      inputLabel: 'Flat code',
+      outputLabel: 'Interactive visualization'
     },
     faqs: [
-      { q: '¿Se puede colapsar todo a la vez?', a: 'Sí, contamos con un botón rápido para colapsar o expandir de forma recursiva toda la estructura en un clic.' },
-      { q: '¿Puedo copiar solo un sub-nodo específico?', a: 'Sí, la vista en árbol permite copiar ramas concretas al portapapeles de manera selectiva.' }
+      { q: 'Can everything be collapsed at once?', a: 'Yes, we have a quick button to recursively collapse or expand the entire structure in one click.' },
+      { q: 'Can I copy just a specific sub-node?', a: 'Yes, the tree view allows you to selectively copy specific branches to the clipboard.' }
     ]
   },
   '/tools/json/parser': {
-    title: 'JSON Parser Online - Parsear y Analizar JSON | Stoolzen',
-    description: 'Parsea y analiza tu JSON online. Convierte cadenas JSON en estructuras de datos legibles y válidas al instante.',
-    keywords: 'json parser online, parsear json, analizar json, json decode, json parse online, json analyzer',
-    h1: 'JSON Parser Online',
-    subtitle: 'Parsea y analiza tus cadenas JSON para detectar su estructura al instante.',
-    intro: 'El Parser de JSON toma una cadena de caracteres cruda y la deserializa para verificar que cumpla rigurosamente con los tipos de datos válidos (cadenas, números, booleanos, nulls, arrays u objetos).',
+    title: 'JSON Parser Online - Parse and Analyze JSON | Stoolzen',
+    description: 'Parse and analyze your JSON online. Convert JSON strings into readable and valid data structures instantly.',
+    keywords: 'json parser online, parse json, analyze json, json decode, json parse online, json analyzer',
+    h1: 'Online JSON Parser',
+    subtitle: 'Parse and analyze your JSON strings to detect their structure instantly.',
+    intro: 'The JSON Parser takes a raw character string and deserializes it to verify that it strictly complies with valid data types (strings, numbers, booleans, nulls, arrays, or objects).',
     example: {
       input: '{"active": true, "timestamp": 1715694212}',
-      output: 'Tipo: Object\nPropiedades:\n - active (Boolean): true\n - timestamp (Number): 1715694212',
-      inputLabel: 'String JSON',
-      outputLabel: 'Análisis de Estructura'
+      output: 'Type: Object\nProperties:\n - active (Boolean): true\n - timestamp (Number): 1715694212',
+      inputLabel: 'JSON String',
+      outputLabel: 'Structure Analysis'
     },
     faqs: [
-      { q: '¿Qué pasa si mi string contiene caracteres Unicode?', a: 'El parser los decodifica perfectamente de forma nativa en cumplimiento con el estándar UTF-8.' },
-      { q: '¿Qué ocurre con comentarios en mi JSON?', a: 'El estándar JSON oficial no soporta comentarios (líneas con // o /* */), por lo que el parser lanzará un error si los detecta.' }
+      { q: 'What if my string contains Unicode characters?', a: 'The parser natively decodes them perfectly in compliance with the UTF-8 standard.' },
+      { q: 'What about comments in my JSON?', a: 'The official JSON standard does not support comments (lines with // or /* */), so the parser will throw an error if it detects them.' }
     ]
   },
   '/tools/json/minify': {
-    title: 'JSON Minifier Online - Comprimir y Minificar JSON | Stoolzen',
-    description: 'Minifica y comprime tu JSON online al instante. Reduce el tamaño de tus payloads JSON para optimizar el rendimiento de tu API.',
-    keywords: 'json minifier, minificar json, comprimir json, json compress online, json minify, reducir json',
-    h1: 'JSON Minifier Online',
-    subtitle: 'Comprime y minifica tu JSON para reducir su tamaño al máximo.',
-    intro: 'La minificación elimina todo carácter innecesario para la computación (espacios, saltos de línea, retornos de carro) de tu JSON. Es un paso crítico para optimizar el consumo de red en payloads HTTP POST en entornos de alta concurrencia.',
+    title: 'JSON Minifier Online - Compress and Minify JSON | Stoolzen',
+    description: 'Minify and compress your JSON online instantly. Reduce the size of your JSON payloads to optimize API performance.',
+    keywords: 'json minifier, minify json, compress json, json compress online, json minify, reduce json',
+    h1: 'Online JSON Minifier',
+    subtitle: 'Compress and minify your JSON to reduce its size as much as possible.',
+    intro: 'Minification removes all characters unnecessary for computation (spaces, line breaks, carriage returns) from your JSON. It is a critical step to optimize network consumption in HTTP POST payloads in high-concurrency environments.',
     example: {
       input: '{\n  "status": "success",\n  "code": 200\n}',
       output: '{"status":"success","code":200}',
-      inputLabel: 'JSON con espacios',
-      outputLabel: 'JSON Minificado'
+      inputLabel: 'JSON with spaces',
+      outputLabel: 'Minified JSON'
     },
     faqs: [
-      { q: '¿Cuánto peso se puede ahorrar minificando?', a: 'Normalmente se logra reducir el tamaño del payload entre un 20% y un 45%, dependiendo del nivel de anidamiento y formateo original.' },
-      { q: '¿Cambia la lógica o los valores de los datos?', a: 'En absoluto, el minificador solo elimina espacios en blanco decorativos sin tocar las claves ni los valores.' }
+      { q: 'How much weight can be saved by minifying?', a: 'Normally, you can reduce payload size between 20% and 45%, depending on the original nesting and formatting level.' },
+      { q: 'Does it change the logic or data values?', a: 'Not at all, the minifier only removes decorative whitespace without touching keys or values.' }
     ]
   },
   '/tools/json/reader': {
-    title: 'JSON Reader Online - Leer y Visualizar JSON | Stoolzen',
-    description: 'Lee y visualiza ficheros o cadenas JSON online con facilidad. Herramienta gratuita para leer JSON de forma clara y estructurada.',
-    keywords: 'json reader, leer json online, json file reader, visualizar json, abrir json online',
-    h1: 'JSON Reader Online',
-    subtitle: 'Lee y visualiza tus datos JSON de forma clara y estructurada.',
-    intro: 'Diseñado específicamente para leer documentos JSON masivos con un scroll sumamente ligero y fluidez total. Ideal para revisar archivos de logs o exportaciones de bases de datos.',
+    title: 'JSON Reader Online - Read and View JSON | Stoolzen',
+    description: 'Read and view JSON files or strings online with ease. Free tool to read JSON clearly and structured.',
+    keywords: 'json reader, read json online, json file reader, view json, open json online',
+    h1: 'Online JSON Reader',
+    subtitle: 'Read and view your JSON data clearly and structured.',
+    intro: 'Specifically designed to read massive JSON documents with extremely light scrolling and total fluidity. Ideal for reviewing log files or database exports.',
     example: {
       input: '[{"id":1,"event":"click"},{"id":2,"event":"hover"}]',
-      output: 'Documento JSON cargado correctamente. 2 registros encontrados en la raíz del array.',
-      inputLabel: 'Fichero cargado',
-      outputLabel: 'Lectura estructurada'
+      output: 'JSON document loaded successfully. 2 records found at the root array.',
+      inputLabel: 'Uploaded file',
+      outputLabel: 'Structured reading'
     },
     faqs: [
-      { q: '¿Puedo subir archivos .json grandes?', a: 'Sí, la herramienta soporta la subida local de archivos de gran tamaño mediante drag and drop o selector de ficheros.' },
-      { q: '¿Se envía mi archivo a vuestro hosting?', a: 'No, el archivo se lee directamente en tu navegador usando la File API local de HTML5.' }
+      { q: 'Can I upload large .json files?', a: 'Yes, the tool supports local uploads of large files via drag and drop or file selector.' },
+      { q: 'Is my file sent to your hosting?', a: 'No, the file is read directly in your browser using the local HTML5 File API.' }
     ]
   },
   '/tools/json/stringify': {
-    title: 'JSON Stringify Online - Convertir Objetos a Cadenas JSON | Stoolzen',
-    description: 'Convierte objetos y estructuras de datos a cadenas JSON serializadas online. Equivalente a JSON.stringify con formato personalizable.',
-    keywords: 'json stringify online, json serialize, convertir a json string, json serialization, json to string',
-    h1: 'JSON Stringify Online',
-    subtitle: 'Serializa y convierte estructuras de datos a cadenas JSON al instante.',
-    intro: 'Convierte cualquier estructura de datos u objeto pegado a una cadena JSON serializada de forma robusta. Permite establecer sangrados definidos, simulando el comportamiento del método nativo `JSON.stringify(obj, null, space)`.',
+    title: 'JSON Stringify Online - Convert Objects to JSON Strings | Stoolzen',
+    description: 'Convert objects and data structures to serialized JSON strings online. Equivalent to JSON.stringify with customizable formatting.',
+    keywords: 'json stringify online, json serialize, convert to json string, json serialization, json to string',
+    h1: 'Online JSON Stringify',
+    subtitle: 'Serialize and convert data structures to JSON strings instantly.',
+    intro: 'Convert any pasted data structure or object into a serialized JSON string robustly. Allows setting defined indents, simulating the behavior of the native `JSON.stringify(obj, null, space)` method.',
     example: {
       input: 'Object { name: "Alice", active: true }',
       output: '{\n  "name": "Alice",\n  "active": true\n}',
-      inputLabel: 'Objeto JS de entrada',
-      outputLabel: 'Cadena JSON serializada'
+      inputLabel: 'Input JS Object',
+      outputLabel: 'Serialized JSON string'
     },
     faqs: [
-      { q: '¿Soporta referencias circulares?', a: 'Lanza una advertencia sintáctica en caso de que existan referencias circulares en el objeto de entrada para evitar bucles infinitos.' },
-      { q: '¿Qué tipos de datos serializa?', a: 'Serializa cadenas, números, booleanos, arrays y sub-objetos legibles.' }
+      { q: 'Does it support circular references?', a: 'It throws a syntax warning if circular references exist in the input object to prevent infinite loops.' },
+      { q: 'What data types does it serialize?', a: 'It serializes strings, numbers, booleans, arrays, and readable sub-objects.' }
     ]
   },
   '/tools/json/sorter': {
-    title: 'JSON Sorter Online - Ordenar Claves JSON Alfabéticamente | Stoolzen',
-    description: 'Ordenar las claves de tu JSON online de forma alfabética o personalizada. Normaliza la estructura de tus datos JSON al instante.',
-    keywords: 'json sorter, ordenar json, json sort keys, json alphabetical order, ordenar claves json',
-    h1: 'JSON Sorter Online',
-    subtitle: 'Ordena las claves de tu JSON de forma alfabética e instantánea.',
-    intro: 'Normaliza la presentación de tus objetos JSON reordenando todas las claves alfabéticamente de forma recursiva. Es sumamente práctico para realizar comparaciones de diferencia (diffs) coherentes entre dos archivos.',
+    title: 'JSON Sorter Online - Sort JSON Keys Alphabetically | Stoolzen',
+    description: 'Sort your JSON keys online alphabetically or custom. Normalize your JSON data structure instantly.',
+    keywords: 'json sorter, sort json, json sort keys, json alphabetical order, sort json keys',
+    h1: 'Online JSON Sorter',
+    subtitle: 'Sort your JSON keys alphabetically and instantly.',
+    intro: 'Normalize the presentation of your JSON objects by reordering all keys alphabetically recursively. It is extremely practical for making coherent diff comparisons between two files.',
     example: {
       input: '{"z": 10, "a": 5, "b": {"y": 3, "x": 1}}',
       output: '{\n  "a": 5,\n  "b": {\n    "x": 1,\n    "y": 3\n  },\n  "z": 10\n}',
-      inputLabel: 'JSON Desordenado',
-      outputLabel: 'JSON Ordenado alfabéticamente'
+      inputLabel: 'Unsorted JSON',
+      outputLabel: 'Alphabetically Sorted JSON'
     },
     faqs: [
-      { q: '¿El ordenamiento altera el significado de los datos?', a: 'Según la especificación RFC 8259, un objeto JSON es un conjunto no ordenado de pares clave/valor, por lo que reordenar las llaves no rompe la validez del dato y facilita su comparación.' },
-      { q: '¿Es recursivo el ordenamiento?', a: 'Sí, ordena tanto las claves principales como las de cualquier sub-objeto anidado a cualquier nivel.' }
+      { q: 'Does sorting alter the meaning of the data?', a: 'According to the RFC 8259 specification, a JSON object is an unordered collection of key/value pairs, so reordering keys does not break data validity and makes comparison easier.' },
+      { q: 'Is the sorting recursive?', a: 'Yes, it sorts both top-level keys and those of any nested sub-objects at any level.' }
     ]
   },
   '/tools/json/compare': {
-    title: 'JSON Compare Online - Comparar Diferencias entre JSONs | Stoolzen',
-    description: 'Compara dos JSONs online y encuentra sus diferencias al instante. Herramienta gratuita para identificar cambios entre payloads JSON.',
-    keywords: 'json compare, comparar json, json diff online, json differences, comparar dos json',
-    h1: 'JSON Compare Online',
-    subtitle: 'Compara dos JSONs y detecta sus diferencias al instante.',
-    intro: 'Identifica rápidamente diferencias, adiciones o eliminaciones entre dos objetos JSON estructurados. La herramienta ideal para depurar versiones de payloads de webhooks o configuraciones.',
+    title: 'JSON Compare Online - Compare Differences Between JSONs | Stoolzen',
+    description: 'Compare two JSONs online and find their differences instantly. Free tool to identify changes between JSON payloads.',
+    keywords: 'json compare, compare json, json diff online, json differences, compare two json',
+    h1: 'Online JSON Compare',
+    subtitle: 'Compare two JSONs and detect their differences instantly.',
+    intro: 'Quickly identify differences, additions, or deletions between two structured JSON objects. The ideal tool for debugging webhook payload versions or configurations.',
     example: {
       input: 'JSON A: {"name": "Alice", "role": "admin"}\nJSON B: {"name": "Alice", "role": "user", "age": 30}',
-      output: 'Modificado: "role" ("admin" -> "user")\nAgregado: "age" (30)',
-      inputLabel: 'JSONs de Entrada',
-      outputLabel: 'Diferencias encontradas'
+      output: 'Modified: "role" ("admin" -> "user")\nAdded: "age" (30)',
+      inputLabel: 'Input JSONs',
+      outputLabel: 'Found differences'
     },
     faqs: [
-      { q: '¿Cómo funciona la comparación?', a: 'Analiza recursivamente ambos objetos y resalta visualmente las claves eliminadas, modificadas o añadidas.' },
-      { q: '¿Es recomendable ordenar las claves antes de comparar?', a: 'Sí, ordenar las claves alfabéticamente ayuda a evitar falsos positivos de diferencia por simple posicionamiento.' }
+      { q: 'How does the comparison work?', a: 'It recursively analyzes both objects and visually highlights deleted, modified, or added keys.' },
+      { q: 'Is it recommended to sort keys before comparing?', a: 'Yes, sorting keys alphabetically helps avoid false positive differences due to simple positioning.' }
     ]
   },
   '/tools/json/escape': {
-    title: 'JSON Escape Online - Escapar Caracteres en JSON | Stoolzen',
-    description: 'Escapa caracteres especiales en cadenas JSON online. Convierte caracteres reservados para uso seguro en strings JSON.',
-    keywords: 'json escape, escapar json, json string escape, json encode, escape json online',
-    h1: 'JSON Escape Online',
-    subtitle: 'Escapa caracteres especiales en tus strings JSON al instante.',
-    intro: 'Convierte caracteres que tienen significados reservados en JSON (como comillas dobles, barras diagonales inversas y saltos de línea) en sus secuencias de escape válidas (`\\\"`, `\\\\`, `\\n`).',
+    title: 'JSON Escape Online - Escape Characters in JSON | Stoolzen',
+    description: 'Escape special characters in JSON strings online. Convert reserved characters for safe use in JSON strings.',
+    keywords: 'json escape, escape json, json string escape, json encode, escape json online',
+    h1: 'Online JSON Escape',
+    subtitle: 'Escape special characters in your JSON strings instantly.',
+    intro: 'Convert characters that have reserved meanings in JSON (like double quotes, backslashes, and line breaks) into their valid escape sequences (`\\\"`, `\\\\`, `\\n`).',
     example: {
-      input: 'Texto con "comillas" y\nsaltos de línea.',
-      output: '"Texto con \\"comillas\\" y\\nsaltos de línea."',
-      inputLabel: 'Texto crudo',
-      outputLabel: 'String JSON escapada'
+      input: 'Text with "quotes" and\nline breaks.',
+      output: '"Text with \\"quotes\\" and\\nline breaks."',
+      inputLabel: 'Raw text',
+      outputLabel: 'Escaped JSON string'
     },
     faqs: [
-      { q: '¿Por qué es necesario escapar caracteres?', a: 'Para poder anidar strings o almacenar bloques de texto de forma segura dentro de una propiedad JSON sin romper la sintaxis del parser.' },
-      { q: '¿Qué caracteres se escapan?', a: 'Principalmente comillas dobles (`"`), barras inversas (`\\`), tabuladores (`\\t`) y saltos de línea (`\\n`).' }
+      { q: 'Why is it necessary to escape characters?', a: 'To safely nest strings or store text blocks inside a JSON property without breaking the parser\'s syntax.' },
+      { q: 'Which characters are escaped?', a: 'Mainly double quotes (`"`), backslashes (`\\`), tabs (`\\t`), and line breaks (`\\n`).' }
     ]
   },
   '/tools/json/unescape': {
-    title: 'JSON Unescape Online - Desescapar Cadenas JSON | Stoolzen',
-    description: 'Desescapa cadenas JSON online con un clic. Convierte secuencias de escape JSON en su representación original legible.',
-    keywords: 'json unescape, desescapar json, json decode string, json unescape online, json string decode',
-    h1: 'JSON Unescape Online',
-    subtitle: 'Desescapa y decodifica cadenas JSON al instante.',
-    intro: 'Realiza el proceso inverso de escape: toma una cadena con secuencias de escape codificadas y las traduce a su formato de texto humano original y legible.',
+    title: 'JSON Unescape Online - Unescape JSON Strings | Stoolzen',
+    description: 'Unescape JSON strings online with one click. Convert JSON escape sequences into their original readable representation.',
+    keywords: 'json unescape, unescape json, json decode string, json unescape online, json string decode',
+    h1: 'Online JSON Unescape',
+    subtitle: 'Unescape and decode JSON strings instantly.',
+    intro: 'Performs the reverse escape process: takes a string with encoded escape sequences and translates them to their original, readable human text format.',
     example: {
-      input: '"Hola \\"Mundo\\"\\nLínea 2."',
-      output: 'Hola "Mundo"\nLínea 2.',
-      inputLabel: 'String escapada',
-      outputLabel: 'Texto desescapado'
+      input: '"Hello \\"World\\"\\nLine 2."',
+      output: 'Hello "World"\nLine 2.',
+      inputLabel: 'Escaped string',
+      outputLabel: 'Unescaped text'
     },
     faqs: [
-      { q: '¿Qué secuencias decodifica?', a: 'Decodifica secuencias estándares como `\\\"`, `\\\\`, `\\/`, `\\n`, `\\r`, `\\t` y códigos unicode `\\uXXXX`.' },
-      { q: '¿Lanza error si el texto no está correctamente escapado?', a: 'Si detecta una secuencia de escape inválida o trunca, te alertará para que puedas corregirla.' }
+      { q: 'Which sequences does it decode?', a: 'It decodes standard sequences like `\\\"`, `\\\\`, `\\/`, `\\n`, `\\r`, `\\t` and unicode codes `\\uXXXX`.' },
+      { q: 'Does it throw an error if the text is not correctly escaped?', a: 'If it detects an invalid or truncated escape sequence, it will alert you so you can fix it.' }
     ]
   },
   '/tools/json/path-explorer': {
-    title: 'JSONPath Explorer Online - Explorar Rutas en JSON | Stoolzen',
-    description: 'Explora y prueba expresiones JSONPath en tus datos online. El JSONPath Explorer más potente y visual para desarrolladores.',
-    keywords: 'jsonpath explorer, jsonpath online, json path tester, explorar json path, json query online',
-    h1: 'JSONPath Explorer Online',
-    subtitle: 'Explora y prueba expresiones JSONPath en tus datos de forma visual.',
-    intro: 'Filtra y extrae partes específicas de un JSON masivo utilizando expresiones JSONPath (el equivalente a XPath para XML). Muy útil para probar consultas complejas antes de implementarlas en tu código de backend.',
+    title: 'JSONPath Explorer Online - Explore JSON Paths | Stoolzen',
+    description: 'Explore and test JSONPath expressions on your data online. The most powerful and visual JSONPath Explorer for developers.',
+    keywords: 'jsonpath explorer, jsonpath online, json path tester, explore json path, json query online',
+    h1: 'Online JSONPath Explorer',
+    subtitle: 'Explore and test JSONPath expressions on your data visually.',
+    intro: 'Filter and extract specific parts of a massive JSON using JSONPath expressions (the equivalent of XPath for XML). Very useful for testing complex queries before implementing them in your backend code.',
     example: {
-      input: 'JSON: {"store":{"book":[{"title":"Sayings"},{"title":"Sword"}]}}\nConsulta: $.store.book[*].title',
+      input: 'JSON: {"store":{"book":[{"title":"Sayings"},{"title":"Sword"}]}}\nQuery: $.store.book[*].title',
       output: '[\n  "Sayings",\n  "Sword"\n]',
-      inputLabel: 'JSON y Expresión de Entrada',
-      outputLabel: 'Resultados filtrados'
+      inputLabel: 'Input JSON and Expression',
+      outputLabel: 'Filtered results'
     },
     faqs: [
-      { q: '¿Qué es JSONPath?', a: 'Es un lenguaje de consulta para JSON desarrollado por Stefan Gössner, que permite navegar por objetos JSON de forma similar a como XPath navega en XML.' },
-      { q: '¿Cuál es la sintaxis para buscar recursivamente?', a: 'Se utiliza el operador de descenso profundo `..` (por ejemplo, `$..title` buscará todas las propiedades "title" en cualquier profundidad del JSON).' }
+      { q: 'What is JSONPath?', a: 'It is a query language for JSON developed by Stefan Gössner, allowing navigation through JSON objects similarly to how XPath navigates XML.' },
+      { q: 'What is the syntax to search recursively?', a: 'Use the deep descent operator `..` (e.g., `$..title` will find all "title" properties at any depth in the JSON).' }
     ]
   },
   '/tools/json/diff': {
-    title: 'JSON Diff Online - Diferencias entre Documentos JSON | Stoolzen',
-    description: 'Compara y resalta las diferencias entre dos documentos JSON online. Visualiza los cambios con un diff visual claro e intuitivo.',
-    keywords: 'json diff, diferencias json, json diff online, comparar json, json delta, json changes',
-    h1: 'JSON Diff Online',
-    subtitle: 'Visualiza las diferencias entre dos documentos JSON con un diff interactivo.',
-    intro: 'Un diff visual premium para archivos JSON. Compara línea por línea, identifica adiciones, cambios de valores de propiedades y eliminaciones de campos de forma sumamente gráfica e interactiva.',
+    title: 'JSON Diff Online - Differences Between JSON Documents | Stoolzen',
+    description: 'Compare and highlight differences between two JSON documents online. View changes with a clear and intuitive visual diff.',
+    keywords: 'json diff, json differences, json diff online, compare json, json delta, json changes',
+    h1: 'Online JSON Diff',
+    subtitle: 'Visualize differences between two JSON documents with an interactive diff.',
+    intro: 'A premium visual diff for JSON files. Compare line by line, identify additions, property value changes, and field deletions in a highly graphical and interactive way.',
     example: {
       input: 'JSON A: {"name": "Alice"}\nJSON B: {"name": "Bob"}',
       output: '- "name": "Alice"\n+ "name": "Bob"',
-      inputLabel: 'Documentos a comparar',
-      outputLabel: 'Resultado visual diff'
+      inputLabel: 'Documents to compare',
+      outputLabel: 'Visual diff result'
     },
     faqs: [
-      { q: '¿Qué indican los colores en el resultado?', a: 'El color verde indica líneas añadidas, el rojo señala elementos eliminados y el amarillo o azul destaca las propiedades modificadas.' },
-      { q: '¿El diff funciona de manera local?', a: 'Sí, la comparación se ejecuta íntegramente en tu navegador sin enviar datos a la red.' }
+      { q: 'What do the colors in the result indicate?', a: 'Green indicates added lines, red points out deleted elements, and yellow or blue highlights modified properties.' },
+      { q: 'Does the diff work locally?', a: 'Yes, the comparison runs entirely in your browser without sending data to the network.' }
     ]
   }
 };
