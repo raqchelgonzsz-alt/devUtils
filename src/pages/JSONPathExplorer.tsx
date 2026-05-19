@@ -11,26 +11,26 @@ import { RelatedContent } from '../components/RelatedContent';
 
 const PATH_SEO_MAP: Record<string, { title: string; description: string; keywords: string; h1: string; subtitle: string; intro: string; faqs: { q: string; a: string }[] }> = {
   '/tools/json/path-explorer': {
-    title: 'JSONPath Explorer Online - Consultar JSON con JSONPath | Stoolzen',
-    description: 'Prueba y depura tus expresiones JSONPath online. Filtra y extrae datos de objetos JSON complejos con facilidad y rapidez.',
-    keywords: 'jsonpath explorer, jsonpath online tester, query json, filtrar json, jsonpath checker, dev tools',
+    title: 'JSONPath Explorer Online - Query JSON with JSONPath | Stoolzen',
+    description: 'Test and debug your JSONPath expressions online. Filter and extract data from complex JSON objects easily and quickly.',
+    keywords: 'jsonpath explorer, jsonpath online tester, query json, filter json, jsonpath checker, dev tools',
     h1: 'JSONPath Explorer',
-    subtitle: 'Extrae y filtra datos de tus objetos JSON usando expresiones JSONPath.',
-    intro: 'JSONPath es para JSON lo que XPath es para XML. Esta herramienta te permite ejecutar consultas potentes sobre estructuras de datos JSON para encontrar exactamente lo que necesitas, ya sea un valor específico, una lista de elementos o filtrar por condiciones.',
+    subtitle: 'Extract and filter data from your JSON objects using JSONPath expressions.',
+    intro: 'JSONPath is to JSON what XPath is to XML. This tool allows you to execute powerful queries on JSON data structures to find exactly what you need, whether it\'s a specific value, a list of elements, or filtering by conditions.',
     faqs: [
-      { q: "¿Qué es una expresión JSONPath?", a: "Es una cadena que define una ruta hacia uno o más elementos en un JSON. Por ejemplo, '$.store.book[*].author' extraería todos los autores de los libros en la tienda." },
-      { q: "¿Soportáis filtros y comodines?", a: "Sí, soportamos el estándar completo de JSONPath, incluyendo comodines (*), selecciones profundas (..) y expresiones de filtro ([?(@.price < 10)])." }
+      { q: "What is a JSONPath expression?", a: "It's a string that defines a path to one or more elements in a JSON. For example, '$.store.book[*].author' would extract all the authors of the books in the store." },
+      { q: "Do you support filters and wildcards?", a: "Yes, we support the full JSONPath standard, including wildcards (*), deep selections (..), and filter expressions ([?(@.price < 10)])." }
     ]
   }
 };
 
 const FALLBACK_SEO = {
   title: 'JSONPath Tester & Explorer Online | Stoolzen',
-  description: 'Herramienta para probar expresiones JSONPath sobre tus datos.',
+  description: 'Tool to test JSONPath expressions on your data.',
   keywords: 'jsonpath, json query, dev tools',
   h1: 'JSONPath Explorer',
-  subtitle: 'Explora tus datos JSON con potencia.',
-  intro: 'Una utilidad interactiva para dominar tus consultas JSONPath.',
+  subtitle: 'Explore your JSON data with power.',
+  intro: 'An interactive utility to master your JSONPath queries.',
   faqs: []
 };
 
@@ -57,7 +57,7 @@ export const JSONPathExplorer: React.FC = () => {
       setResult(evaluated);
       setError(null);
     } catch (err) {
-      setError('Error al evaluar la expresión o JSON inválido.');
+      setError('Error evaluating expression or invalid JSON.');
       setResult(null);
     }
   }, [jsonInput, pathInput]);
@@ -65,7 +65,7 @@ export const JSONPathExplorer: React.FC = () => {
   const handleCopyResult = () => {
     if (!result) return;
     navigator.clipboard.writeText(JSON.stringify(result, null, 2));
-    setStatusMessage({ title: 'Resultado Copiado', detail: 'La salida ha sido guardada en tu portapapeles.' });
+    setStatusMessage({ title: 'Result Copied', detail: 'The output has been saved to your clipboard.' });
     setShowStatus(true);
     setTimeout(() => setShowStatus(false), 3000);
   };
@@ -181,30 +181,30 @@ export const JSONPathExplorer: React.FC = () => {
         <section className="max-w-4xl space-y-6">
           <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
             <FileSearch className="w-6 h-6 text-indigo-500" />
-            Guía de JSONPath
+            JSONPath Guide
           </h2>
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
           <div className="prose prose-slate max-w-none text-outline space-y-4">
             <p>
-              <strong>JSONPath</strong> es un lenguaje de consulta para JSON, similar a lo que XPath es para XML. Te permite navegar a través de un documento JSON y extraer nodos, elementos o valores específicos utilizando una sintaxis compacta y potente.
+              <strong>JSONPath</strong> is a query language for JSON, similar to what XPath is to XML. It allows you to navigate through a JSON document and extract specific nodes, elements, or values using a compact and powerful syntax.
             </p>
-            <h3 className="text-xl font-bold text-on-surface pt-4">Operadores principales de JSONPath</h3>
+            <h3 className="text-xl font-bold text-on-surface pt-4">Main JSONPath Operators</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left border-collapse">
                 <thead>
                   <tr className="border-b border-outline-variant">
-                    <th className="py-2 pr-4 font-bold text-on-surface">Operador</th>
-                    <th className="py-2 font-bold text-on-surface">Descripción</th>
+                    <th className="py-2 pr-4 font-bold text-on-surface">Operator</th>
+                    <th className="py-2 font-bold text-on-surface">Description</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-outline-variant/30">
-                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">$</td><td className="py-2">El objeto o elemento raíz.</td></tr>
-                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">@</td><td className="py-2">El objeto o elemento actual.</td></tr>
-                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">. ó []</td><td className="py-2">Operador de hijo (dot-notation o bracket-notation).</td></tr>
-                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">..</td><td className="py-2">Escaneo profundo. Busca en todos los niveles.</td></tr>
-                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">*</td><td className="py-2">Comodín. Todos los objetos/elementos.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">$</td><td className="py-2">The root object or element.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">@</td><td className="py-2">The current object or element.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">. or []</td><td className="py-2">Child operator (dot-notation or bracket-notation).</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">..</td><td className="py-2">Deep scan. Searches at all levels.</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-indigo-600">*</td><td className="py-2">Wildcard. All objects/elements.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -213,12 +213,12 @@ export const JSONPathExplorer: React.FC = () => {
 
         {/* Examples Section */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-on-surface">Ejemplos Prácticos de Consultas</h2>
+          <h2 className="text-2xl font-bold text-on-surface">Practical Query Examples</h2>
           <div className="space-y-4">
             <div className="bg-surface-container rounded-2xl border border-outline-variant p-6 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                   <span className="text-[10px] font-bold uppercase text-outline">JSON de Ejemplo</span>
+                   <span className="text-[10px] font-bold uppercase text-outline">Example JSON</span>
                    <pre className="bg-white p-3 rounded-lg text-[10px] font-mono border border-slate-100">
 {`{
   "store": {
@@ -232,11 +232,11 @@ export const JSONPathExplorer: React.FC = () => {
                 </div>
                 <div className="space-y-4">
                    <div className="space-y-1">
-                      <p className="text-xs font-bold text-on-surface">Consultar todos los precios:</p>
+                      <p className="text-xs font-bold text-on-surface">Query all prices:</p>
                       <code className="text-xs bg-indigo-50 text-indigo-700 p-1 rounded">$.store.book[*].price</code>
                    </div>
                    <div className="space-y-1">
-                      <p className="text-xs font-bold text-on-surface">Consultar libros de ficción:</p>
+                      <p className="text-xs font-bold text-on-surface">Query fiction books:</p>
                       <code className="text-xs bg-indigo-50 text-indigo-700 p-1 rounded">$..book[?(@.category=="fiction")]</code>
                    </div>
                 </div>
@@ -248,7 +248,7 @@ export const JSONPathExplorer: React.FC = () => {
         {/* FAQs */}
         {seo.faqs.length > 0 && (
           <section className="bg-surface-container-low rounded-3xl p-8 md:p-12 border border-outline-variant">
-            <h2 className="text-2xl font-bold text-on-surface mb-8">Preguntas Frecuentes</h2>
+            <h2 className="text-2xl font-bold text-on-surface mb-8">Frequently Asked Questions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {seo.faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-3">
@@ -264,19 +264,19 @@ export const JSONPathExplorer: React.FC = () => {
           category="json"
           currentPath={pathname}
           relatedTools={[
-            { name: 'JSON Formatter', path: '/tools/json/formatter', desc: 'Formatea y valida objetos JSON' },
-            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Busca errores en la estructura JSON' },
-            { name: 'JSON Diff', path: '/tools/json/diff', desc: 'Compara archivos JSON visualmente' },
-            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Escapa caracteres para uso en strings' },
-            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Comprime el código JSON' },
+            { name: 'JSON Formatter', path: '/tools/json/formatter', desc: 'Formats and validates JSON objects' },
+            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Checks for errors in JSON structure' },
+            { name: 'JSON Diff', path: '/tools/json/diff', desc: 'Compares JSON files visually' },
+            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Escapes characters for use in strings' },
+            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Compresses JSON code' },
           ]}
           categories={[
-            { name: 'Hub de JSON', path: '/tools/json' },
-            { name: 'Tools de API', path: '/tools/api' }
+            { name: 'JSON Hub', path: '/tools/json' },
+            { name: 'API Tools', path: '/tools/api' }
           ]}
           guides={[
-            { name: 'Sintaxis básica de JSONPath', path: '/docs/jsonpath-syntax' },
-            { name: 'Cómo extraer datos de JSON complejos', path: '/docs/extract-json-data' }
+            { name: 'Basic JSONPath Syntax', path: '/docs/jsonpath-syntax' },
+            { name: 'How to Extract Complex JSON Data', path: '/docs/extract-json-data' }
           ]}
         />
       </div>

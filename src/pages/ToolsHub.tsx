@@ -34,18 +34,18 @@ const CATEGORIES: Category[] = [
     color: 'text-yellow-600',
     bgColor: 'bg-yellow-50 border-yellow-200',
     tools: [
-      { name: 'JSON Formatter', description: 'Beautify y valida JSON al instante', path: '/tools/json/formatter', icon: Wand2 },
-      { name: 'JSON Validator', description: 'Detecta errores de sintaxis en JSON', path: '/tools/json/validator', icon: Search },
-      { name: 'JSON Editor', description: 'Editor con resaltado de sintaxis', path: '/tools/json/editor', icon: Code2 },
-      { name: 'JSON Minifier', description: 'Comprime JSON para producción', path: '/tools/json/minify', icon: Minimize },
-      { name: 'JSON Pretty Print', description: 'Indenta y embellece JSON comprimido', path: '/tools/json/pretty-print', icon: AlignLeft },
-      { name: 'JSON Viewer', description: 'Vista de árbol interactiva', path: '/tools/json/viewer', icon: Layers },
-      { name: 'JSON Sorter', description: 'Ordena claves alfabéticamente', path: '/tools/json/sorter', icon: Filter },
-      { name: 'JSON Compare', description: 'Compara dos JSONs al instante', path: '/tools/json/compare', icon: GitCompare },
-      { name: 'JSON Escape', description: 'Escapa caracteres especiales', path: '/tools/json/escape', icon: Code2 },
-      { name: 'JSON Unescape', description: 'Desescapa cadenas JSON', path: '/tools/json/unescape', icon: ArrowLeftRight },
-      { name: 'JSONPath Explorer', description: 'Prueba expresiones JSONPath', path: '/tools/json/path-explorer', icon: FileSearch, badge: 'New' },
-      { name: 'JSON Diff', description: 'Visualiza diferencias entre JSONs', path: '/tools/json/diff', icon: GitCompare, badge: 'New' },
+      { name: 'JSON Formatter', description: 'Beautify and validate JSON instantly', path: '/tools/json/formatter', icon: Wand2 },
+      { name: 'JSON Validator', description: 'Detect syntax errors in JSON', path: '/tools/json/validator', icon: Search },
+      { name: 'JSON Editor', description: 'Editor with syntax highlighting', path: '/tools/json/editor', icon: Code2 },
+      { name: 'JSON Minifier', description: 'Compress JSON for production', path: '/tools/json/minify', icon: Minimize },
+      { name: 'JSON Pretty Print', description: 'Indent and beautify compressed JSON', path: '/tools/json/pretty-print', icon: AlignLeft },
+      { name: 'JSON Viewer', description: 'Interactive tree view', path: '/tools/json/viewer', icon: Layers },
+      { name: 'JSON Sorter', description: 'Sort keys alphabetically', path: '/tools/json/sorter', icon: Filter },
+      { name: 'JSON Compare', description: 'Compare two JSONs instantly', path: '/tools/json/compare', icon: GitCompare },
+      { name: 'JSON Escape', description: 'Escape special characters', path: '/tools/json/escape', icon: Code2 },
+      { name: 'JSON Unescape', description: 'Unescape JSON strings', path: '/tools/json/unescape', icon: ArrowLeftRight },
+      { name: 'JSONPath Explorer', description: 'Test JSONPath expressions', path: '/tools/json/path-explorer', icon: FileSearch, badge: 'New' },
+      { name: 'JSON Diff', description: 'Visualize differences between JSONs', path: '/tools/json/diff', icon: GitCompare, badge: 'New' },
     ],
   },
   {
@@ -55,14 +55,14 @@ const CATEGORIES: Category[] = [
     color: 'text-pink-600',
     bgColor: 'bg-pink-50 border-pink-200',
     tools: [
-      { name: 'GraphQL Formatter', description: 'Formatea queries GraphQL', path: '/tools/graphql/formatter', icon: Wand2 },
-      { name: 'GraphQL Validator', description: 'Valida sintaxis de queries', path: '/tools/graphql/validator', icon: Search },
-      { name: 'GraphQL Editor', description: 'Editor con resaltado de sintaxis', path: '/tools/graphql/editor', icon: Code2 },
-      { name: 'GraphQL Beautifier', description: 'Embellece queries GraphQL', path: '/tools/graphql/beautifier', icon: AlignLeft },
-      { name: 'GraphQL Minifier', description: 'Minifica queries para producción', path: '/tools/graphql/minifier', icon: Minimize },
-      { name: 'GraphQL Viewer', description: 'Visualiza la estructura del schema', path: '/tools/graphql/viewer', icon: Layers },
-      { name: 'GraphQL Checker', description: 'Verifica errores en queries', path: '/tools/graphql/checker', icon: Search },
-      { name: 'GraphQL Parser', description: 'Parsea y analiza queries', path: '/tools/graphql/parser', icon: FileSearch },
+      { name: 'GraphQL Formatter', description: 'Format GraphQL queries', path: '/tools/graphql/formatter', icon: Wand2 },
+      { name: 'GraphQL Validator', description: 'Validate query syntax', path: '/tools/graphql/validator', icon: Search },
+      { name: 'GraphQL Editor', description: 'Editor with syntax highlighting', path: '/tools/graphql/editor', icon: Code2 },
+      { name: 'GraphQL Beautifier', description: 'Beautify GraphQL queries', path: '/tools/graphql/beautifier', icon: AlignLeft },
+      { name: 'GraphQL Minifier', description: 'Minify queries for production', path: '/tools/graphql/minifier', icon: Minimize },
+      { name: 'GraphQL Viewer', description: 'Visualize schema structure', path: '/tools/graphql/viewer', icon: Layers },
+      { name: 'GraphQL Checker', description: 'Check for query errors', path: '/tools/graphql/checker', icon: Search },
+      { name: 'GraphQL Parser', description: 'Parse and analyze queries', path: '/tools/graphql/parser', icon: FileSearch },
     ],
   },
   {
@@ -72,37 +72,37 @@ const CATEGORIES: Category[] = [
     color: 'text-blue-600',
     bgColor: 'bg-blue-50 border-blue-200',
     tools: [
-      { name: 'JWT Decoder', description: 'Decodifica y verifica tokens JWT', path: '/tools/api/jwt-decoder', icon: Lock },
-      { name: 'OAuth Debugger', description: 'Simula y depura flujos OAuth2', path: '/tools/api/oauth-debugger', icon: Activity, badge: 'Soon' },
-      { name: 'REST Client', description: 'Prueba peticiones HTTP online', path: '/tools/api/rest-client', icon: Terminal, badge: 'Soon' },
-      { name: 'CURL to Fetch', description: 'Convierte comandos CURL a JS', path: '/tools/api/curl-converter', icon: Code2, badge: 'Soon' },
+      { name: 'JWT Decoder', description: 'Decode and verify JWT tokens', path: '/tools/api/jwt-decoder', icon: Lock },
+      { name: 'OAuth Debugger', description: 'Simulate and debug OAuth2 flows', path: '/tools/api/oauth-debugger', icon: Activity, badge: 'Soon' },
+      { name: 'REST Client', description: 'Test HTTP requests online', path: '/tools/api/rest-client', icon: Terminal, badge: 'Soon' },
+      { name: 'CURL to Fetch', description: 'Convert CURL commands to JS', path: '/tools/api/curl-converter', icon: Code2, badge: 'Soon' },
     ],
   },
   {
     id: 'text',
-    label: 'Texto & Codificación',
+    label: 'Text & Encoding',
     icon: Type,
     color: 'text-green-600',
     bgColor: 'bg-green-50 border-green-200',
     tools: [
-      { name: 'Base64 Encoder', description: 'Codifica texto a Base64', path: '/tools/text/base64-encoder', icon: Hash },
-      { name: 'Base64 Decoder', description: 'Decodifica Base64 a texto', path: '/tools/text/base64-decoder', icon: AlignLeft },
-      { name: 'URL Encoder', description: 'Codifica URLs para transporte', path: '/tools/text/url-encoder', icon: LinkIcon, badge: 'Soon' },
-      { name: 'URL Decoder', description: 'Decodifica parámetros de URL', path: '/tools/text/url-decoder', icon: ArrowLeftRight, badge: 'Soon' },
-      { name: 'Case Converter', description: 'Cambia entre camelCase, snake_case...', path: '/tools/text/case-converter', icon: Type, badge: 'Soon' },
+      { name: 'Base64 Encoder', description: 'Encode text to Base64', path: '/tools/text/base64-encoder', icon: Hash },
+      { name: 'Base64 Decoder', description: 'Decode Base64 to text', path: '/tools/text/base64-decoder', icon: AlignLeft },
+      { name: 'URL Encoder', description: 'Encode URLs for transport', path: '/tools/text/url-encoder', icon: LinkIcon, badge: 'Soon' },
+      { name: 'URL Decoder', description: 'Decode URL parameters', path: '/tools/text/url-decoder', icon: ArrowLeftRight, badge: 'Soon' },
+      { name: 'Case Converter', description: 'Switch between camelCase, snake_case...', path: '/tools/text/case-converter', icon: Type, badge: 'Soon' },
     ],
   },
   {
     id: 'css',
-    label: 'CSS & Diseño',
+    label: 'CSS & Design',
     icon: Palette,
     color: 'text-purple-600',
     bgColor: 'bg-purple-50 border-purple-200',
     tools: [
-      { name: 'CSS Formatter', description: 'Embellece y organiza tu CSS', path: '/tools/css/formatter', icon: Wand2, badge: 'Soon' },
-      { name: 'CSS Minifier', description: 'Comprime CSS para producción', path: '/tools/css/minifier', icon: Minimize, badge: 'Soon' },
-      { name: 'Flexbox Generator', description: 'Crea layouts Flexbox visualmente', path: '/tools/css/flexbox', icon: Layers, badge: 'Soon' },
-      { name: 'Grid Generator', description: 'Generador de CSS Grid interactivo', path: '/tools/css/grid', icon: Palette, badge: 'Soon' },
+      { name: 'CSS Formatter', description: 'Beautify and organize your CSS', path: '/tools/css/formatter', icon: Wand2, badge: 'Soon' },
+      { name: 'CSS Minifier', description: 'Compress CSS for production', path: '/tools/css/minifier', icon: Minimize, badge: 'Soon' },
+      { name: 'Flexbox Generator', description: 'Create Flexbox layouts visually', path: '/tools/css/flexbox', icon: Layers, badge: 'Soon' },
+      { name: 'Grid Generator', description: 'Interactive CSS Grid generator', path: '/tools/css/grid', icon: Palette, badge: 'Soon' },
     ],
   },
 ];
@@ -116,148 +116,148 @@ const CATEGORY_CONTENT: Record<string, { description: React.ReactNode; useCases:
     description: (
       <>
         <p>
-          El formato <strong>JSON (JavaScript Object Notation)</strong> se ha convertido en el estándar indiscutible para el intercambio de datos en la web moderna. Su simplicidad, legibilidad tanto para humanos como para máquinas, y su compatibilidad universal lo hacen ideal para APIs REST, archivos de configuración y almacenamiento de datos NoSQL.
+          The <strong>JSON (JavaScript Object Notation)</strong> format has become the undisputed standard for data exchange on the modern web. Its simplicity, readability for both humans and machines, and universal compatibility make it ideal for REST APIs, configuration files, and NoSQL data storage.
         </p>
         <p className="mt-4">
-          Sin embargo, trabajar con JSON crudo puede ser un desafío. Las respuestas de las APIs a menudo vienen minificadas para ahorrar ancho de banda, lo que las hace casi imposibles de leer. Un simple error de sintaxis, como una coma de más o una llave mal cerrada, puede detener por completo el desarrollo.
+          However, working with raw JSON can be a challenge. API responses often come minified to save bandwidth, making them almost impossible to read. A simple syntax error, like an extra comma or an unclosed brace, can completely halt development.
         </p>
         
         <div className="mt-8 p-6 bg-surface-container rounded-2xl border border-outline-variant">
-           <h3 className="text-xl font-bold text-on-surface mb-4">Diferencias entre Formatear, Validar y Comparar</h3>
+           <h3 className="text-xl font-bold text-on-surface mb-4">Differences between Formatting, Validating, and Comparing</h3>
            <div className="space-y-4 text-sm">
               <p>
-                <strong>Formatear (Beautify):</strong> Toma una cadena de texto JSON desordenada o compacta y le aplica sangría (indentación) y saltos de línea para que sea legible por humanos. No cambia los datos, solo su presentación.
+                <strong>Format (Beautify):</strong> Takes a messy or compact JSON string and applies indentation and line breaks so it is human-readable. It does not change the data, only its presentation.
               </p>
               <p>
-                <strong>Validar:</strong> Analiza la estructura del JSON contra las reglas del estándar RFC 8259. Detecta errores comunes como comas finales, falta de comillas en las claves o llaves desbalanceadas.
+                <strong>Validate:</strong> Analyzes the JSON structure against the rules of the RFC 8259 standard. Detects common errors like trailing commas, missing quotes on keys, or unbalanced braces.
               </p>
               <p>
-                <strong>Comparar (Diff):</strong> Identifica cambios semánticos entre dos objetos JSON. Es vital para detectar diferencias en payloads de APIs entre entornos de staging y producción.
+                <strong>Compare (Diff):</strong> Identifies semantic changes between two JSON objects. It is vital for detecting differences in API payloads between staging and production environments.
               </p>
            </div>
         </div>
 
         <p className="mt-8">
-          Nuestra suite de <strong>herramientas JSON online</strong> está diseñada para solventar estos problemas. Todo procesado localmente en tu navegador para garantizar la máxima privacidad.
+          Our suite of <strong>online JSON tools</strong> is designed to solve these problems. Everything is processed locally in your browser to guarantee maximum privacy.
         </p>
       </>
     ),
     useCases: [
-      "Depuración de respuestas de APIs REST minificadas.",
-      "Validación de archivos de configuración como package.json o tsconfig.json.",
-      "Limpieza y ordenación de datos extraídos de bases de datos NoSQL.",
-      "Conversión de objetos complejos a cadenas seguras para transporte (Escaping).",
-      "Comparación de versiones de payloads para detectar cambios en integraciones."
+      "Debugging minified REST API responses.",
+      "Validating configuration files like package.json or tsconfig.json.",
+      "Cleaning and organizing data extracted from NoSQL databases.",
+      "Converting complex objects into secure strings for transport (Escaping).",
+      "Comparing payload versions to detect changes in integrations."
     ],
     faqs: [
-      { q: "¿Es seguro procesar mi JSON aquí?", a: "Absolutamente. Todo el procesamiento ocurre en el lado del cliente (tu navegador). Tus datos nunca se envían a nuestros servidores ni se guardan en ninguna base de datos externa." },
-      { q: "¿Hay un límite de tamaño para los archivos JSON?", a: "No hay un límite técnico estricto, pero el rendimiento depende de la memoria de tu navegador. Hemos probado archivos de hasta 10MB sin problemas significativos." },
-      { q: "¿Vuestras herramientas cumplen con el estándar RFC 8259?", a: "Sí, nuestros validadores y formateadores siguen estrictamente el estándar oficial de JSON para asegurar la compatibilidad con cualquier sistema." }
+      { q: "Is it safe to process my JSON here?", a: "Absolutely. All processing occurs on the client side (your browser). Your data is never sent to our servers or saved in any external database." },
+      { q: "Is there a size limit for JSON files?", a: "There is no strict technical limit, but performance depends on your browser's memory. We have tested files up to 10MB without significant issues." },
+      { q: "Do your tools comply with the RFC 8259 standard?", a: "Yes, our validators and formatters strictly follow the official JSON standard to ensure compatibility with any system." }
     ]
   },
   graphql: {
     description: (
       <>
         <p>
-          <strong>GraphQL</strong> revolucionó la forma en que consumimos datos al permitir que los clientes soliciten exactamente lo que necesitan. Aunque es potente, la sintaxis de las consultas y la estructura de los esquemas pueden volverse complejas rápidamente.
+          <strong>GraphQL</strong> revolutionized the way we consume data by allowing clients to request exactly what they need. While powerful, the query syntax and schema structure can quickly become complex.
         </p>
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
            <div className="p-5 bg-pink-50/50 border border-pink-100 rounded-2xl">
-              <h4 className="font-bold text-pink-700 mb-2">Formateo Inteligente</h4>
+              <h4 className="font-bold text-pink-700 mb-2">Smart Formatting</h4>
               <p className="text-xs text-pink-800/80 leading-relaxed">
-                 Aplica reglas de estilo de Prettier a tus queries para mantener una estructura de campos y argumentos consistente.
+                 Apply Prettier style rules to your queries to maintain a consistent structure of fields and arguments.
               </p>
            </div>
            <div className="p-5 bg-surface-container border border-outline-variant rounded-2xl">
-              <h4 className="font-bold text-on-surface mb-2">Validación de Esquema</h4>
+              <h4 className="font-bold text-on-surface mb-2">Schema Validation</h4>
               <p className="text-xs text-outline leading-relaxed">
-                 Comprueba la validez de tus documentos GraphQL antes de integrarlos en tu código cliente.
+                 Check the validity of your GraphQL documents before integrating them into your client code.
               </p>
            </div>
         </div>
         <p className="mt-8">
-          Nuestras <strong>herramientas GraphQL online</strong> te ayudan a mantener tus queries limpias, válidas y eficientes. Todo sin instalaciones y con procesamiento local.
+          Our <strong>online GraphQL tools</strong> help you keep your queries clean, valid, and efficient. All without installations and with local processing.
         </p>
       </>
     ),
     useCases: [
-      "Formateo de queries y mutaciones para commits de Git más limpios.",
-      "Validación rápida de sintaxis de consultas complejas.",
-      "Minificación de queries para reducir el tamaño de las peticiones en producción.",
-      "Visualización de la estructura de objetos devueltos por servidores GraphQL."
+      "Formatting queries and mutations for cleaner Git commits.",
+      "Quick syntax validation for complex queries.",
+      "Minifying queries to reduce request size in production.",
+      "Visualizing the structure of objects returned by GraphQL servers."
     ],
     faqs: [
-      { q: "¿Soportáis fragmentos y variables?", a: "Sí, nuestro formateador y validador maneja la sintaxis completa de GraphQL, incluyendo fragments, variables, directivas y mutaciones." },
-      { q: "¿Necesito conectar mi servidor para usar las herramientas?", a: "No. Estas son herramientas de manipulación de texto y sintaxis. No requieren una conexión activa con tu endpoint de GraphQL." }
+      { q: "Do you support fragments and variables?", a: "Yes, our formatter and validator handle the complete GraphQL syntax, including fragments, variables, directives, and mutations." },
+      { q: "Do I need to connect my server to use the tools?", a: "No. These are text and syntax manipulation tools. They do not require an active connection to your GraphQL endpoint." }
     ]
   },
   api: {
     description: (
       <>
         <p>
-          El desarrollo de <strong>APIs modernas</strong> requiere un conjunto de herramientas robustas para la depuración y la seguridad. El manejo de tokens de autenticación, la inspección de cabeceras y la validación de protocolos son tareas diarias para cualquier desarrollador backend o frontend.
+          Developing <strong>modern APIs</strong> requires a robust set of tools for debugging and security. Handling authentication tokens, inspecting headers, and validating protocols are daily tasks for any backend or frontend developer.
         </p>
         <p className="mt-4">
-          En esta sección, agrupamos utilidades críticas para el trabajo con protocolos de red y autenticación, empezando por nuestro potente decodificador de <strong>JWT (JSON Web Tokens)</strong>. Estas herramientas te permiten inspeccionar payloads, verificar firmas y depurar flujos OAuth2 sin comprometer la seguridad de tus claves.
+          In this section, we group critical utilities for working with network protocols and authentication, starting with our powerful <strong>JWT (JSON Web Tokens)</strong> decoder. These tools allow you to inspect payloads, verify signatures, and debug OAuth2 flows without compromising the security of your keys.
         </p>
       </>
     ),
     useCases: [
-      "Inspección de payloads y claims en tokens JWT.",
-      "Verificación de fechas de expiración (exp) y emisión (iat) de tokens.",
-      "Depuración de problemas de autorización en integraciones OAuth2.",
-      "Análisis de cabeceras de seguridad y estructuras de autenticación.",
-      "Conversión de comandos CURL a código funcional para peticiones API."
+      "Inspecting payloads and claims in JWT tokens.",
+      "Verifying expiration (exp) and issued at (iat) dates of tokens.",
+      "Debugging authorization issues in OAuth2 integrations.",
+      "Analyzing security headers and authentication structures.",
+      "Converting CURL commands to functional code for API requests."
     ],
     faqs: [
-      { q: "¿Se envían mis tokens JWT a algún sitio?", a: "Nunca. La decodificación de la base64 del JWT se hace íntegramente en tu navegador. Tu información sensible permanece privada." },
-      { q: "¿Podéis verificar la firma del token?", a: "Nuestro decodificador muestra la información de la firma y permite validarla localmente si proporcionas el secreto, garantizando que el secreto nunca viaje por la red." }
+      { q: "Are my JWT tokens sent anywhere?", a: "Never. The decoding of the JWT base64 is done entirely in your browser. Your sensitive information remains private." },
+      { q: "Can you verify the token signature?", a: "Our decoder displays the signature information and allows you to validate it locally if you provide the secret, guaranteeing that the secret never travels over the network." }
     ]
   },
   text: {
     description: (
       <>
         <p>
-          La manipulación de cadenas de texto y la codificación de datos son pilares fundamentales en el desarrollo de software. Ya sea que necesites codificar una URL para enviarla como parámetro, convertir un archivo a <strong>Base64</strong> para embeberlo en un JSON, o simplemente cambiar el estilo de las variables entre <em>camelCase</em> y <em>snake_case</em>.
+          String manipulation and data encoding are fundamental pillars in software development. Whether you need to encode a URL to send it as a parameter, convert a file to <strong>Base64</strong> to embed it in a JSON, or simply change the style of variables between <em>camelCase</em> and <em>snake_case</em>.
         </p>
         <p className="mt-4">
-          Nuestras <strong>herramientas de texto online</strong> están optimizadas para la velocidad. Soporta múltiples formatos de codificación y decodificación al instante, ayudándote a transformar datos sin tener que escribir scripts rápidos o usar la terminal.
+          Our <strong>online text tools</strong> are optimized for speed. They support multiple encoding and decoding formats instantly, helping you transform data without having to write quick scripts or use the terminal.
         </p>
       </>
     ),
     useCases: [
-      "Conversión de imágenes o archivos a strings Base64 para CSS o JSON.",
-      "Codificación y decodificación de parámetros URL para depurar webhooks.",
-      "Transformación masiva de nombres de variables entre diferentes convenciones (Case Conversion).",
-      "Limpieza de espacios en blanco y caracteres ocultos en payloads de texto.",
-      "Generación de hashes rápidos para verificación de integridad."
+      "Converting images or files to Base64 strings for CSS or JSON.",
+      "Encoding and decoding URL parameters to debug webhooks.",
+      "Massive transformation of variable names between different conventions (Case Conversion).",
+      "Cleaning whitespace and hidden characters in text payloads.",
+      "Generating quick hashes for integrity verification."
     ],
     faqs: [
-      { q: "¿Qué diferencia hay entre Base64 y encriptación?", a: "Base64 es un método de codificación, no de encriptación. Su objetivo es representar datos binarios en texto ASCII, no ocultar la información." },
-      { q: "¿Soportáis caracteres Unicode en las URLs?", a: "Sí, nuestro decodificador de URL maneja correctamente caracteres especiales y emojis siguiendo el estándar de codificación por porcentaje." }
+      { q: "What is the difference between Base64 and encryption?", a: "Base64 is an encoding method, not encryption. Its purpose is to represent binary data in ASCII text, not to hide information." },
+      { q: "Do you support Unicode characters in URLs?", a: "Yes, our URL decoder correctly handles special characters and emojis following the percent-encoding standard." }
     ]
   },
   css: {
     description: (
       <>
         <p>
-          El diseño web moderno depende de un <strong>CSS</strong> limpio, eficiente y bien estructurado. Con la llegada de Flexbox y CSS Grid, la complejidad de los layouts ha aumentado, haciendo que herramientas visuales de generación de código sean más valiosas que nunca.
+          Modern web design relies on clean, efficient, and well-structured <strong>CSS</strong>. With the advent of Flexbox and CSS Grid, layout complexity has increased, making visual code generation tools more valuable than ever.
         </p>
         <p className="mt-4">
-          Aquí encontrarás desde formateadores que limpian tu CSS sucio hasta generadores visuales que te permiten prototipar layouts complejos en segundos. Todas las herramientas generan código estándar compatible con los navegadores modernos, ahorrándote horas de prueba y error en el navegador.
+          Here you will find everything from formatters that clean your messy CSS to visual generators that allow you to prototype complex layouts in seconds. All tools generate standard code compatible with modern browsers, saving you hours of trial and error in the browser.
         </p>
       </>
     ),
     useCases: [
-      "Embellecimiento de archivos CSS minificados para facilitar su lectura.",
-      "Reducción del tamaño de archivos CSS para producción mediante minificación.",
-      "Generación visual de estructuras complejas con CSS Grid y Flexbox.",
-      "Conversión de unidades (px to rem) para diseños responsivos modernos.",
-      "Optimización de paletas de colores y variables CSS (Custom Properties)."
+      "Beautifying minified CSS files to make them easier to read.",
+      "Reducing the size of CSS files for production through minification.",
+      "Visual generation of complex structures with CSS Grid and Flexbox.",
+      "Converting units (px to rem) for modern responsive designs.",
+      "Optimizing color palettes and CSS variables (Custom Properties)."
     ],
     faqs: [
-      { q: "¿El código generado es compatible con todos los navegadores?", a: "Sí, generamos CSS estándar que funciona en todos los navegadores modernos. En casos específicos, indicamos si se requieren prefijos de navegador." },
-      { q: "¿Puedo usar el minificador para archivos de gran tamaño?", a: "Nuestras herramientas están optimizadas para manejar hojas de estilo de gran escala sin bloquear la interfaz del usuario." }
+      { q: "Is the generated code compatible with all browsers?", a: "Yes, we generate standard CSS that works in all modern browsers. In specific cases, we indicate if browser prefixes are required." },
+      { q: "Can I use the minifier for large files?", a: "Our tools are optimized to handle large-scale stylesheets without blocking the user interface." }
     ]
   }
 };
@@ -287,7 +287,7 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
       case 'api': return 'Free Online API Tools - JWT Decoder & OAuth Debugger | Stoolzen';
       case 'text': return 'Data Transformation Tools - Base64, URL & Text Encoding | Stoolzen';
       case 'css': return 'Online CSS Tools - Formatter, Minifier & Layout Generators | Stoolzen';
-      default: return `Herramientas ${currentCategory?.label} Online | Stoolzen`;
+      default: return `${currentCategory?.label} Tools Online | Stoolzen`;
     }
   };
 
@@ -299,21 +299,21 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
       case 'api': return 'Free Online API Tools and Auth Debugging';
       case 'text': return 'Online Data Transformation and Encoding Tools';
       case 'css': return 'Free Online CSS Tools and Design Utilities';
-      default: return `Herramientas de ${currentCategory?.label}`;
+      default: return `${currentCategory?.label} Tools`;
     }
   };
 
   const seoTitle = getPageTitle();
   const seoDesc = currentCategory
-    ? `Explora todas las herramientas ${currentCategory.label} online gratuitas de Stoolzen. Formateadores, validadores, editores y más.`
-    : 'El hub definitivo de herramientas para desarrolladores. JSON, GraphQL, JWT, CSS, Texto y más. Gratuito y sin registro.';
+    ? `Explore all free online ${currentCategory.label} tools from Stoolzen. Formatters, validators, editors and more.`
+    : 'The ultimate hub for developer tools. JSON, GraphQL, JWT, CSS, Text and more. Free and no registration required.';
 
   return (
     <div className="space-y-8">
       <SEO
         title={seoTitle}
         description={seoDesc}
-        keywords={`herramientas desarrolladores, dev tools online, ${currentCategory?.label.toLowerCase() ?? 'json graphql jwt css'} tools, stoolzen`}
+        keywords={`developer tools, dev tools online, ${currentCategory?.label.toLowerCase() ?? 'json graphql jwt css'} tools, stoolzen`}
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Tools', item: '/tools' },
@@ -355,7 +355,7 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-outline group-focus-within:text-primary transition-colors" />
         <input
           type="search"
-          placeholder="Buscar herramienta..."
+          placeholder="Search tool..."
           value={search}
           onChange={e => setSearch(e.target.value)}
           className={cn(
@@ -401,7 +401,7 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
               </div>
               <h2 id={`cat-${cat.id}`} className="text-lg font-bold text-on-surface">{cat.label} Tools</h2>
               <span className="text-xs text-outline bg-surface-container px-2 py-0.5 rounded-full border border-outline-variant">
-                {cat.tools.length} herramientas
+                {cat.tools.length} tools
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -458,7 +458,7 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
         <div className="mt-20 pt-16 border-t border-outline-variant space-y-16 pb-12">
           {/* Main Description */}
           <section className="max-w-4xl space-y-6">
-            <h2 className="text-2xl font-bold text-on-surface">Guía Completa de Herramientas {currentCategory?.label}</h2>
+            <h2 className="text-2xl font-bold text-on-surface">Complete Guide to {currentCategory?.label} Tools</h2>
             <div className="text-outline text-lg leading-relaxed space-y-4">
               {CATEGORY_CONTENT[category].description}
             </div>
@@ -466,7 +466,7 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
 
           {/* Use Cases Grid */}
           <section className="space-y-8">
-            <h2 className="text-2xl font-bold text-on-surface text-center">Casos de Uso Comunes</h2>
+            <h2 className="text-2xl font-bold text-on-surface text-center">Common Use Cases</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {CATEGORY_CONTENT[category].useCases.map((useCase, idx) => (
                 <div key={idx} className="p-6 rounded-2xl bg-surface-container border border-outline-variant flex gap-4 transition-transform hover:-translate-y-1">
@@ -481,7 +481,7 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
 
           {/* Detailed FAQs */}
           <section className="space-y-8 bg-surface-container-low rounded-3xl p-8 md:p-12 border border-outline-variant">
-            <h2 className="text-2xl font-bold text-on-surface text-center">Preguntas Frecuentes sobre {currentCategory?.label}</h2>
+            <h2 className="text-2xl font-bold text-on-surface text-center">Frequently Asked Questions about {currentCategory?.label}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
               {CATEGORY_CONTENT[category].faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-3 group">
@@ -498,16 +498,16 @@ export const ToolsHub: React.FC<ToolsHubProps> = ({ category }) => {
           
           {/* Call to Action */}
           <section className="text-center space-y-6 py-12 bg-indigo-600 rounded-3xl text-white">
-            <h2 className="text-3xl font-bold">¿Listo para mejorar tu flujo de trabajo?</h2>
+            <h2 className="text-3xl font-bold">Ready to improve your workflow?</h2>
             <p className="text-indigo-100 max-w-xl mx-auto">
-              Empieza a usar nuestras herramientas {currentCategory?.label} hoy mismo. Sin instalaciones, sin registros, totalmente gratis.
+              Start using our {currentCategory?.label} tools today. No installations, no registrations, totally free.
             </p>
             <div className="flex justify-center gap-4">
               <Link 
                 to="/docs" 
                 className="px-8 py-3 bg-white text-indigo-600 font-bold rounded-xl hover:bg-indigo-50 transition-all"
               >
-                Leer Documentación
+                Read Documentation
               </Link>
             </div>
           </section>

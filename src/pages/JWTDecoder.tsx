@@ -19,12 +19,12 @@ const API_SEO_MAP: Record<string, {
   faqs: { q: string; a: string }[];
 }> = {
   '/tools/api/jwt-decoder': {
-    title: 'Decodificador JWT Online - Validar y Analizar Tokens | Stoolzen',
-    description: 'Decodifica tus JSON Web Tokens (JWT) de forma segura. Analiza headers, payloads y verifica firmas online con nuestra herramienta gratuita.',
-    keywords: 'validadores de jwt, jwt decoder, decodificador jwt, analizar jwt, jwt debugger, verificar jwt online',
-    h1: 'Decodificador JWT Online',
-    subtitle: 'Decodifica, verifica y analiza tus JSON Web Tokens de forma segura y privada.',
-    intro: 'El decodificador de JWT de Stoolzen permite inspeccionar el contenido de cualquier token JSON Web Token sin comprometer su seguridad. Todo el procesamiento se realiza en local, lo que garantiza que tus claves y payloads nunca salgan de tu navegador.',
+    title: 'JWT Decoder Online - Validate and Analyze Tokens | Stoolzen',
+    description: 'Decode your JSON Web Tokens (JWT) safely. Analyze headers, payloads, and verify signatures online with our free tool.',
+    keywords: 'jwt validators, jwt decoder, analyze jwt, jwt debugger, verify jwt online',
+    h1: 'Online JWT Decoder',
+    subtitle: 'Decode, verify, and analyze your JSON Web Tokens safely and privately.',
+    intro: 'The Stoolzen JWT decoder allows you to inspect the content of any JSON Web Token without compromising its security. All processing is done locally, ensuring that your keys and payloads never leave your browser.',
     example: {
       input: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJuYW1lIjoiRGV2In0.signature',
       output: {
@@ -33,9 +33,9 @@ const API_SEO_MAP: Record<string, {
       }
     },
     faqs: [
-      { q: "¿Es seguro decodificar mi token aquí?", a: "Totalmente. El JWT se decodifica en tu navegador mediante JavaScript local. No hay peticiones de red que envíen tu token a ningún servidor." },
-      { q: "¿Puedo ver el secreto si el token está firmado?", a: "No. Un JWT está firmado, no encriptado. Puedes ver los datos del header y payload, pero el secreto original no puede ser extraído del token." },
-      { q: "¿Qué algoritmos de firma soportáis?", a: "Soportamos la visualización de tokens firmados con HS256, RS256, ES256 y más, siguiendo el estándar RFC 7519." }
+      { q: "Is it safe to decode my token here?", a: "Absolutely. The JWT is decoded in your browser using local JavaScript. There are no network requests sending your token to any server." },
+      { q: "Can I see the secret if the token is signed?", a: "No. A JWT is signed, not encrypted. You can see the header and payload data, but the original secret cannot be extracted from the token." },
+      { q: "Which signature algorithms do you support?", a: "We support viewing tokens signed with HS256, RS256, ES256, and more, following the RFC 7519 standard." }
     ]
   }
 };
@@ -50,12 +50,12 @@ const FALLBACK_API_SEO: {
   example?: { input: string; output: { header: string; payload: string } };
   faqs: { q: string; a: string }[];
 } = {
-  title: 'Herramientas de API y Autenticación Online | Stoolzen',
-  description: 'Herramientas para desarrolladores backend y frontend: JWT, OAuth, REST y más.',
+  title: 'API and Authentication Tools Online | Stoolzen',
+  description: 'Tools for backend and frontend developers: JWT, OAuth, REST, and more.',
   keywords: 'api tools, auth tools, jwt, oauth, rest debug',
-  h1: 'Herramientas de API & Auth',
-  subtitle: 'Depura y valida tus protocolos de red y autenticación.',
-  intro: 'Un conjunto de utilidades esenciales para trabajar con APIs modernas y sistemas de seguridad.',
+  h1: 'API & Auth Tools',
+  subtitle: 'Debug and validate your network and authentication protocols.',
+  intro: 'A set of essential utilities for working with modern APIs and security systems.',
   faqs: []
 };
 
@@ -255,26 +255,26 @@ export const JWTDecoder: React.FC = () => {
       <div className="mt-10 pt-8 border-t border-outline-variant pb-20 space-y-14">
         {/* Intro Section */}
         <section className="max-w-4xl space-y-6">
-          <h2 className="text-3xl font-bold text-on-surface">Guía de Uso: {seo.h1}</h2>
+          <h2 className="text-3xl font-bold text-on-surface">Usage Guide: {seo.h1}</h2>
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
           <div className="prose prose-slate max-w-none text-outline space-y-4">
             <p>
-              Un <strong>JSON Web Token (JWT)</strong> es un estándar abierto (RFC 7519) que define un formato compacto para transmitir información de forma segura. Nuestra herramienta te permite descomponer este token en sus tres partes fundamentales:
+              A <strong>JSON Web Token (JWT)</strong> is an open standard (RFC 7519) that defines a compact format for securely transmitting information. Our tool allows you to decompose this token into its three fundamental parts:
             </p>
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Header (Encabezado):</strong> Contiene el tipo de token (JWT) y el algoritmo de firma utilizado (como HS256 o RS256).</li>
-              <li><strong>Payload (Carga útil):</strong> Contiene las declaraciones (claims), que son datos sobre una entidad (generalmente el usuario) y metadatos adicionales.</li>
-              <li><strong>Signature (Firma):</strong> Se utiliza para verificar que el remitente del JWT es quien dice ser y para asegurar que el mensaje no fue alterado.</li>
+              <li><strong>Header:</strong> Contains the token type (JWT) and the signing algorithm used (like HS256 or RS256).</li>
+              <li><strong>Payload:</strong> Contains the claims, which are statements about an entity (typically the user) and additional metadata.</li>
+              <li><strong>Signature:</strong> Used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.</li>
             </ul>
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mt-8">
                <h4 className="text-amber-800 font-bold flex items-center gap-2 mb-2">
                   <ShieldCheck className="w-5 h-5" />
-                  Aviso de Seguridad
+                  Security Notice
                </h4>
                <p className="text-amber-900 text-sm leading-relaxed italic">
-                  Recuerda que los JWT están codificados en Base64, NO encriptados. Cualquier persona con el token puede leer su contenido. Nunca incluyas contraseñas, claves privadas o información altamente sensible dentro del payload de un JWT.
+                  Remember that JWTs are Base64 encoded, NOT encrypted. Anyone with the token can read its contents. Never include passwords, private keys, or highly sensitive information inside a JWT payload.
                </p>
             </div>
           </div>
@@ -283,10 +283,10 @@ export const JWTDecoder: React.FC = () => {
         {/* Input/Output Example */}
         {seo.example && (
           <section className="space-y-8">
-            <h2 className="text-2xl font-bold text-on-surface">Ejemplo de Decodificación</h2>
+            <h2 className="text-2xl font-bold text-on-surface">Decoding Example</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <p className="text-sm font-bold text-outline uppercase tracking-wider">JWT Codificado</p>
+                <p className="text-sm font-bold text-outline uppercase tracking-wider">Encoded JWT</p>
                 <div className="bg-surface-container rounded-xl p-4 border border-outline-variant font-mono text-sm text-on-surface break-all overflow-x-auto leading-relaxed">
                   <span className="text-error">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.
                   <span className="text-primary">eyJzdWIiOiIxMjMiLCJuYW1lIjoiRGV2In0</span>.
@@ -294,7 +294,7 @@ export const JWTDecoder: React.FC = () => {
                 </div>
               </div>
               <div className="space-y-4">
-                <p className="text-sm font-bold text-outline uppercase tracking-wider">Payload Decodificado</p>
+                <p className="text-sm font-bold text-outline uppercase tracking-wider">Decoded Payload</p>
                 <div className="bg-indigo-50/30 rounded-xl p-4 border border-indigo-100 font-mono text-sm text-indigo-900 overflow-x-auto whitespace-pre">
                   {seo.example.output.payload}
                 </div>
@@ -305,21 +305,21 @@ export const JWTDecoder: React.FC = () => {
 
         {/* Use Cases Section */}
         <section className="space-y-10">
-          <h2 className="text-2xl font-bold text-on-surface text-center">Cuándo usar JWT</h2>
+          <h2 className="text-2xl font-bold text-on-surface text-center">When to use JWT</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-primary/50 transition-colors group">
               <div className="w-12 h-12 rounded-2xl bg-primary-container text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
                 <Lock className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-on-surface mb-3">Autorización</h3>
-              <p className="text-outline leading-relaxed">Es el escenario más común. Una vez que el usuario se loguea, cada petición incluirá el JWT, permitiéndole acceder a rutas y servicios permitidos con ese token.</p>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Authorization</h3>
+              <p className="text-outline leading-relaxed">This is the most common scenario. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token.</p>
             </div>
             <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-secondary/50 transition-colors group">
               <div className="w-12 h-12 rounded-2xl bg-secondary-container text-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
                 <Activity className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-on-surface mb-3">Intercambio de Información</h3>
-              <p className="text-outline leading-relaxed">Los JWT son una buena forma de transmitir información de forma segura entre partes. Al estar firmados, puedes estar seguro de que los datos no han sido alterados.</p>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Information Exchange</h3>
+              <p className="text-outline leading-relaxed">JWTs are a good way of securely transmitting information between parties. Because JWTs can be signed, you can be sure the senders are who they say they are and the content hasn't been tampered with.</p>
             </div>
           </div>
         </section>
@@ -327,7 +327,7 @@ export const JWTDecoder: React.FC = () => {
         {/* FAQs Section */}
         {seo.faqs.length > 0 && (
           <section className="bg-surface-container-low rounded-[2rem] p-10 md:p-16 border border-outline-variant">
-            <h2 className="text-3xl font-bold text-on-surface mb-12 text-center">Preguntas Frecuentes</h2>
+            <h2 className="text-3xl font-bold text-on-surface mb-12 text-center">Frequently Asked Questions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {seo.faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-4">
@@ -346,13 +346,13 @@ export const JWTDecoder: React.FC = () => {
 
         {/* Related Tools Grid */}
         <section className="space-y-8">
-          <h2 className="text-2xl font-bold text-on-surface text-center">Herramientas Relacionadas</h2>
+          <h2 className="text-2xl font-bold text-on-surface text-center">Related Tools</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: 'JSON Formatter', path: '/tools/json/formatter', desc: 'Embellece tus datos JSON' },
-              { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Valida sintaxis JSON' },
-              { name: 'GraphQL Formatter', path: '/tools/graphql/formatter', desc: 'Organiza tus queries' },
-              { name: 'Base64 Decoder', path: '/tools/text', desc: 'Próximamente...' }
+              { name: 'JSON Formatter', path: '/tools/json/formatter', desc: 'Beautify your JSON data' },
+              { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Validate JSON syntax' },
+              { name: 'GraphQL Formatter', path: '/tools/graphql/formatter', desc: 'Organize your queries' },
+              { name: 'Base64 Decoder', path: '/tools/text', desc: 'Coming soon...' }
             ].map(tool => (
               <a key={tool.path} href={tool.path} className="p-6 rounded-2xl bg-surface-container border border-outline-variant hover:border-primary transition-all group">
                 <p className="font-bold text-on-surface group-hover:text-primary transition-colors">{tool.name}</p>

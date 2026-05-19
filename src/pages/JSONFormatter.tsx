@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
-import { Terminal, Copy, Wand2, Trash2, CheckCircle2, History, Maximize2, Minimize2, Type, FoldVertical, UnfoldVertical, Upload, Download, Minimize, Database, Printer, Code2, ListTree, Plus, Minus, Share2, X, FileCode } from 'lucide-react';
+import { Terminal, Copy, Wand2, Trash2, CheckCircle2, History, Maximize2, Minimize2, Type, FoldVertical, UnfoldVertical, Upload, Download, Minimize, Database, Printer, Code2, ListTree, PlusSquare, MinusSquare, Share2, X, FileCode } from 'lucide-react';
 import { formatJSON, minifyJSON } from '../utils/toolUtils';
 import JsonView from '@uiw/react-json-view';
 import { lightTheme } from '@uiw/react-json-view/light';
@@ -517,8 +517,8 @@ export const JSONFormatter: React.FC = () => {
                     displayObjectSize={false}
                     enableClipboard={true}
                     collapsed={false}
-                    collapsedIcon={<Plus className="w-3.5 h-3.5 text-indigo-500 hover:bg-indigo-100 rounded-sm cursor-pointer" />}
-                    expandedIcon={<Minus className="w-3.5 h-3.5 text-indigo-500 hover:bg-indigo-100 rounded-sm cursor-pointer" />}
+                    collapsedIcon={<PlusSquare className="w-4 h-4 text-indigo-600 bg-white dark:bg-[#1e1e1e] cursor-pointer" />}
+                    expandedIcon={<MinusSquare className="w-4 h-4 text-indigo-600 bg-white dark:bg-[#1e1e1e] cursor-pointer" />}
                   />
                 ) : (
                   <div className="text-slate-400 text-sm flex items-center justify-center h-full font-mono">No data to display</div>
@@ -551,33 +551,33 @@ export const JSONFormatter: React.FC = () => {
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
               <FileCode className="w-6 h-6 text-indigo-500" />
-              ¿Qué es {seo.h1}?
+              What is {seo.h1}?
             </h2>
             <p className="text-outline leading-relaxed text-slate-600 dark:text-zinc-300">
               {seo.intro}
             </p>
             <p className="text-outline leading-relaxed text-slate-500 dark:text-zinc-400">
-              Esta herramienta premium de Stoolzen está optimizada para procesar tus estructuras {seo.h1} directamente en el navegador, asegurando la máxima velocidad y total privacidad para tus datos de desarrollo.
+              This premium tool by Stoolzen is optimized to process your {seo.h1} structures directly in the browser, ensuring maximum speed and total privacy for your development data.
             </p>
           </div>
 
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
               <CheckCircle2 className="w-6 h-6 text-green-500" />
-              ¿Por qué usar Stoolzen?
+              Why use Stoolzen?
             </h2>
             <ul className="space-y-3 text-outline">
               <li className="flex gap-3">
                 <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
-                <span><strong>100% privado:</strong> Tus datos nunca salen de tu navegador. El procesamiento es client-side local sin servidores externos.</span>
+                <span><strong>100% private:</strong> Your data never leaves your browser. Processing is local client-side without external servers.</span>
               </li>
               <li className="flex gap-3">
                 <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
-                <span><strong>Sin registros:</strong> Accede a todas las herramientas sin coste, sin suscripciones obligatorias ni formularios.</span>
+                <span><strong>No registration:</strong> Access all tools for free, with no mandatory subscriptions or forms.</span>
               </li>
               <li className="flex gap-3">
                 <span className="font-bold text-indigo-500 flex-shrink-0">✓</span>
-                <span><strong>Rendimiento Premium:</strong> Cargado con Monaco Editor y optimización asíncrona para soportar archivos de gran tamaño.</span>
+                <span><strong>Premium Performance:</strong> Powered by Monaco Editor and asynchronous optimization to support large files.</span>
               </li>
             </ul>
           </div>
@@ -586,7 +586,7 @@ export const JSONFormatter: React.FC = () => {
         {/* Example Input / Output */}
         {seo.example && (
           <div className="space-y-4">
-            <h2 className="text-xl font-bold text-on-surface">Ejemplo de Uso: {seo.example.inputLabel || 'Entrada'} → {seo.example.outputLabel || 'Salida'}</h2>
+            <h2 className="text-xl font-bold text-on-surface">Usage Example: {seo.example.inputLabel || 'Input'} → {seo.example.outputLabel || 'Output'}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <span className="text-xs font-bold text-outline uppercase tracking-widest">{seo.example.inputLabel || 'Input'}</span>
@@ -607,7 +607,7 @@ export const JSONFormatter: React.FC = () => {
         {/* FAQ */}
         {seo.faqs && seo.faqs.length > 0 && (
           <div className="bg-surface-container-low rounded-2xl p-8 border border-outline-variant">
-            <h2 className="text-xl font-bold text-on-surface mb-6">Preguntas Frecuentes (FAQ)</h2>
+            <h2 className="text-xl font-bold text-on-surface mb-6">Frequently Asked Questions (FAQ)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {seo.faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-2">
@@ -628,19 +628,19 @@ export const JSONFormatter: React.FC = () => {
           category="json"
           currentPath={pathname}
           relatedTools={[
-            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Verifica la sintaxis de tus objetos JSON' },
-            { name: 'JSON Diff', path: '/tools/json/diff', desc: 'Compara dos JSONs y encuentra diferencias' },
-            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Escapa caracteres para strings' },
-            { name: 'JSONPath Explorer', path: '/tools/json/path-explorer', desc: 'Filtra datos con expresiones JSONPath' },
-            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Comprime tu JSON para producción' },
+            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Verify the syntax of your JSON objects' },
+            { name: 'JSON Diff', path: '/tools/json/diff', desc: 'Compare two JSONs and find differences' },
+            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Escape characters for strings' },
+            { name: 'JSONPath Explorer', path: '/tools/json/path-explorer', desc: 'Filter data with JSONPath expressions' },
+            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Compress your JSON for production' },
           ]}
           categories={[
             { name: 'JSON Tools Hub', path: '/tools/json' },
             { name: 'API & Auth Tools', path: '/tools/api' }
           ]}
           guides={[
-            { name: 'Guía de Formateo JSON', path: '/docs/json-formatting-guide' },
-            { name: 'Seguridad en Tokens JWT', path: '/docs/jwt-security-essentials' }
+            { name: 'JSON Formatting Guide', path: '/docs/json' },
+            { name: 'JWT Security Essentials', path: '/docs/jwt' }
           ]}
         />
       </div>
@@ -783,8 +783,8 @@ export const JSONFormatter: React.FC = () => {
                       displayObjectSize={false}
                       enableClipboard={({ value }) => navigator.clipboard.writeText(typeof value === 'string' ? value : JSON.stringify(value, null, 2))}
                       collapsed={false}
-                      collapsedIcon={<Plus className="w-3.5 h-3.5 text-indigo-500 hover:bg-indigo-100 rounded-sm cursor-pointer" />}
-                      expandedIcon={<Minus className="w-3.5 h-3.5 text-indigo-500 hover:bg-indigo-100 rounded-sm cursor-pointer" />}
+                      collapsedIcon={<PlusSquare className="w-5 h-5 text-indigo-600 bg-white dark:bg-[#1e1e1e] cursor-pointer" />}
+                      expandedIcon={<MinusSquare className="w-5 h-5 text-indigo-600 bg-white dark:bg-[#1e1e1e] cursor-pointer" />}
                     />
                   ) : (
                     <div className="text-slate-400 text-sm flex items-center justify-center h-full font-mono">No data to display</div>

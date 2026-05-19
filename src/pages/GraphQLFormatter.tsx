@@ -455,22 +455,22 @@ export const GraphQLFormatter: React.FC = () => {
       <div className={cn("mt-10 pt-8 border-t border-outline-variant pb-20 space-y-14", maximized && "hidden")}>
         {/* Intro Section */}
         <section className="max-w-4xl space-y-6">
-          <h2 className="text-3xl font-bold text-on-surface">Sobre {seo.h1}</h2>
+          <h2 className="text-3xl font-bold text-on-surface">About {seo.h1}</h2>
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
           <div className="prose prose-slate max-w-none text-outline space-y-4">
             <p>
-              <strong>GraphQL</strong> es un lenguaje de consulta para APIs y un tiempo de ejecución para cumplir con esas consultas utilizando tus datos existentes. A diferencia de REST, GraphQL permite a los clientes solicitar exactamente los datos que necesitan, nada más y nada menos.
+              <strong>GraphQL</strong> is a query language for APIs and a runtime for fulfilling those queries with your existing data. Unlike REST, GraphQL allows clients to ask for exactly what they need, nothing more and nothing less.
             </p>
-            <h3 className="text-xl font-bold text-on-surface pt-4">¿Por qué formatear tus consultas GraphQL?</h3>
+            <h3 className="text-xl font-bold text-on-surface pt-4">Why format your GraphQL queries?</h3>
             <p>
-              Las consultas GraphQL pueden volverse extremadamente complejas y profundas a medida que tu aplicación crece. Un <strong>formateador de GraphQL</strong> ayuda a los desarrolladores a:
+              GraphQL queries can become extremely complex and deeply nested as your application grows. A <strong>GraphQL formatter</strong> helps developers:
             </p>
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Mejorar la legibilidad:</strong> Indentación clara de campos, argumentos y directivas.</li>
-              <li><strong>Detectar errores:</strong> Validación instantánea contra la sintaxis estándar de GraphQL.</li>
-              <li><strong>Estandarización:</strong> Mantener un estilo de código consistente en todo el equipo de desarrollo.</li>
+              <li><strong>Improve readability:</strong> Clear indentation for fields, arguments, and directives.</li>
+              <li><strong>Detect errors:</strong> Instant validation against standard GraphQL syntax.</li>
+              <li><strong>Standardization:</strong> Maintain a consistent code style across the development team.</li>
             </ul>
           </div>
         </section>
@@ -478,16 +478,16 @@ export const GraphQLFormatter: React.FC = () => {
         {/* Input/Output Example */}
         {seo.example && (
           <section className="space-y-8">
-            <h2 className="text-2xl font-bold text-on-surface">Ejemplo de Uso</h2>
+            <h2 className="text-2xl font-bold text-on-surface">Usage Example</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <p className="text-sm font-bold text-outline uppercase tracking-wider">Entrada (Crudo)</p>
+                <p className="text-sm font-bold text-outline uppercase tracking-wider">Input (Raw)</p>
                 <div className="bg-surface-container rounded-xl p-4 border border-outline-variant font-mono text-sm text-on-surface overflow-x-auto">
                   {seo.example.input}
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-sm font-bold text-outline uppercase tracking-wider">Salida (Procesado)</p>
+                <p className="text-sm font-bold text-outline uppercase tracking-wider">Output (Processed)</p>
                 <div className="bg-indigo-50/30 rounded-xl p-4 border border-indigo-100 font-mono text-sm text-indigo-900 overflow-x-auto whitespace-pre">
                   {seo.example.output}
                 </div>
@@ -498,28 +498,28 @@ export const GraphQLFormatter: React.FC = () => {
 
         {/* Features Grid */}
         <section className="space-y-10">
-          <h2 className="text-2xl font-bold text-on-surface text-center">Por qué usar Stoolzen para GraphQL</h2>
+          <h2 className="text-2xl font-bold text-on-surface text-center">Why use Stoolzen for GraphQL</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-indigo-500/50 transition-colors group">
               <div className="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Wand2 className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-on-surface mb-3">Prettify Inteligente</h3>
-              <p className="text-outline leading-relaxed">Organiza tus queries respetando la estructura de fragmentos y argumentos automáticamente.</p>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Smart Prettify</h3>
+              <p className="text-outline leading-relaxed">Organize your queries while automatically respecting the structure of fragments and arguments.</p>
             </div>
             <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-indigo-500/50 transition-colors group">
               <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Minimize className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-on-surface mb-3">Minificación Real</h3>
-              <p className="text-outline leading-relaxed">Comprime tus consultas para producción eliminando espacios y comentarios innecesarios.</p>
+              <h3 className="text-xl font-bold text-on-surface mb-3">Real Minification</h3>
+              <p className="text-outline leading-relaxed">Compress your queries for production by removing unnecessary spaces and comments.</p>
             </div>
             <div className="p-8 rounded-3xl bg-surface-container border border-outline-variant hover:border-indigo-500/50 transition-colors group">
               <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-on-surface mb-3">Validación SDL</h3>
-              <p className="text-outline leading-relaxed">Soporte total para la especificación oficial de GraphQL, incluyendo Schema Definition Language.</p>
+              <h3 className="text-xl font-bold text-on-surface mb-3">SDL Validation</h3>
+              <p className="text-outline leading-relaxed">Full support for the official GraphQL specification, including Schema Definition Language.</p>
             </div>
           </div>
         </section>
@@ -527,7 +527,7 @@ export const GraphQLFormatter: React.FC = () => {
         {/* FAQs Section */}
         {seo.faqs.length > 0 && (
           <section className="bg-surface-container-low rounded-[2rem] p-10 md:p-16 border border-outline-variant">
-            <h2 className="text-3xl font-bold text-on-surface mb-12 text-center">Preguntas Frecuentes</h2>
+            <h2 className="text-3xl font-bold text-on-surface mb-12 text-center">Frequently Asked Questions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {seo.faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-4">
@@ -546,13 +546,13 @@ export const GraphQLFormatter: React.FC = () => {
 
         {/* Related Tools Grid */}
         <section className="space-y-8">
-          <h2 className="text-2xl font-bold text-on-surface text-center">Otras Herramientas GraphQL</h2>
+          <h2 className="text-2xl font-bold text-on-surface text-center">Other GraphQL Tools</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: 'GraphQL Validator', path: '/tools/graphql/validator', desc: 'Valida sintaxis al instante' },
-              { name: 'GraphQL Minifier', path: '/tools/graphql/minifier', desc: 'Comprime para producción' },
-              { name: 'GraphQL Editor', path: '/tools/graphql/editor', desc: 'Editor profesional online' },
-              { name: 'GraphQL Beautifier', path: '/tools/graphql/beautifier', desc: 'Embellece tus queries' }
+              { name: 'GraphQL Validator', path: '/tools/graphql/validator', desc: 'Validate syntax instantly' },
+              { name: 'GraphQL Minifier', path: '/tools/graphql/minifier', desc: 'Compress for production' },
+              { name: 'GraphQL Editor', path: '/tools/graphql/editor', desc: 'Professional online editor' },
+              { name: 'GraphQL Beautifier', path: '/tools/graphql/beautifier', desc: 'Beautify your queries' }
             ].filter(t => t.path !== pathname).map(tool => (
               <a key={tool.path} href={tool.path} className="p-6 rounded-2xl bg-surface-container border border-outline-variant hover:border-indigo-500 transition-all group">
                 <p className="font-bold text-on-surface group-hover:text-indigo-600 transition-colors">{tool.name}</p>
@@ -766,12 +766,12 @@ export const GraphQLFormatter: React.FC = () => {
           {/* Section 1: Detailed Technical Overview */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
+               <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
                 <BookOpen className="w-6 h-6" />
               </div>
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Guía Técnica de Integridad en GraphQL</h2>
-                <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Análisis en profundidad</p>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Technical Guide to GraphQL Integrity</h2>
+                <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">In-depth Analysis</p>
               </div>
             </div>
             <p className="text-slate-600 dark:text-zinc-300 leading-relaxed text-sm md:text-base mb-6">
@@ -783,9 +783,9 @@ export const GraphQLFormatter: React.FC = () => {
                   ✓
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base">Privacidad por diseño</h3>
+                  <h3 className="font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base">Privacy by Design</h3>
                   <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 leading-relaxed">
-                    Las operaciones de formateo, validación y minificación se ejecutan 100% localmente en tu cliente web. Ninguna consulta abandona tu dispositivo.
+                    Formatting, validation, and minification operations are executed 100% locally in your web client. No query leaves your device.
                   </p>
                 </div>
               </div>
@@ -794,9 +794,9 @@ export const GraphQLFormatter: React.FC = () => {
                   ⚡
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base">Velocidad instantánea</h3>
+                  <h3 className="font-bold text-slate-800 dark:text-zinc-200 text-sm md:text-base">Instant Speed</h3>
                   <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 leading-relaxed">
-                    Optimizado con el motor Monaco Editor y algoritmos AST para parsear consultas de miles de líneas en milisegundos con cero lag visual.
+                    Optimized with the Monaco Editor engine and AST algorithms to parse queries of thousands of lines in milliseconds with zero visual lag.
                   </p>
                 </div>
               </div>
@@ -811,8 +811,8 @@ export const GraphQLFormatter: React.FC = () => {
                   <Lightbulb className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Ejemplo Práctico Ilustrativo</h2>
-                  <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Demostración técnica interactiva</p>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Interactive Practical Example</h2>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Interactive technical demo</p>
                 </div>
               </div>
               
@@ -826,32 +826,32 @@ export const GraphQLFormatter: React.FC = () => {
                     <button 
                       onClick={() => {
                         setInput(seo.example!.input);
-                        setStatusMessage({ title: 'Ejemplo cargado', detail: 'El código del ejemplo ha sido cargado al editor.' });
+                        setStatusMessage({ title: 'Example Loaded', detail: 'The example code has been loaded into the editor.' });
                         setShowStatus(true);
                         setTimeout(() => setShowStatus(false), 3000);
                       }}
                       className="absolute top-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1 px-2.5 rounded-md text-[10px] uppercase shadow-sm transition-all"
                     >
-                      Probar en editor
+                      Test in Editor
                     </button>
                   </div>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-slate-600 dark:text-zinc-400 mb-2 uppercase tracking-wide">
-                    {seo.example.outputLabel || 'Resultado Esperado'}
+                    {seo.example.outputLabel || 'Expected Result'}
                   </span>
                   <div className="bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 relative font-mono text-xs text-slate-700 dark:text-zinc-300 min-h-[140px] overflow-auto whitespace-pre">
                     {seo.example.output}
                     <button 
                       onClick={() => {
                         navigator.clipboard.writeText(seo.example!.output);
-                        setStatusMessage({ title: 'Copiado al portapapeles', detail: 'El resultado del ejemplo ha sido copiado.' });
+                        setStatusMessage({ title: 'Copied to clipboard', detail: 'The result of the example has been copied.' });
                         setShowStatus(true);
                         setTimeout(() => setShowStatus(false), 3000);
                       }}
                       className="absolute top-2 right-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold py-1 px-2.5 rounded-md text-[10px] uppercase shadow-sm transition-all"
                     >
-                      Copiar
+                      Copy
                     </button>
                   </div>
                 </div>
@@ -859,7 +859,7 @@ export const GraphQLFormatter: React.FC = () => {
             </div>
           )}
 
-          {/* Section 3: Dynamic Accordion FAQ in Spanish */}
+          {/* Section 3: Dynamic Accordion FAQ in English */}
           {seo.faqs.length > 0 && (
             <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
@@ -867,8 +867,8 @@ export const GraphQLFormatter: React.FC = () => {
                   <HelpCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Preguntas Frecuentes (FAQ)</h2>
-                  <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Respuestas de expertos</p>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-zinc-50">Frequently Asked Questions (FAQ)</h2>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Expert Answers</p>
                 </div>
               </div>
 
@@ -910,17 +910,17 @@ export const GraphQLFormatter: React.FC = () => {
 
           {/* Section 4: Programmatic Internal Links Panel */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-6 md:p-8 shadow-sm">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-zinc-100 mb-6">Explora otras herramientas GraphQL</h2>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-zinc-100 mb-6">Explore Other GraphQL Tools</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { title: 'Formateador', desc: 'Indentar y embellecer consultas', path: '/tools/graphql/formatter' },
-                { title: 'Validador', desc: 'Comprobar errores sintácticos', path: '/tools/graphql/validator' },
-                { title: 'Editor', desc: 'Zona de pruebas interactiva', path: '/tools/graphql/editor' },
-                { title: 'Beautifier', desc: 'Embellecedor de código', path: '/tools/graphql/beautifier' },
-                { title: 'Minifier', desc: 'Comprimir consultas GraphQL', path: '/tools/graphql/minifier' },
-                { title: 'Viewer', desc: 'Visualizar jerarquía', path: '/tools/graphql/viewer' },
-                { title: 'Checker', desc: 'Linter y corrector sintáctico', path: '/tools/graphql/checker' },
-                { title: 'Parser', desc: 'Analizar árbol de sintaxis AST', path: '/tools/graphql/parser' }
+                { title: 'Formatter', desc: 'Indent and beautify queries', path: '/tools/graphql/formatter' },
+                { title: 'Validator', desc: 'Check for syntax errors', path: '/tools/graphql/validator' },
+                { title: 'Editor', desc: 'Interactive playground', path: '/tools/graphql/editor' },
+                { title: 'Beautifier', desc: 'Code beautifier', path: '/tools/graphql/beautifier' },
+                { title: 'Minifier', desc: 'Compress GraphQL queries', path: '/tools/graphql/minifier' },
+                { title: 'Viewer', desc: 'Visualize hierarchy', path: '/tools/graphql/viewer' },
+                { title: 'Checker', desc: 'Linter and syntax checker', path: '/tools/graphql/checker' },
+                { title: 'Parser', desc: 'Analyze AST syntax tree', path: '/tools/graphql/parser' }
               ]
                 .filter(item => item.path !== pathname)
                 .map((item, idx) => (
@@ -938,7 +938,7 @@ export const GraphQLFormatter: React.FC = () => {
                       </p>
                     </div>
                     <div className="flex items-center gap-1 mt-4 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
-                      Iniciar <ArrowRight className="w-3 h-3" />
+                      Start <ArrowRight className="w-3 h-3" />
                     </div>
                   </Link>
                 ))}

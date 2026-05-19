@@ -1,168 +1,257 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, FileText } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, FileText, Lightbulb, AlertTriangle, CheckCircle, Info, Zap, Shield, Database, Code, Server, Settings, Globe } from 'lucide-react';
 import { SEO } from '../components/SEO';
 
-const ARTICLES: Record<string, { title: string; description: string; date: string; readTime: string; category: string; content: React.ReactNode }> = {
-  'json-formatting-guide': {
-    title: "A Developer's Guide to JSON Formatting",
-    description: "Learn the best practices for formatting, validating, and structuring JSON data in your modern web applications.",
-    date: 'May 06, 2026',
-    readTime: '4 min read',
-    category: 'Guides',
+// Reusable custom UI components for the articles
+const Callout = ({ title, children, type = 'info' }: { title?: string, children: React.ReactNode, type?: 'info' | 'warning' | 'success' | 'tip' }) => {
+  const config = {
+    info: { bg: 'bg-blue-500/10', border: 'border-blue-500', icon: Info, iconColor: 'text-blue-500' },
+    warning: { bg: 'bg-red-500/10', border: 'border-red-500', icon: AlertTriangle, iconColor: 'text-red-500' },
+    success: { bg: 'bg-green-500/10', border: 'border-green-500', icon: CheckCircle, iconColor: 'text-green-500' },
+    tip: { bg: 'bg-primary-container/40', border: 'border-primary', icon: Lightbulb, iconColor: 'text-primary' }
+  };
+  const { bg, border, icon: Icon, iconColor } = config[type];
+  
+  return (
+    <div className={`my-8 p-6 ${bg} border-l-4 ${border} rounded-r-xl flex gap-4 items-start shadow-sm not-prose`}>
+      <Icon className={`w-6 h-6 flex-shrink-0 mt-0.5 ${iconColor}`} />
+      <div className="text-on-surface text-base leading-relaxed">
+        {title && <h4 className="font-bold text-lg mb-2">{title}</h4>}
+        <div className="opacity-90">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+const SectionHeader = ({ icon: Icon, children }: { icon: React.ElementType, children: React.ReactNode }) => (
+  <h2 className="flex items-center gap-3 mt-12 mb-6 text-2xl font-bold text-on-surface border-b border-outline-variant pb-4">
+    <Icon className="w-6 h-6 text-primary" />
+    {children}
+  </h2>
+);
+
+const PILLAR_PAGES: Record<string, { title: string; description: string; date: string; readTime: string; category: string; content: React.ReactNode }> = {
+  'json': {
+    title: "JSON Format: The Complete Guide for Developers",
+    description: "Master JSON formatting, validation, and schema design. Learn to read, parse, and debug JSON data with real-world examples and interactive tools.",
+    date: 'May 19, 2026',
+    readTime: '8 min read',
+    category: 'Data Formats',
     content: (
       <>
-        <p>JSON (JavaScript Object Notation) has become the de facto standard for data exchange on the web. Despite its simplicity, poor JSON structuring can lead to bloated payloads, difficult maintenance, and parsing errors.</p>
+        <p className="lead text-xl text-outline mb-8">JavaScript Object Notation (JSON) is the undisputed standard for data exchange on the web. Despite its simplicity, poor JSON structuring is the root cause of countless API failures and performance bottlenecks.</p>
         
-        <h2>1. Keep It Simple and Flat</h2>
-        <p>While JSON supports deep nesting, keeping your data structures as flat as possible improves readability and parsing speed. Deeply nested objects often require complex recursive functions to traverse and can cause memory issues in constrained environments.</p>
-        
-        <h2>2. Use Consistent Naming Conventions</h2>
-        <p>Stick to a single naming convention throughout your API. The most common standards are <code>camelCase</code> (preferred in JavaScript/TypeScript environments) and <code>snake_case</code> (popular in Python/Ruby ecosystems).</p>
-        <pre><code>{`// Good
-{ "userId": 123, "firstName": "Jane" }
+        <SectionHeader icon={Database}>The Anatomy of a JSON Payload</SectionHeader>
+        <p>JSON is built on two universal structures:</p>
+        <ul>
+          <li><strong>Objects:</strong> A collection of key/value pairs enclosed in <code>{`{}`}</code>.</li>
+          <li><strong>Arrays:</strong> An ordered list of values enclosed in <code>{`[]`}</code>.</li>
+        </ul>
 
-// Bad (Mixed conventions)
-{ "user_id": 123, "FirstName": "Jane" }`}</code></pre>
-        
-        <h2>3. Always Validate Payload</h2>
-        <p>Never trust incoming JSON data. Use schema validation libraries like Zod, Joi, or JSON Schema to ensure the data matches your expected format before processing it.</p>
-        
-        <h2>4. Proper Formatting for Debugging</h2>
-        <p>Minified JSON is great for production payloads, but during development, you should always format your JSON. Use tools like the <strong>Stoolzen JSON Formatter</strong> to quickly beautify, validate, and inspect your JSON strings.</p>
+        <h3>Allowed Data Types</h3>
+        <p>Unlike JavaScript, JSON is strictly typed. You can only use:</p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 not-prose my-6">
+          {['String', 'Number', 'Boolean', 'Null', 'Object', 'Array'].map(type => (
+            <div key={type} className="bg-surface-container border border-outline-variant px-4 py-2 rounded-lg text-center font-mono text-sm text-primary">
+              {type}
+            </div>
+          ))}
+        </div>
+
+        <SectionHeader icon={AlertTriangle}>Common JSON Formatting Errors</SectionHeader>
+        <p>When APIs throw a <code>SyntaxError: Unexpected token</code>, it's usually one of these culprits:</p>
+
+        <h3>1. Trailing Commas</h3>
+        <p>JSON does <strong>not</strong> allow a comma after the last element of an object or array.</p>
+        <pre><code>{`// ❌ Invalid:
+{"name": "Alice", "age": 30,}
+
+// ✅ Valid:
+{"name": "Alice", "age": 30}`}</code></pre>
+
+        <h3>2. Single Quotes vs. Double Quotes</h3>
+        <p>Keys and string values MUST use double quotes.</p>
+        <pre><code>{`// ❌ Invalid:
+{'status': 'active'}
+
+// ✅ Valid:
+{"status": "active"}`}</code></pre>
+
+        <Callout type="tip" title="Pro Tip: Validate instantly">
+          Stop guessing if your JSON is valid. Use the <Link to="/json" className="text-primary font-bold hover:underline">Stoolzen JSON Formatter & Validator</Link> to instantly detect and fix syntax errors with line-by-line debugging.
+        </Callout>
+
+        <SectionHeader icon={Code}>Real-World Example: Designing Responses</SectionHeader>
+        <p>When building REST APIs, wrap your data in a standardized envelope. This prevents top-level array vulnerabilities and provides metadata context.</p>
+
+        <pre><code>{`{
+  "meta": {
+    "requestId": "req_8f73b9",
+    "timestamp": "2026-05-19T10:38:10Z",
+    "status": 200
+  },
+  "data": {
+    "user": {
+      "id": "1042",
+      "email": "dev@example.com"
+    }
+  }
+}`}</code></pre>
+
+        <Callout type="warning" title="Watch out for Number precision">
+          JavaScript numbers are double-precision 64-bit floats. Numbers larger than <code>9007199254740991</code> will lose precision. Always pass large identifiers (like Snowflake IDs) as Strings (e.g. <code>"1042"</code>), not Numbers.
+        </Callout>
       </>
     )
   },
-  'graphql-best-practices': {
-    title: "GraphQL API Design Best Practices",
-    description: "Discover how to design scalable and maintainable GraphQL schemas, including error handling and performance optimizations.",
-    date: 'May 07, 2026',
+  'jwt': {
+    title: "JWT Authentication: Security Essentials",
+    description: "Understand the core concepts of JSON Web Tokens (JWT) and how to securely implement stateless authentication in your applications.",
+    date: 'May 19, 2026',
     readTime: '6 min read',
-    category: 'API Design',
-    content: (
-      <>
-        <p>GraphQL offers immense flexibility for clients, but that flexibility comes with server-side responsibilities. Designing a great schema requires thought and adherence to best practices.</p>
-
-        <h2>1. Design for the Client, Not the Database</h2>
-        <p>Your GraphQL schema should not be a 1:1 mapping of your database tables. Design your schema based on how the UI and clients consume the data. Use custom resolvers to bridge the gap between your ideal client API and your underlying database schema.</p>
-
-        <h2>2. Use Pagination from Day One</h2>
-        <p>Any field that returns a list should support pagination. Relay's Connection specification (using <code>edges</code>, <code>node</code>, and <code>pageInfo</code>) is the industry standard. Even if a list seems small now, it will likely grow in the future.</p>
-
-        <h2>3. Handle Errors Gracefully</h2>
-        <p>GraphQL always returns a 200 OK HTTP status, even if there are errors. Use the <code>errors</code> array in the response properly. For user-facing errors (like validation failures), consider returning them as part of the schema payload instead of top-level GraphQL errors.</p>
-
-        <h2>4. Prevent Malicious Queries</h2>
-        <p>Because clients dictate what they request, a malicious user could craft a deeply nested query to perform a Denial of Service (DoS) attack. Implement query depth limiting and query complexity analysis to protect your servers.</p>
-      </>
-    )
-  },
-  'jwt-security-essentials': {
-    title: "JWT Security Essentials",
-    description: "Understand the core concepts of JSON Web Tokens (JWT) and how to securely implement authentication in your apps.",
-    date: 'May 08, 2026',
-    readTime: '5 min read',
     category: 'Security',
     content: (
       <>
-        <p>JSON Web Tokens (JWT) are widely used for stateless authentication. However, their simplicity often leads to security vulnerabilities if not implemented correctly.</p>
+        <p className="lead text-xl text-outline mb-8">JSON Web Tokens (JWT) are the modern standard for stateless authentication in single-page applications (SPAs) and microservices. However, their simplicity and flexibility often lead to severe security vulnerabilities if implemented incorrectly.</p>
 
-        <h2>1. Keep Secrets Secret</h2>
-        <p>The signing key (secret) is the only thing preventing users from forging their own tokens. Use strong, long, and randomly generated secrets. Never hardcode them in your application; use environment variables.</p>
-
-        <h2>2. Don't Store Sensitive Data in the Payload</h2>
-        <p>A JWT is signed, not encrypted. Anyone who intercepts the token can decode it (using tools like the <strong>Stoolzen JWT Decoder</strong>) and read the payload. Only store non-sensitive identifiers like User IDs and Roles.</p>
-
-        <h2>3. Set a Short Expiration Time</h2>
-        <p>Stateless tokens cannot be easily invalidated. To mitigate the risk of a stolen token, set a short <code>exp</code> (expiration) time—typically 15 to 60 minutes. Use Refresh Tokens to obtain new JWTs without requiring the user to log in again.</p>
-
-        <h2>4. Use Appropriate Algorithms</h2>
-        <p>Use strong algorithms like <code>RS256</code> (RSA Signature with SHA-256) instead of <code>HS256</code> if your system is distributed and different services need to verify the token without knowing the private key.</p>
-      </>
-    )
-  },
-  'cors-errors-explained': {
-    title: "Understanding and Fixing CORS Errors",
-    description: "A comprehensive guide to understanding Cross-Origin Resource Sharing (CORS) and how to resolve common errors in modern web apps.",
-    date: 'May 09, 2026',
-    readTime: '7 min read',
-    category: 'Web Dev',
-    content: (
-      <>
-        <p>If you're a frontend developer, you've likely seen it: the dreaded red text in your console complaining about "No Access-Control-Allow-Origin header is present on the requested resource". Let's break down why this happens and how to fix it.</p>
-
-        <h2>What is CORS?</h2>
-        <p>CORS (Cross-Origin Resource Sharing) is a browser security mechanism. By default, browsers restrict scripts from reading data from a different domain than the one that served the script. This is known as the <strong>Same-Origin Policy</strong>.</p>
-        <p>CORS is the mechanism that allows servers to tell the browser: "It's okay, I allow requests from that specific domain."</p>
-
-        <h2>Common Causes of CORS Errors</h2>
-        <ul>
-          <li><strong>Development vs Production:</strong> Your local app runs on <code>localhost:3000</code>, but your API is on <code>api.example.com</code>. The browser blocks the request.</li>
-          <li><strong>Missing Headers:</strong> The backend server genuinely isn't sending the <code>Access-Control-Allow-Origin</code> header.</li>
-          <li><strong>Preflight Failures:</strong> For complex requests (like PUT, DELETE, or requests with custom headers), the browser sends an <code>OPTIONS</code> preflight request first. If the server doesn't respond correctly to <code>OPTIONS</code>, the actual request fails.</li>
-        </ul>
-
-        <h2>How to Fix CORS Errors</h2>
-        <p><strong>1. Fix it on the Backend (The Right Way):</strong> The API server needs to be configured to allow your frontend's domain. If you control the backend, configure your CORS middleware to accept your frontend's URL.</p>
-        <p><strong>2. Local Proxy (The Dev Way):</strong> If you're building a React/Vite app, use a proxy in your <code>vite.config.ts</code> or <code>webpack.config.js</code> to trick the browser into thinking the request is going to the same domain.</p>
-        <p><strong>3. Never Use "No-CORS" Extensions in Production:</strong> Browser extensions that disable CORS are for temporary debugging only. Your real users won't have them installed!</p>
-      </>
-    )
-  },
-  'base64-encoding-guide': {
-    title: "When to Use Base64 Encoding: A Practical Guide",
-    description: "Learn what Base64 encoding actually is, why it exists, and the best use cases for encoding data in web applications.",
-    date: 'May 10, 2026',
-    readTime: '5 min read',
-    category: 'Fundamentals',
-    content: (
-      <>
-        <p>Base64 is everywhere in web development. You see it in data URIs, in JWT tokens (which you can decode using our <strong>JWT Decoder</strong>), and in email attachments. But what exactly is it?</p>
-
-        <h2>It's Encoding, Not Encryption</h2>
-        <p>The most important thing to know: Base64 is not encryption. It provides zero security. Anyone can decode a Base64 string instantly. Its purpose is to safely transmit binary data across channels that only reliably support text.</p>
-
-        <h2>How It Works</h2>
-        <p>Base64 takes 3 bytes of binary data (24 bits) and splits them into 4 chunks of 6 bits. Each 6-bit chunk maps to one of 64 standard ASCII characters (A-Z, a-z, 0-9, +, and /). This guarantees that the resulting string contains no control characters that might break a text parser.</p>
-
-        <h2>Best Use Cases</h2>
-        <ul>
-          <li><strong>Data URIs:</strong> Embedding small images directly in CSS or HTML (e.g., <code>data:image/png;base64,...</code>) to save an HTTP request.</li>
-          <li><strong>JSON Payloads:</strong> JSON cannot store raw binary data. If you need to send a file via a JSON API, encoding it to Base64 is the standard approach.</li>
-          <li><strong>JWTs:</strong> JSON Web Tokens use Base64Url encoding (a web-safe variant) so the token can be passed safely in URLs and HTTP headers.</li>
-        </ul>
-
-        <h2>The Drawback: Size</h2>
-        <p>Because it uses 4 bytes to represent 3 bytes of data, Base64 encoding increases file size by roughly <strong>33%</strong>. For large files (like high-res images or videos), this overhead is significant and you should use multipart form uploads instead.</p>
-      </>
-    )
-  },
-  'regex-for-developers': {
-    title: "Mastering Regex: Common Patterns for Devs",
-    description: "Stop copy-pasting Regex. Learn how to write and understand common regular expressions used for validation and parsing.",
-    date: 'May 11, 2026',
-    readTime: '8 min read',
-    category: 'Snippets',
-    content: (
-      <>
-        <p>Regular Expressions (Regex) look like line noise to beginners, but they are incredibly powerful tools for string manipulation and validation. Here are a few patterns every developer should understand.</p>
-
-        <h2>1. Validating an Email Address</h2>
-        <p>While a perfectly compliant RFC email regex is pages long, a practical and widely used pattern looks like this:</p>
-        <pre><code>{`/^[^\s@]+@[^\s@]+\.[^\s@]+$/`}</code></pre>
-        <p><strong>How it works:</strong> It ensures there is some text that isn't a space or @ symbol, followed by an @, followed by more valid text, a dot, and a final domain suffix.</p>
-
-        <h2>2. Password Strength Requirements</h2>
-        <p>Want to enforce a password with at least one uppercase letter, one lowercase letter, one number, and at least 8 characters?</p>
-        <pre><code>{`/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/`}</code></pre>
-        <p><strong>How it works:</strong> This uses <em>Positive Lookaheads</em> (<code>?=</code>) to assert that the string contains the required character types anywhere before matching the whole string length.</p>
-
-        <h2>3. Extracting Bearer Tokens</h2>
-        <p>Often you need to extract the token string from an Authorization header:</p>
-        <pre><code>{`/^Bearer\s+(.*)$/i`}</code></pre>
-        <p><strong>How it works:</strong> It looks for the word "Bearer" (case insensitive due to the <code>i</code> flag), followed by whitespace, and captures everything after it into a capture group <code>(.*)</code>.</p>
+        <SectionHeader icon={Shield}>The Structure of a JWT</SectionHeader>
+        <p>A JWT is a string composed of three parts, separated by dots (<code>.</code>): <strong>Header</strong>, <strong>Payload</strong>, and <strong>Signature</strong>.</p>
         
-        <p>Once you extract your token, you can always paste it into our <strong>JWT Decoder</strong> tool to inspect its contents!</p>
+        <pre><code>{`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. // Header (Algorithm)
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ. // Payload
+SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c // Signature`}</code></pre>
+
+        <Callout type="warning" title="JWTs are Encoded, Not Encrypted">
+          This is the most common misconception. The Header and Payload are merely <em>Base64Url encoded</em>. Anyone who intercepts the token can decode it and read the contents.
+        </Callout>
+        
+        <Callout type="tip" title="Try it yourself">
+          Copy any JWT from your browser's local storage and paste it into the <Link to="/jwt" className="text-primary font-bold hover:underline">Stoolzen JWT Decoder</Link>. You'll instantly see the decoded payload data.
+        </Callout>
+
+        <SectionHeader icon={CheckCircle}>Security Best Practices</SectionHeader>
+        
+        <h3>1. Never Store Sensitive Data</h3>
+        <p>Because the payload is readable by anyone, never put passwords, API keys, or sensitive PII inside a JWT.</p>
+        <pre><code>{`// ❌ Bad Practice:
+{ "id": 101, "role": "admin", "ssn": "000-00-0000" }
+
+// ✅ Good Practice:
+{ "sub": "user_101", "role": "admin" }`}</code></pre>
+
+        <h3>2. Keep Tokens Short-Lived</h3>
+        <p>Because JWTs are stateless, they cannot be easily revoked before they expire. If an attacker steals a token, they have access until it dies.</p>
+        <ul>
+          <li><strong>Access Tokens:</strong> Set the <code>exp</code> claim to 15-60 minutes.</li>
+          <li><strong>Refresh Tokens:</strong> Use opaque refresh tokens stored securely in HttpOnly cookies.</li>
+        </ul>
+
+        <SectionHeader icon={Shield}>The "None" Algorithm Vulnerability</SectionHeader>
+        <p>Some JWT libraries historically supported an algorithm of <code>"alg": "none"</code>, allowing tokens to bypass signature validation entirely. An attacker can strip the signature, change the payload, set alg to "none", and gain unauthorized access.</p>
+        
+        <Callout type="success" title="The Fix">
+          Always explicitly specify the expected algorithm when verifying a token on your backend.
+        </Callout>
+        
+        <pre><code>{`// Node.js example using jsonwebtoken
+jwt.verify(token, publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
+  // Safe verification
+});`}</code></pre>
+      </>
+    )
+  },
+  'regex': {
+    title: "Mastering Regular Expressions: Stop Copy-Pasting",
+    description: "Learn how to read, write, and optimize Regex patterns. Covering capture groups, lookarounds, and avoiding catastrophic backtracking (ReDoS).",
+    date: 'May 19, 2026',
+    readTime: '7 min read',
+    category: 'Encoding & Strings',
+    content: (
+      <>
+        <p className="lead text-xl text-outline mb-8">Regular Expressions (Regex) often look like line noise to developers, making it tempting to just copy-paste from StackOverflow. But understanding the core syntax unlocks one of the most powerful text-processing tools in programming.</p>
+
+        <SectionHeader icon={Code}>The Building Blocks</SectionHeader>
+        <p>At its core, a Regex is just a sequence of characters that define a search pattern. Here are the essentials:</p>
+        <ul>
+          <li><strong>Character Classes (<code>\d</code>, <code>\w</code>, <code>\s</code>):</strong> Match digits, word characters, or whitespace.</li>
+          <li><strong>Quantifiers (<code>*</code>, <code>+</code>, <code>?</code>, <code>{'{'}n,m{'}'}</code>):</strong> Specify how many times a pattern should occur.</li>
+          <li><strong>Anchors (<code>^</code>, <code>$</code>):</strong> Tie the match to the start (<code>^</code>) or end (<code>$</code>) of a string.</li>
+        </ul>
+
+        <SectionHeader icon={Database}>Capture Groups vs. Non-Capturing</SectionHeader>
+        <p>When you wrap part of a regex in parentheses <code>( )</code>, you create a capture group. This allows you to extract that specific part of the match later in your code.</p>
+        <pre><code>{`const dateRegex = /^(\\d{4})-(\\d{2})-(\\d{2})$/;
+const match = "2026-05-19".match(dateRegex);
+console.log(match[1]); // "2026" (The year)`}</code></pre>
+        
+        <Callout type="info" title="Performance Tip">
+          If you need parentheses just for grouping logic (like <code>(a|b)</code>), but don't want to save the result in memory, use a non-capturing group <code>(?: )</code> for better performance.
+        </Callout>
+
+        <SectionHeader icon={AlertTriangle}>ReDoS: Catastrophic Backtracking</SectionHeader>
+        <p>A poorly written Regex can crash your server. Regular Expression Denial of Service (ReDoS) happens when an engine uses backtracking to evaluate overlapping groups with quantifiers (like <code>(a+)+$</code>).</p>
+        <Callout type="warning">
+          An attacker can supply a long, almost-matching string that takes exponential time to evaluate, freezing your Node.js event loop instantly.
+        </Callout>
+      </>
+    )
+  },
+  'base64': {
+    title: "Base64 Encoding Explained",
+    description: "Learn how Base64 works, why it inflates file sizes, and the critical differences between encoding, encryption, and hashing.",
+    date: 'May 19, 2026',
+    readTime: '5 min read',
+    category: 'Encoding & Strings',
+    content: (
+      <>
+        <p className="lead text-xl text-outline mb-8">Base64 is everywhere: Data URIs, email attachments, and JWTs. But despite its prevalence, many developers confuse it with encryption. Let's break down what Base64 actually does.</p>
+
+        <SectionHeader icon={Shield}>What is Base64? (And What It Isn't)</SectionHeader>
+        <Callout type="warning" title="Base64 is Encoding, NOT Encryption">
+          It provides zero security. Anyone can decode a Base64 string instantly. Its sole purpose is to safely transport raw binary data across channels that were designed to only handle text.
+        </Callout>
+
+        <SectionHeader icon={Settings}>How It Works Under the Hood</SectionHeader>
+        <p>Computers store data in bytes (8 bits). Base64 takes 3 bytes of binary data (24 bits total) and divides them into 4 chunks of 6 bits each.</p>
+        <p>Each 6-bit chunk has 64 possible values (2<sup>6</sup> = 64). These values are mapped to a standard ASCII alphabet: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code>, and <code>/</code>.</p>
+        
+        <h3>The Cost: 33% Size Inflation</h3>
+        <p>Because it takes 4 characters (4 bytes of text) to represent 3 bytes of raw binary, Base64 encoding inflates the size of your data by exactly <strong>33.3%</strong>.</p>
+
+        <Callout type="tip" title="Need to encode a file?">
+          Use the <Link to="/base64" className="text-primary font-bold hover:underline">Stoolzen Base64 Tool</Link> to instantly encode text, images, or decode Base64 strings safely in your browser.
+        </Callout>
+      </>
+    )
+  },
+  'api-debugging': {
+    title: "API Debugging & The CORS Guide",
+    description: "Stop fighting CORS errors. Understand the Same-Origin Policy, preflight requests, and how to debug REST APIs like a senior engineer.",
+    date: 'May 19, 2026',
+    readTime: '6 min read',
+    category: 'Web Development',
+    content: (
+      <>
+        <p className="lead text-xl text-outline mb-8">Nothing frustrates a frontend developer quite like seeing the dreaded <code>No Access-Control-Allow-Origin header is present</code> error in the browser console. Let's demystify CORS and API debugging.</p>
+
+        <SectionHeader icon={Globe}>The Same-Origin Policy</SectionHeader>
+        <p>By default, browsers restrict a script loaded from <code>https://myapp.com</code> from requesting data from <code>https://api.com</code>. This is a crucial security mechanism.</p>
+        <p><strong>CORS (Cross-Origin Resource Sharing)</strong> is the mechanism that allows servers to punch a hole in this policy.</p>
+
+        <SectionHeader icon={Server}>How to Fix CORS Errors</SectionHeader>
+        <Callout type="info" title="It's a Backend Problem">
+          A CORS error is almost always a Backend issue. Your API server must send the correct HTTP headers in its response.
+        </Callout>
+        
+        <pre><code>{`// A standard backend configuration must include:
+Access-Control-Allow-Origin: https://myapp.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+Access-Control-Allow-Headers: Content-Type, Authorization`}</code></pre>
+
+        <SectionHeader icon={Zap}>Preflight Requests (OPTIONS)</SectionHeader>
+        <p>If you're making a "complex" request (like a <code>POST</code> with a JSON body), the browser automatically sends a transparent <code>OPTIONS</code> request first to ask the server for permission.</p>
+        <p>If your API server doesn't respond to the <code>OPTIONS</code> method with a <code>200 OK</code> and the correct CORS headers, the actual <code>POST</code> request is blocked before it even starts.</p>
       </>
     )
   }
@@ -170,7 +259,7 @@ const ARTICLES: Record<string, { title: string; description: string; date: strin
 
 export const DocArticle: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const article = id ? ARTICLES[id] : null;
+  const article = id ? PILLAR_PAGES[id] : null;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -182,7 +271,7 @@ export const DocArticle: React.FC = () => {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "TechArticle",
     "headline": article.title,
     "description": article.description,
     "datePublished": new Date(article.date).toISOString(),
@@ -193,11 +282,11 @@ export const DocArticle: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto pb-12">
+    <div className="max-w-4xl mx-auto pb-12">
       <SEO 
         title={`${article.title} | Stoolzen Docs`}
         description={article.description}
-        keywords={`${article.category.toLowerCase()}, developer guide, stoolzen blog`}
+        keywords={`${article.category.toLowerCase()}, developer guide, stoolzen docs, ${id}`}
         jsonLd={jsonLd}
       />
       
@@ -206,11 +295,11 @@ export const DocArticle: React.FC = () => {
         className="inline-flex items-center text-sm font-bold text-outline hover:text-primary transition-colors mb-8 group"
       >
         <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-        Back to all guides
+        Back to Knowledge Hub
       </Link>
 
-      <article className="bg-surface-bright border border-outline-variant rounded-2xl p-6 md:p-10 shadow-sm">
-        <div className="flex items-center gap-4 text-sm font-medium text-outline mb-6 flex-wrap">
+      <article className="bg-surface-bright border border-outline-variant rounded-2xl p-6 md:p-12 shadow-sm">
+        <div className="flex items-center gap-4 text-sm font-medium text-outline mb-8 flex-wrap">
           <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             {article.category}
           </span>
@@ -224,30 +313,31 @@ export const DocArticle: React.FC = () => {
           </div>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-extrabold text-on-surface tracking-tight mb-6 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-on-surface tracking-tight mb-8 leading-tight">
           {article.title}
         </h1>
 
-        <p className="text-xl text-outline mb-10 leading-relaxed font-medium">
-          {article.description}
-        </p>
-
-        <div className="prose prose-slate prose-lg dark:prose-invert max-w-none prose-headings:text-on-surface prose-headings:font-bold prose-p:text-on-surface prose-a:text-primary hover:prose-a:text-primary-dark prose-code:text-primary prose-code:bg-primary-container prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-surface-container prose-pre:border prose-pre:border-outline-variant prose-pre:text-on-surface">
+        <div className="prose prose-slate prose-lg dark:prose-invert max-w-none 
+          prose-headings:text-on-surface prose-headings:font-bold 
+          prose-p:text-on-surface/90 
+          prose-a:text-primary hover:prose-a:text-primary-dark prose-a:font-bold
+          prose-code:text-primary prose-code:bg-primary-container/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded 
+          prose-pre:bg-surface-container prose-pre:border prose-pre:border-outline-variant prose-pre:text-on-surface prose-pre:shadow-sm prose-pre:rounded-xl
+          prose-ul:text-on-surface/90 prose-li:marker:text-primary">
           {article.content}
         </div>
       </article>
 
-      <div className="mt-12 text-center">
-        <h3 className="text-2xl font-bold text-on-surface mb-6">Need the right tool for the job?</h3>
+      {/* Dynamic CTA block based on category/article */}
+      <div className="mt-12 text-center bg-primary-container/20 rounded-2xl p-10 border border-primary/20 shadow-sm">
+        <h3 className="text-2xl font-bold text-on-surface mb-4">Ready to put this into practice?</h3>
+        <p className="text-outline text-lg mb-8 max-w-2xl mx-auto">Test your knowledge with our live developer tools. Formatting, decoding, and parsing made easy.</p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/json" className="px-6 py-3 bg-surface-bright border border-outline-variant text-on-surface font-bold rounded-lg hover:border-primary hover:text-primary transition-all">
-            JSON Formatter
+          <Link to="/json" className="px-6 py-3 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary-dark transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            Open JSON Formatter
           </Link>
-          <Link to="/graphql" className="px-6 py-3 bg-surface-bright border border-outline-variant text-on-surface font-bold rounded-lg hover:border-primary hover:text-primary transition-all">
-            GraphQL Formatter
-          </Link>
-          <Link to="/jwt" className="px-6 py-3 bg-surface-bright border border-outline-variant text-on-surface font-bold rounded-lg hover:border-primary hover:text-primary transition-all">
-            JWT Decoder
+          <Link to="/jwt" className="px-6 py-3 bg-surface-bright border-2 border-outline-variant text-on-surface font-bold rounded-lg hover:border-primary hover:text-primary transition-all">
+            Open JWT Decoder
           </Link>
         </div>
       </div>

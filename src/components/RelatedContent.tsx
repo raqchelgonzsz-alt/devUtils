@@ -59,8 +59,8 @@ export const RelatedContent: React.FC<RelatedContentProps> = ({
     { name: 'API Tools', path: '/tools/api' }
   ],
   guides = [
-    { name: 'Guía de Formateo JSON', path: '/docs/json-formatting-guide' },
-    { name: 'Mejores Prácticas GraphQL', path: '/docs/graphql-best-practices' }
+    { name: 'JSON Formatting Guide', path: '/docs/json-formatting-guide' },
+    { name: 'GraphQL Best Practices', path: '/docs/graphql-best-practices' }
   ]
 }) => {
   return (
@@ -71,7 +71,7 @@ export const RelatedContent: React.FC<RelatedContentProps> = ({
           <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600">
             <LayoutGrid className="w-5 h-5" />
           </div>
-          <h2 className="text-xl font-bold">Herramientas Relacionadas</h2>
+          <h2 className="text-xl font-bold">Related Tools</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {relatedTools.map((tool) => {
@@ -109,7 +109,7 @@ export const RelatedContent: React.FC<RelatedContentProps> = ({
             <div className="p-2 bg-amber-50 rounded-lg text-amber-600">
               <LayoutGrid className="w-5 h-5" />
             </div>
-            <h2 className="text-lg font-bold">Explorar Categorías</h2>
+            <h2 className="text-lg font-bold">Explore Categories</h2>
           </div>
           <div className="grid grid-cols-1 gap-3">
             {categories.slice(0, 2).map((cat) => (
@@ -131,7 +131,7 @@ export const RelatedContent: React.FC<RelatedContentProps> = ({
             <div className="p-2 bg-emerald-50 rounded-lg text-emerald-600">
               <BookOpen className="w-5 h-5" />
             </div>
-            <h2 className="text-lg font-bold">Guías y Recursos</h2>
+            <h2 className="text-lg font-bold">Guides & Resources</h2>
           </div>
           <div className="grid grid-cols-1 gap-3">
             {guides.slice(0, 2).map((guide) => (

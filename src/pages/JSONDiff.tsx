@@ -11,37 +11,37 @@ import { formatJSON } from '../utils/toolUtils';
 
 const DIFF_SEO_MAP: Record<string, { title: string; description: string; keywords: string; h1: string; subtitle: string; intro: string; faqs: { q: string; a: string }[] }> = {
   '/tools/json/diff': {
-    title: 'JSON Diff Online - Comparar dos Archivos JSON | Stoolzen',
-    description: 'Compara dos cadenas JSON online y visualiza las diferencias línea por línea. Herramienta gratuita, rápida y segura para desarrolladores.',
-    keywords: 'json diff online, comparar json, diferencias json, json comparison tool, dev tools',
+    title: 'JSON Diff Online - Compare two JSON Files | Stoolzen',
+    description: 'Compare two JSON strings online and visualize differences line by line. Free, fast, and secure tool for developers.',
+    keywords: 'json diff online, compare json, json differences, json comparison tool, dev tools',
     h1: 'JSON Diff & Compare',
-    subtitle: 'Compara dos estructuras JSON y encuentra las diferencias al instante.',
-    intro: 'Nuestra herramienta de JSON Diff permite comparar dos fragmentos de código JSON de forma visual. Utiliza el motor de VS Code para resaltar adiciones, eliminaciones y cambios, facilitando la depuración de payloads de APIs o configuraciones.',
+    subtitle: 'Compare two JSON structures and find differences instantly.',
+    intro: 'Our JSON Diff tool allows you to compare two JSON code snippets visually. It uses the VS Code engine to highlight additions, deletions, and changes, making it easy to debug API payloads or configurations.',
     faqs: [
-      { q: "¿Cómo funciona la comparación?", a: "La herramienta analiza ambos JSONs y resalta en verde las adiciones y en rojo las eliminaciones. Si los JSONs no están formateados, te recomendamos usar el botón 'Prettify' primero." },
-      { q: "¿Es seguro comparar datos sensibles?", a: "Sí. Todo el procesamiento de comparación ocurre localmente en tu navegador. Tus datos nunca se envían a nuestros servidores." }
+      { q: "How does the comparison work?", a: "The tool analyzes both JSONs and highlights additions in green and deletions in red. If the JSONs are not formatted, we recommend using the 'Prettify' button first." },
+      { q: "Is it safe to compare sensitive data?", a: "Yes. All comparison processing happens locally in your browser. Your data is never sent to our servers." }
     ]
   },
   '/tools/json/compare': {
-    title: 'Comparador de JSON Online Gratis | Stoolzen',
-    description: 'Encuentra diferencias entre dos objetos JSON online. Visualización clara y detallada de cambios en estructuras JSON.',
-    keywords: 'comparar json online, json compare tool, diferencias entre json, validar cambios json',
+    title: 'Free Online JSON Comparator | Stoolzen',
+    description: 'Find differences between two JSON objects online. Clear and detailed visualization of changes in JSON structures.',
+    keywords: 'compare json online, json compare tool, json differences, validate json changes',
     h1: 'JSON Comparator',
-    subtitle: 'La forma más fácil de comparar dos objetos JSON en tu navegador.',
-    intro: 'El comparador de JSON de Stoolzen es ideal para cuando necesitas saber qué ha cambiado entre dos respuestas de una API o dos versiones de un archivo de configuración. Soporta archivos grandes y ofrece una vista dividida profesional.',
+    subtitle: 'The easiest way to compare two JSON objects in your browser.',
+    intro: 'The Stoolzen JSON Comparator is ideal for when you need to know what changed between two API responses or two versions of a configuration file. It supports large files and offers a professional split view.',
     faqs: [
-      { q: "¿Puedo comparar JSONs minificados?", a: "Sí, pero para una mejor visualización de las diferencias, la herramienta intentará auto-formatearlos antes de mostrar el diff." }
+      { q: "Can I compare minified JSONs?", a: "Yes, but for a better visualization of differences, the tool will try to auto-format them before showing the diff." }
     ]
   }
 };
 
 const FALLBACK_SEO = {
   title: 'JSON Diff & Compare Online | Stoolzen',
-  description: 'Compara dos estructuras JSON y visualiza las diferencias.',
+  description: 'Compare two JSON structures and visualize the differences.',
   keywords: 'json diff, json compare, developer tools',
   h1: 'JSON Diff',
-  subtitle: 'Compara y encuentra diferencias en tus datos JSON.',
-  intro: 'Una utilidad potente para comparar dos cadenas JSON lado a lado.',
+  subtitle: 'Compare and find differences in your JSON data.',
+  intro: 'A powerful utility to compare two JSON strings side by side.',
   faqs: []
 };
 
@@ -88,7 +88,7 @@ export const JSONDiff: React.FC = () => {
     try {
       setOriginal(formatJSON(original, '2'));
       setModified(formatJSON(modified, '2'));
-      setStatusMessage({ title: 'JSONs Formateados', detail: 'Ambos lados han sido embellecidos para una mejor comparación.' });
+      setStatusMessage({ title: 'JSONs Formatted', detail: 'Both sides have been beautified for better comparison.' });
       setShowStatus(true);
       setTimeout(() => setShowStatus(false), 3000);
     } catch (e) {
@@ -124,7 +124,7 @@ export const JSONDiff: React.FC = () => {
           <button 
             onClick={handlePrettify} 
             className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 hover:bg-indigo-700 active:scale-95 shadow-md"
-            title="Formatear ambos lados"
+            title="Format both sides"
           >
             <Wand2 className="w-4 h-4" />
             Prettify
@@ -132,7 +132,7 @@ export const JSONDiff: React.FC = () => {
           <button 
             onClick={handleClear} 
             className="px-4 py-2 bg-surface-container border border-outline-variant text-on-surface rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 hover:bg-surface-container-high active:scale-95 shadow-sm"
-            title="Limpiar todo"
+            title="Clear all"
           >
             <Trash2 className="w-4 h-4" />
             Clear
@@ -178,31 +178,31 @@ export const JSONDiff: React.FC = () => {
         <section className="max-w-4xl space-y-6">
           <h2 className="text-2xl font-bold text-on-surface flex items-center gap-2">
             <GitCompare className="w-6 h-6 text-indigo-500" />
-            ¿Por qué usar {seo.h1}?
+            Why use {seo.h1}?
           </h2>
           <p className="text-outline text-lg leading-relaxed">
             {seo.intro}
           </p>
           <div className="prose prose-slate max-w-none text-outline space-y-4">
             <p>
-              En el desarrollo de software moderno, los archivos JSON son el estándar de facto para el intercambio de datos. Sin embargo, cuando trabajamos con respuestas de API complejas o archivos de configuración de miles de líneas, identificar cambios manuales es propenso a errores humanos. 
-              Nuestro <strong>comparador de JSON online</strong> utiliza un algoritmo de diferenciación avanzado para resaltar no solo líneas cambiadas, sino también cambios semánticos dentro de los objetos.
+              In modern software development, JSON files are the de facto standard for data exchange. However, when working with complex API responses or configuration files spanning thousands of lines, identifying manual changes is prone to human error. 
+              Our <strong>online JSON comparator</strong> uses an advanced diffing algorithm to highlight not only changed lines but also semantic changes within objects.
             </p>
-            <h3 className="text-xl font-bold text-on-surface pt-4">Casos de uso reales</h3>
+            <h3 className="text-xl font-bold text-on-surface pt-4">Real Use Cases</h3>
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Depuración de APIs:</strong> Compara la respuesta de tu servidor local vs producción para encontrar inconsistencias en el esquema.</li>
-              <li><strong>Control de Versiones:</strong> Analiza cambios en archivos <code>package.json</code> o archivos de configuración de infraestructura (Terraform, CloudFormation) antes de hacer un commit.</li>
-              <li><strong>Validación de Regresiones:</strong> Asegúrate de que una actualización en tu base de datos no ha alterado campos críticos en el payload de salida.</li>
+              <li><strong>API Debugging:</strong> Compare your local server response vs production to find schema inconsistencies.</li>
+              <li><strong>Version Control:</strong> Analyze changes in <code>package.json</code> files or infrastructure configuration files (Terraform, CloudFormation) before committing.</li>
+              <li><strong>Regression Testing:</strong> Ensure an update to your database hasn't altered critical fields in the output payload.</li>
             </ul>
           </div>
         </section>
 
         {/* Examples Section */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-on-surface">Ejemplos de Comparación JSON</h2>
+          <h2 className="text-2xl font-bold text-on-surface">JSON Comparison Examples</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <span className="text-[10px] font-bold uppercase text-outline">Entrada Original</span>
+              <span className="text-[10px] font-bold uppercase text-outline">Original Input</span>
               <pre className="bg-surface-container p-4 rounded-xl text-xs font-mono border border-outline-variant overflow-x-auto text-on-surface">
 {`{
   "id": 1,
@@ -212,7 +212,7 @@ export const JSONDiff: React.FC = () => {
               </pre>
             </div>
             <div className="space-y-2">
-              <span className="text-[10px] font-bold uppercase text-outline">Entrada Modificada</span>
+              <span className="text-[10px] font-bold uppercase text-outline">Modified Input</span>
               <pre className="bg-surface-container p-4 rounded-xl text-xs font-mono border border-outline-variant overflow-x-auto text-on-surface">
 {`{
   "id": 1,
@@ -224,14 +224,14 @@ export const JSONDiff: React.FC = () => {
             </div>
           </div>
           <p className="text-sm text-outline italic">
-            * El editor resaltará "status" en rojo/verde, "tags" mostrará el cambio de "test" por "prod", y se marcará la nueva línea "version" como una adición.
+            * The editor will highlight "status" in red/green, "tags" will show the change from "test" to "prod", and the new "version" line will be marked as an addition.
           </p>
         </section>
 
         {/* FAQs */}
         {seo.faqs.length > 0 && (
           <section className="bg-surface-container-low rounded-3xl p-8 md:p-12 border border-outline-variant">
-            <h2 className="text-2xl font-bold text-on-surface mb-8 text-center">Preguntas Frecuentes</h2>
+            <h2 className="text-2xl font-bold text-on-surface mb-8 text-center">Frequently Asked Questions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {seo.faqs.map((faq, idx) => (
                 <div key={idx} className="space-y-3">
@@ -249,19 +249,19 @@ export const JSONDiff: React.FC = () => {
           category="json"
           currentPath={pathname}
           relatedTools={[
-            { name: 'JSON Formatter', path: '/tools/json/formatter', desc: 'Formatea y embellece tus objetos JSON' },
-            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Detecta errores de sintaxis al instante' },
-            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Convierte JSON a cadenas escapadas' },
-            { name: 'JSONPath Explorer', path: '/tools/json/path-explorer', desc: 'Consulta estructuras JSON complejas' },
-            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Comprime el código para optimizar espacio' },
+            { name: 'JSON Formatter', path: '/tools/json/formatter', desc: 'Format and beautify your JSON objects' },
+            { name: 'JSON Validator', path: '/tools/json/validator', desc: 'Detect syntax errors instantly' },
+            { name: 'JSON Escape', path: '/tools/json/escape', desc: 'Convert JSON to escaped strings' },
+            { name: 'JSONPath Explorer', path: '/tools/json/path-explorer', desc: 'Query complex JSON structures' },
+            { name: 'JSON Minifier', path: '/tools/json/minify', desc: 'Compress code to optimize space' },
           ]}
           categories={[
-            { name: 'Herramientas JSON', path: '/tools/json' },
-            { name: 'Utilidades de Texto', path: '/tools/text' }
+            { name: 'JSON Tools', path: '/tools/json' },
+            { name: 'Text Utilities', path: '/tools/text' }
           ]}
           guides={[
-            { name: 'Diferencias entre JSON y XML', path: '/docs/json-vs-xml' },
-            { name: 'Cómo depurar APIs con JSON Diff', path: '/docs/debug-api-json-diff' }
+            { name: 'Differences between JSON and XML', path: '/docs/json-vs-xml' },
+            { name: 'How to debug APIs with JSON Diff', path: '/docs/debug-api-json-diff' }
           ]}
         />
       </div>
