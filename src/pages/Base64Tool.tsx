@@ -118,7 +118,7 @@ export const Base64Tool: React.FC = () => {
   const btnClass = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 active:scale-95 shadow-sm";
 
   return (
-    <div className="h-full flex flex-col space-y-6 relative pb-20">
+    <div className="min-h-full flex flex-col space-y-6 relative pb-20">
       <SEO 
         title={seo.title}
         description={seo.description}

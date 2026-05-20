@@ -102,7 +102,7 @@ export const JSONDiff: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-6 pb-20">
+    <div className="flex flex-col space-y-6 pb-20">
       <SEO 
         title={seo.title}
         description={seo.description}
@@ -140,37 +140,41 @@ export const JSONDiff: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex-1 bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm min-h-[650px]">
-        <div className="px-4 py-2 border-b border-outline-variant bg-surface-container-high flex justify-between text-[10px] font-bold uppercase tracking-widest text-outline">
+      <div className="h-[500px] md:h-[600px] lg:h-[650px] bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm flex flex-col">
+        <div className="px-4 py-2 border-b border-outline-variant bg-surface-container-high flex justify-between text-[10px] font-bold uppercase tracking-widest text-outline flex-shrink-0">
           <span>Original JSON</span>
           <span>Modified JSON</span>
         </div>
-        <DiffEditor
-          height="100%"
-          original={original}
-          modified={modified}
-          language="json"
-          theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-          loading={<EditorSkeleton />}
-          options={{
-            renderSideBySide: true,
-            minimap: { enabled: false },
-            fontSize: 13,
-            fontFamily: 'JetBrains Mono',
-            automaticLayout: true,
-            originalEditable: true,
-            scrollBeyondLastLine: false,
-            padding: { top: 20 }
-          }}
-          onMount={(editor) => {
-             editor.getOriginalEditor().onDidChangeModelContent(() => {
-                setOriginal(editor.getOriginalEditor().getValue());
-             });
-             editor.getModifiedEditor().onDidChangeModelContent(() => {
-                setModified(editor.getModifiedEditor().getValue());
-             });
-          }}
-        />
+        <div className="flex-1 relative overflow-hidden w-full h-full">
+          <div className="absolute inset-0">
+            <DiffEditor
+              height="100%"
+              original={original}
+              modified={modified}
+              language="json"
+              theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+              loading={<EditorSkeleton />}
+              options={{
+                renderSideBySide: true,
+                minimap: { enabled: false },
+                fontSize: 13,
+                fontFamily: 'JetBrains Mono',
+                automaticLayout: true,
+                originalEditable: true,
+                scrollBeyondLastLine: false,
+                padding: { top: 20 }
+              }}
+              onMount={(editor) => {
+                 editor.getOriginalEditor().onDidChangeModelContent(() => {
+                    setOriginal(editor.getOriginalEditor().getValue());
+                 });
+                 editor.getModifiedEditor().onDidChangeModelContent(() => {
+                    setModified(editor.getModifiedEditor().getValue());
+                 });
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* SEO/Educational Content */}

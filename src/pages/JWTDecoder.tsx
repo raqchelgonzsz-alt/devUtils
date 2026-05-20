@@ -138,9 +138,9 @@ export const JWTDecoder: React.FC = () => {
         </div>
 
         {/* Detailed Panels */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[650px]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[900px] lg:h-[550px]">
           {/* Header */}
-          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm h-full">
             <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
               <div className="flex flex-col">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Header</span>
@@ -154,26 +154,28 @@ export const JWTDecoder: React.FC = () => {
                 <Copy className="w-3 h-3" />
               </button>
             </div>
-            <div className="flex-1 bg-surface-container-lowest relative">
-               <Editor
-                height="100%"
-                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-                value={decoded ? JSON.stringify(decoded.header, null, 2) : ''}
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 13,
-                  lineNumbers: 'off',
-                  readOnly: true,
-                  fontFamily: 'JetBrains Mono',
-                  automaticLayout: true,
-                  padding: { top: 16 }
-                }}
-              />
+            <div className="flex-1 bg-surface-container-lowest relative overflow-hidden">
+              <div className="absolute inset-0">
+                 <Editor
+                  height="100%"
+                  theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+                  value={decoded ? JSON.stringify(decoded.header, null, 2) : ''}
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 13,
+                    lineNumbers: 'off',
+                    readOnly: true,
+                    fontFamily: 'JetBrains Mono',
+                    automaticLayout: true,
+                    padding: { top: 16 }
+                  }}
+                />
+              </div>
             </div>
           </div>
 
           {/* Payload */}
-          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm h-full">
              <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
               <div className="flex flex-col">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Payload</span>
@@ -187,26 +189,28 @@ export const JWTDecoder: React.FC = () => {
                 <Copy className="w-3 h-3" />
               </button>
             </div>
-            <div className="flex-1 bg-surface-container-lowest relative">
-               <Editor
-                height="100%"
-                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-                value={decoded ? JSON.stringify(decoded.payload, null, 2) : ''}
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 13,
-                  lineNumbers: 'off',
-                  readOnly: true,
-                  fontFamily: 'JetBrains Mono',
-                  automaticLayout: true,
-                  padding: { top: 16 }
-                }}
-              />
+            <div className="flex-1 bg-surface-container-lowest relative overflow-hidden">
+              <div className="absolute inset-0">
+                 <Editor
+                  height="100%"
+                  theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+                  value={decoded ? JSON.stringify(decoded.payload, null, 2) : ''}
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 13,
+                    lineNumbers: 'off',
+                    readOnly: true,
+                    fontFamily: 'JetBrains Mono',
+                    automaticLayout: true,
+                    padding: { top: 16 }
+                  }}
+                />
+              </div>
             </div>
           </div>
 
           {/* Signature */}
-          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm h-full">
              <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
               <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Signature</span>
             </div>
