@@ -263,7 +263,7 @@ export const JSONFormatter: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-4 relative">
+    <div className="flex flex-col space-y-4 relative">
       <SEO 
         title={seo.title}
         description={seo.description}
@@ -306,11 +306,11 @@ export const JSONFormatter: React.FC = () => {
       </div>
 
       <div className={cn(
-        "flex-1 min-h-[650px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-8",
+        "h-[900px] lg:h-[650px] grid grid-cols-1 lg:grid-cols-2 gap-4 pb-8",
         maximized && "hidden"
       )}>
         {/* Input Area */}
-        <div className="flex flex-col bg-surface-container border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="flex flex-col bg-surface-container border border-slate-200 rounded-2xl overflow-hidden shadow-sm h-full">
           <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-slate-50 flex-wrap gap-2">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-slate-400" />
@@ -372,34 +372,36 @@ export const JSONFormatter: React.FC = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 bg-white relative min-h-[450px]">
-            <Editor
-              height="100%"
-              defaultLanguage="json"
-              theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-              value={input}
-              onChange={(value) => setInput(value || '')}
-              onMount={handleEditorDidMount}
-              loading={<EditorSkeleton />}
-              options={{
-                minimap: { enabled: false },
-                fontSize: fontSize,
-                lineNumbers: 'on',
-                roundedSelection: false,
-                scrollBeyondLastLine: false,
-                readOnly: false,
-                fontFamily: 'JetBrains Mono',
-                automaticLayout: true,
-                padding: { top: 16 },
-                renderIndentGuides: true,
-                bracketPairColorization: { enabled: true }
-              }}
-            />
+          <div className="flex-1 bg-white relative overflow-hidden">
+            <div className="absolute inset-0">
+              <Editor
+                height="100%"
+                defaultLanguage="json"
+                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+                value={input}
+                onChange={(value) => setInput(value || '')}
+                onMount={handleEditorDidMount}
+                loading={<EditorSkeleton />}
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: fontSize,
+                  lineNumbers: 'on',
+                  roundedSelection: false,
+                  scrollBeyondLastLine: false,
+                  readOnly: false,
+                  fontFamily: 'JetBrains Mono',
+                  automaticLayout: true,
+                  padding: { top: 16 },
+                  renderIndentGuides: true,
+                  bracketPairColorization: { enabled: true }
+                }}
+              />
+            </div>
           </div>
         </div>
 
         {/* Output Area */}
-        <div className="flex flex-col bg-surface-container border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="flex flex-col bg-surface-container border border-slate-200 rounded-2xl overflow-hidden shadow-sm h-full">
           <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-slate-50 flex-wrap gap-2">
             <div className="flex items-center gap-2">
               <History className="w-4 h-4 text-slate-400 hidden sm:block" />
@@ -484,29 +486,31 @@ export const JSONFormatter: React.FC = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 bg-white relative overflow-hidden min-h-[450px]">
+          <div className="flex-1 bg-white relative overflow-hidden">
             {outputView === 'text' ? (
-              <Editor
-                height="100%"
-                defaultLanguage="json"
-                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-                value={output}
-                onMount={handleEditorDidMount}
-                loading={<EditorSkeleton />}
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: fontSize,
-                  lineNumbers: 'on',
-                  roundedSelection: false,
-                  scrollBeyondLastLine: false,
-                  readOnly: true,
-                  fontFamily: 'JetBrains Mono',
-                  automaticLayout: true,
-                  padding: { top: 16 },
-                  renderIndentGuides: true,
-                  bracketPairColorization: { enabled: true }
-                }}
-              />
+              <div className="absolute inset-0">
+                <Editor
+                  height="100%"
+                  defaultLanguage="json"
+                  theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+                  value={output}
+                  onMount={handleEditorDidMount}
+                  loading={<EditorSkeleton />}
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: fontSize,
+                    lineNumbers: 'on',
+                    roundedSelection: false,
+                    scrollBeyondLastLine: false,
+                    readOnly: true,
+                    fontFamily: 'JetBrains Mono',
+                    automaticLayout: true,
+                    padding: { top: 16 },
+                    renderIndentGuides: true,
+                    bracketPairColorization: { enabled: true }
+                  }}
+                />
+              </div>
             ) : (
               <div className={cn("h-full overflow-auto p-4", theme === 'dark' ? 'bg-[#1e1e1e]' : 'bg-white')}>
                 {output ? (

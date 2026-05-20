@@ -71,7 +71,7 @@ export const JSONPathExplorer: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-6 pb-20">
+    <div className="flex flex-col space-y-6 pb-20">
       <SEO 
         title={seo.title}
         description={seo.description}
@@ -113,58 +113,62 @@ export const JSONPathExplorer: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[650px] pb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[900px] lg:h-[650px] pb-8">
           {/* JSON Input */}
-          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm h-full">
             <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
               <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Target JSON</span>
               <button onClick={() => setJsonInput('')} className="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
-            <div className="flex-1">
-              <Editor
-                height="100%"
-                defaultLanguage="json"
-                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-                value={jsonInput}
-                onChange={(v) => setJsonInput(v || '')}
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 13,
-                  fontFamily: 'JetBrains Mono',
-                  automaticLayout: true,
-                  padding: { top: 20 }
-                }}
-              />
+            <div className="flex-1 bg-white relative overflow-hidden">
+              <div className="absolute inset-0">
+                <Editor
+                  height="100%"
+                  defaultLanguage="json"
+                  theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+                  value={jsonInput}
+                  onChange={(v) => setJsonInput(v || '')}
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 13,
+                    fontFamily: 'JetBrains Mono',
+                    automaticLayout: true,
+                    padding: { top: 20 }
+                  }}
+                />
+              </div>
             </div>
           </div>
 
           {/* Result Output */}
-          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm relative">
+          <div className="flex flex-col bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm relative h-full">
             <div className="px-4 py-3 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
               <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface">Query Result</span>
               <button onClick={handleCopyResult} className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors">
                 <Copy className="w-4 h-4" />
               </button>
             </div>
-            <div className="flex-1 relative">
-              <Editor
-                height="100%"
-                defaultLanguage="json"
-                theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
-                value={result ? JSON.stringify(result, null, 2) : ''}
-                options={{
-                  readOnly: true,
-                  minimap: { enabled: false },
-                  fontSize: 13,
-                  fontFamily: 'JetBrains Mono',
-                  automaticLayout: true,
-                  padding: { top: 20 }
-                }}
-              />
+            <div className="flex-1 bg-white relative overflow-hidden">
+              <div className="absolute inset-0">
+                <Editor
+                  height="100%"
+                  defaultLanguage="json"
+                  theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
+                  value={result ? JSON.stringify(result, null, 2) : ''}
+                  options={{
+                    readOnly: true,
+                    minimap: { enabled: false },
+                    fontSize: 13,
+                    fontFamily: 'JetBrains Mono',
+                    automaticLayout: true,
+                    padding: { top: 20 }
+                  }}
+                />
+              </div>
               {error && (
-                <div className="absolute inset-0 bg-red-50/50 backdrop-blur-[1px] flex items-center justify-center p-6 text-center">
+                <div className="absolute inset-0 bg-red-50/50 backdrop-blur-[1px] flex items-center justify-center p-6 text-center z-10">
                   <div className="bg-white border border-red-200 rounded-xl p-4 shadow-lg text-red-600 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5" />
                     <span className="text-sm font-bold">{error}</span>
